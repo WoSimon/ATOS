@@ -27,59 +27,59 @@
 
     <script>
 
-      function zeigeFrückstückExtras(){
-        if (document.getElementById("extrasFrüh").checked) {
-            document.getElementById("optionenExtrasFrüh").style.display = "block";
+      function zeigeFrückstückExtras(tag){
+        if (document.getElementById(tag + "-extrasFrüh").checked) {
+            document.getElementById(tag + "-optionenExtrasFrüh").style.display = "block";
           }
           else {
-            document.getElementById("optionenExtrasFrüh").style.display = "none";
+            document.getElementById(tag + "-optionenExtrasFrüh").style.display = "none";
           }
           return;
       }
 
-      function zeigeAbendExtras(){
-        if (document.getElementById("extrasAbend").checked) {
-            document.getElementById("extrasAbendTxt").style.display = "block";
+      function zeigeAbendExtras(tag){
+        if (document.getElementById(tag + "-extrasAbend").checked) {
+            document.getElementById(tag + "-extrasAbendTxt").style.display = "block";
           }
           else {
-            document.getElementById("extrasAbendTxt").style.display = "none";
+            document.getElementById(tag + "-extrasAbendTxt").style.display = "none";
           }
           return;
       }
 
-      function zeigeSalatAuswahl(){
-        if (document.getElementById("salatAbend").checked) {
-            document.getElementById("salatAuswahl").style.display = "block";
-            document.getElementById("salatHächen").required = true;
+      function zeigeSalatAuswahl(tag){
+        if (document.getElementById(tag + "-salatAbend").checked) {
+            document.getElementById(tag + "-salatAuswahl").style.display = "block";
+            document.getElementById(tag + "-salatHächen").required = true;
           }
           else {
-            document.getElementById("salatAuswahl").style.display = "none";
-            document.getElementById("salatHächen").required = false;
-            document.getElementById("salatHächen").checked = false;
-            document.getElementById("salatFeta").checked = false;
-            document.getElementById("salatThunfisch").checked = false;
-            document.getElementById("salatGouda").checked = false;
+            document.getElementById(tag + "-salatAuswahl").style.display = "none";
+            document.getElementById(tag + "-salatHächen").required = false;
+            document.getElementById(tag + "-salatHächen").checked = false;
+            document.getElementById(tag + "-salatFeta").checked = false;
+            document.getElementById(tag + "-salatThunfisch").checked = false;
+            document.getElementById(tag + "-salatGouda").checked = false;
           }
           return;
       }
 
-      function zeigeWrapAuswahl(){
-        if (document.getElementById("wrapAbend").checked) {
-            document.getElementById("wrapAuswahl").style.display = "block";
-            document.getElementById("wrapVegi").required = true;
+      function zeigeWrapAuswahl(tag){
+        if (document.getElementById(tag + "-wrapAbend").checked) {
+            document.getElementById(tag + "-wrapAuswahl").style.display = "block";
+            document.getElementById(tag + "-wrapVegi").required = true;
           }
           else {
-            document.getElementById("wrapAuswahl").style.display = "none";
-            document.getElementById("wrapVegi").required = false;
-            document.getElementById("wrapVegi").checked = false;
-            document.getElementById("wrapPute").checked = false;
+            document.getElementById(tag + "-wrapAuswahl").style.display = "none";
+            document.getElementById(tag + "-wrapVegi").required = false;
+            document.getElementById(tag + "-wrapVegi").checked = false;
+            document.getElementById(tag + "-wrapPute").checked = false;
           }
           return;
       }
 
-      function zeigeAbendSpezifikationen(){
-        zeigeSalatAuswahl();
-        zeigeWrapAuswahl();
+      function zeigeAbendSpezifikationen(tag){
+        zeigeSalatAuswahl(tag);
+        zeigeWrapAuswahl(tag);
       }
 
 
@@ -266,6 +266,8 @@
         
       </script>
 
+      <form class="row g-3" method="POST">
+
       <?php
       
         foreach ($arrayDays as $tag){
@@ -279,6 +281,8 @@
         }
       
       ?>
+
+      </form>
 
       <!-- Optional JavaScript; choose one of the two! -->
       
