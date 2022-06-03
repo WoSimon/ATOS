@@ -39,7 +39,7 @@
 
     <script type="text/javascript" src="../JS/functions.js"></script>
 
-    <title>ATOS Essenbestellung | Seite 2</title>
+    <title>ATOS Verpflegung | Seite 2</title>
 
     <script>
 
