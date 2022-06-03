@@ -3,23 +3,23 @@
   <div class="col-md-6">
     <h4>Mittagessen bestellen</h4>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>vorMittag" value="vorMittag" id="vorMittag" checked>
+      <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>vorMittag" value="vorMittag" id="<?php echo $tag?>-vorMittag" checked>
       <label class="form-check-label" for="vorMittag">Vorspeise</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="<?php echo $tag . '-' ?>mittag" id="aktivMittag">
+      <input class="form-check-input" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-aktivMittag">
       <label class="form-check-label" for="aktivMittag">Aktiv Vegetarisch</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="<?php echo $tag . '-' ?>mittag" id="chefMittag">
+      <input class="form-check-input" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-chefMittag">
       <label class="form-check-label" for="chefMittag">Der Küchenchef empfiehlt</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="<?php echo $tag . '-' ?>mittag" id="köstlichMittag">
+      <input class="form-check-input" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-köstlichMittag">
       <label class="form-check-label" for="köstlichMittag">Köstlich bewährt</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>desMittag" value="desMittag" id="desMittag" checked>
+      <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>desMittag" value="desMittag" id="<?php echo $tag?>-desMittag" checked>
       <label class="form-check-label" for="desMittag">Dessert</label>
     </div>
   </div>
@@ -52,3 +52,44 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  var allergienDict = JSON.parse(localStorage.getItem("allergien"));
+  var vorspeise = document.getElementById("<?php echo $tag?>-vorMitag");
+  var mittag1 = document.getElementById("<?php echo $tag?>-aktivMittag");
+  var mittag2 = document.getElementById("<?php echo $tag?>-chefMittag");
+  var mittag3 = document.getElementById("<?php echo $tag?>-köstlichMittag");
+  var dessert = document.getElementById("<?php echo $tag?>-desMittag");
+
+  var gluten = allergienDict["gluten"];
+  var krebstiere = allergienDict["krebstiere"];
+  var eier = allergienDict["eier"];
+  var fisch = allergienDict["fisch"];
+  var erdnüsse = allergienDict["erdnüsse"];
+  var soja = allergienDict["soja"];
+  var milch = allergienDict["milch"];
+  var schalenfrüchte = allergienDict["schalenfrüchte"];
+  var sellerie =  allergienDict["sellerie"];
+  var senf = allergienDict["senf"];
+  var sesam = allergienDict["sesam"];
+  var mollusken = allergienDict["mollusken"];
+
+  if (gluten || eier || milch) {
+    mittag1.disabled = true;
+  }
+  if (gluten || milch){
+    mittag2.disabled = true;
+  }
+  if (sesam){
+    mittag3.disabled = true;
+  }
+  if (milch){
+    dessert.checked = false;
+    dessert.disabled = true;
+  }
+  if (mittag1.disabled && mittag2.disabled && mittag3.disabled){
+    mittag1.required = false;
+  }
+
+</script>

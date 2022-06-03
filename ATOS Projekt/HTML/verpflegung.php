@@ -23,7 +23,7 @@
 
     <script type="text/javascript" src="../JS/functions.js"></script>
 
-    <title>ATOS Essenbestellung | Seite ... </title>
+    <title>ATOS Essenbestellung | Seite 3 </title>
 
     <script>
 
