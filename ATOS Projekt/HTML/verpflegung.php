@@ -266,7 +266,7 @@
         
       </script>
 
-      <form class="row g-3" method="POST">
+      <form class="row g-3" method="POST" action="zusammenfassung.php">
 
       <?php
       

@@ -36,14 +36,36 @@
     }*/
 
     function nächsterTag(tag){
-        var alert = document.getElementById(tag);
+        var aktuellerBlock = document.getElementById(tag);
+        var dateParts = tag.split(".");
+        //console.log(dateParts);
+        var tagDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+        //console.log ("Tag: " + tagDate);
 
-        if (alert.style.display == "block") {
-            alert.style.display = "none";
-        }
-        else {
-            alert.style.display = "block";
-        }
+        var nächsterTag = new Date(tagDate.setDate(tagDate.getDate()) + 1 * 24 * 60 * 60 * 1000);
+        nächsterTag = dateToString(nächsterTag);
+
+        nächsterBlock = document.getElementById(nächsterTag);
+
+        aktuellerBlock.style.display = "none";
+        nächsterBlock.style.display = "block";
+    
+        return;
+    }
+
+    function vorherigerTag(tag){
+        var aktuellerBlock = document.getElementById(tag);
+        var dateParts = tag.split(".");
+        var tagDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+
+        var vorherigerTag = new Date(tagDate.setDate(tagDate.getDate()) - 1 * 24 * 60 * 60 * 1000);
+        vorherigerTag = dateToString(vorherigerTag);
+
+        vorherigerBlock = document.getElementById(vorherigerTag);
+
+        aktuellerBlock.style.display = "none";
+        vorherigerBlock.style.display = "block";
+    
         return;
     }
     
@@ -307,7 +329,7 @@
             <br>
             <div>
                 <h6>Caprese</h6>
-                <i>Großer Timaten-Mozzarella-Teller mit Ciabatta</i>
+                <i>Großer Tomaten-Mozzarella-Teller mit Ciabatta</i>
             </div>
             <br>
             <div>
@@ -321,10 +343,11 @@
         <br>
     </div>
 
-    <!--<div class="col-md-4">
-        <a href="allergien.php"><button type="button" class="btn btn-secondary">Zurück</button></a>
-    </div>-->
-    <div class="row justify-content-md-center">
+
+    <div class="row g-3">
+        <div class="col-md-4">
+            <?php if ($tag == $arrayDays[0]) {echo '<a href="allergien.php">';}?><button class="btn btn-secondary" <?php if (!($tag == $arrayDays[0])){echo 'onclick="vorherigerTag('; echo "'" . $tag; echo "');"; echo '"';}?> type="button">Zurück</button><?php if ($tag == $arrayDays[0]) {echo '</a>';}?>
+        </div>
         <div class="col col-lg-2">
             <?php
 
@@ -332,25 +355,14 @@
 
             ?>
         </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary" <?php if (!($tag == $arrayDays[count($arrayDays) - 1])) { echo 'onclick="nächsterTag('; echo "'" . $tag; echo "');"; echo '"'; }?> <?php if (!($tag == $arrayDays[count($arrayDays) - 1])) {echo 'type="button"';} else {echo 'type="submit"';} ?>>Weiter</button>
+        </div>
     </div>
-    <!--<div class="col-md-4">
-        <button class="btn btn-primary" onclick="nächsterTag('<?php echo $tag?>');" type="submit">Weiter</button>
-    </div>-->
-
-    
+ 
     <div class="row g-3">
         <br>
         <br>
         <br>
     </div>
-</div>
-
-<div class="row justify-content-md-center">
-    <div class="col col-lg-2">
-        <button class="btn btn-dark col-auto" onclick="nächsterTag('<?php echo $tag?>');">Lade <?php echo $tag?></button>
-    </div>
-</div>
-
-<div class="row g-3">
-    <br>
 </div>
