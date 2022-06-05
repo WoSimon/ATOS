@@ -3,23 +3,23 @@
   <div class="col-md-6">
     <h4>Mittagessen bestellen</h4>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>vorMittag" value="vorMittag" id="<?php echo $tag?>-vorMittag" checked>
+      <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>vorMittag" id="<?php echo $tag?>-vorMittag" checked>
       <label class="form-check-label" for="vorMittag">Vorspeise</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-aktivMittag">
+      <input class="form-check-input" value="mittag1" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-aktivMittag">
       <label class="form-check-label" for="aktivMittag">Aktiv Vegetarisch</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-chefMittag">
+      <input class="form-check-input" value="mittag2" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-chefMittag">
       <label class="form-check-label" for="chefMittag">Der Küchenchef empfiehlt</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-köstlichMittag">
+      <input class="form-check-input" value="mittag3" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-köstlichMittag">
       <label class="form-check-label" for="köstlichMittag">Köstlich bewährt</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>desMittag" value="desMittag" id="<?php echo $tag?>-desMittag" checked>
+      <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>desMittag" id="<?php echo $tag?>-desMittag" checked>
       <label class="form-check-label" for="desMittag">Dessert</label>
     </div>
   </div>
@@ -45,6 +45,7 @@
       <h6>Köstlich bewährt</h6>
       <i>Badische Kartoffelsuppe mit gemischter Wursteinlage</i>
     </div>
+    <br>
     <div>
       <h6>Dessert</h6>
       <i>Mini-Windbeutel mit Schokoladensauce</i>
