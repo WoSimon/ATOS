@@ -11,31 +11,93 @@
         tag1.style.display = "block";
     }
 
-    /* Code aktuell nicht genutzt, wurde zum Testen der Funktionen geschrieben
-
     function nächsterTag(tag){
-        var dateParts = tag.split(".");
-        console.log(dateParts);
-        var tagDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
-        console.log ("Tag: " + tagDate);
+        var leereFelder = formFull(tag);
+        if (leereFelder.length == 0) {
+            zeigeNächstenTag(tag);
+        }
+        else{
+            var felder = leereFelder.join(", ");
+            alert("Bitte: " + felder + " ausfüllen!");
+        }
+    }
 
-        var nächsterTag = new Date(tagDate.setDate(tagDate.getDate()) + 1 * 24 * 60 * 60 * 1000);
+    function formFull(tag){
+        var missing = [];
+        const frühstück = document.querySelectorAll('input[name="' + tag + '-frühstück"]');
+        for (const früh of frühstück) {
+            if (früh.checked) {
+                var isFrühstück = true;
+                break;
+            }
+            else {
+                var isFrühstück = false;
+            }
+        }
+        if (!isFrühstück) {
+            missing.push("Frühstück");
+        }
 
-        nächsterTagDate = tagDate.setDate(tagDate.getDate() + 1);
-        nächsterTagStr = dateToString(nächsterTagDate);
+        const mittagessen = document.querySelectorAll('input[name="' + tag + '-mittag"]');
+        for (const mittag of mittagessen) {
+            if (mittag.checked) {
+                var isMittag = true;
+                break;
+            }
+            else {
+                var isMittag = false;
+            }
+        }
+        if (!isMittag) {
+            missing.push("Mittagessen");
+        }
 
-        console.log ("Nächster Tag: " + nächsterTag);
-        nächsterTag = dateToString(nächsterTag);
-        
-        aktuellerBlock = document.getElementById(tag);
-        nächsterBlock = document.getElementById(nächsterTag);
+        const abendessen = document.querySelectorAll('input[name="' + tag + '-abend"]');
+        for (const abend of abendessen) {
+            if (abend.checked) {
+                if (abend.value == "salatAbend"){
+                    const salate = document.querySelectorAll('input[name="' + tag + '-salat"]');
+                    for (const salat of salate) {
+                        if (salat.checked) {
+                            var isAbend = true;
+                            break;
+                        }
+                        else {
+                            var isAbend = false;
+                        }
+                    }
+                    break;
+                }
+                else if (abend.value == "wrapAbend"){
+                    const wraps = document.querySelectorAll('input[name="' + tag + '-wrap"]');
+                    for (const wrap of wraps) {
+                        if (wrap.checked) {
+                            var isAbend = true;
+                            break;
+                        }
+                        else {
+                            var isAbend = false;
+                        }
+                    }
+                    break;
+                }
+                else {
+                    var isAbend = true;
+                    break;
+                }
+            }
+            else {
+                var isAbend = false;
+            }
+        }
+        if (!isAbend) {
+            missing.push("Abendessen");
+        }
 
-        aktuellerBlock.style.display = "none";
-        nächsterBlock.style.display = "block";
+        return missing;
+    }
 
-    }*/
-
-    function nächsterTag(tag){
+    function zeigeNächstenTag(tag){
         var aktuellerBlock = document.getElementById(tag);
         var dateParts = tag.split(".");
         //console.log(dateParts);
@@ -165,7 +227,7 @@
             <br>
             <div>
                 <h6>Französiches Frühstück</h6>
-                <i>Weckchen & Crssaint, Butter oder Margarine, Konfitüre, Nutella, Honig</i>
+                <i>Weckchen und Crssaint, Butter oder Margarine, Konfitüre, Nutella, Honig</i>
             </div>
         </div>
     </div>
@@ -340,6 +402,7 @@
     </div>
 
     <div class="row g-3">
+        <br>
         <br>
     </div>
 
