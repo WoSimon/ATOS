@@ -238,59 +238,59 @@
     switch ($menu){
         case "1":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag1.php";
+            include "mittag/mittag1.php";
             break;
         case "2":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag2.php";
+            include "mittag/mittag2.php";
             break;
         case "3":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag3.php";
+            include "mittag/mittag3.php";
             break;
         case "4":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag4.php";
+            include "mittag/mittag4.php";
             break;
         case "5":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag5.php";
+            include "mittag/mittag5.php";
             break;
         case "6": 
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag6.php";
+            include "mittag/mittag6.php";
             break;
         case "7":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag7.php";
+            include "mittag/mittag7.php";
             break;
         case "8":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag8.php";
+            include "mittag/mittag8.php";
             break;
         case "9":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag9.php";
+            include "mittag/mittag9.php";
             break;
         case "10":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag10.php";
+            include "mittag/mittag10.php";
             break;
         case "11":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag11.php";
+            include "mittag/mittag11.php";
             break;
         case "12":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag12.php";
+            include "mittag/mittag12.php";
             break;
         case "13":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag13.php";
+            include "mittag/mittag13.php";
             break;
         case "14":
             echo "<script>console.log('" . $tag . ' ist ' . $menu . "');</script>";
-            include "mittag14.php";
+            include "mittag/mittag14.php";
             break;
         default:
             echo "<h1>Fehler beim Mittagessen</h1>";
