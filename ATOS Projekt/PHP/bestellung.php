@@ -141,19 +141,19 @@
         <div class="col-md-6">
             <h4>Frühstücksbestellung</h4>
             <div class="form-check">
-                <input class="form-check-input" value="basicFrüh" type="radio" name="<?php echo $tag . '-'?>frühstück" id="basicFrüh" required>
+                <input class="form-check-input" value="Basic Frühstück" type="radio" name="<?php echo $tag . '-'?>frühstück" id="basicFrüh" required>
                 <label class="form-check-label" for="basicFrüh">Basic</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" value="vegiFrüh" type="radio" name="<?php echo $tag . '-'?>frühstück" id="vegetarischFrüh">
+                <input class="form-check-input" value="Vegetarisches Frühstück" type="radio" name="<?php echo $tag . '-'?>frühstück" id="vegetarischFrüh">
                 <label class="form-check-label" for="vegetarischFrüh">Vegetarisches Frühstück</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" value="fitFrüh" type="radio" name="<?php echo $tag . '-'?>frühstück" id="fitnessFrüh">
+                <input class="form-check-input" value="Fitness Frühstück" type="radio" name="<?php echo $tag . '-'?>frühstück" id="fitnessFrüh">
                 <label class="form-check-label" for="fitnessFrüh">Fitness Frühstück "Hennes"</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" value="franzFrüh" type="radio" name="<?php echo $tag . '-'?>frühstück" id="französischFrüh">
+                <input class="form-check-input" value="Französisches Frühstück" type="radio" name="<?php echo $tag . '-'?>frühstück" id="französischFrüh">
                 <label class="form-check-label" for="französischFrüh">Französiches Frühstück</label>
             </div>
             <div class="form-check">
@@ -303,11 +303,11 @@
         <div class="col-md-6">
             <h4>Abendessenbestellung</h4>
                 <div class="form-check">
-                    <input class="form-check-input" value="basicAbend" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="basicAbend" required>
+                    <input class="form-check-input" value="Basic Abendessen" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="basicAbend" required>
                     <label class="form-check-label" for="basicAbend">Basic</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" value="vegiAbend" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="vegetarischAbend">
+                    <input class="form-check-input" value="Vegetarisches Abendessen" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="vegetarischAbend">
                     <label class="form-check-label" for="vegetarischAbend">Vegetarisches Abendessen</label>
                 </div>
                 <div class="form-check">
@@ -316,19 +316,19 @@
                 </div>
                 <div id="<?php echo $tag?>-salatAuswahl" style="display:none;">
                     <div class="form-check offset-sm-1">
-                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salat" id="<?php echo $tag?>-salatHächen" value="salatHächen">
+                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salat" id="<?php echo $tag?>-salatHächen" value="Salat mit Hächen">
                         <label class="form-check-label" for="salatHächen">Hänchenbrustfilet</label>
                     </div>
                     <div class="form-check offset-sm-1">
-                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salat" id="<?php echo $tag?>-salatFeta" value="salatFeta">
+                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salat" id="<?php echo $tag?>-salatFeta" value="Salat mit Feta">
                         <label class="form-check-label" for="salatFeta">Feta</label>
                     </div>
                     <div class="form-check offset-sm-1">
-                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salat" id="<?php echo $tag?>-salatThunfisch" value="salatThunfisch">
+                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salat" id="<?php echo $tag?>-salatThunfisch" value="Salat mit Thunfisch">
                         <label class="form-check-label" for="salatThunfisch">Thunfisch</label>
                     </div>
                     <div class="form-check offset-sm-1">
-                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salat" id="<?php echo $tag?>-salatGouda" value="salatGouda">
+                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salat" id="<?php echo $tag?>-salatGouda" value="Salat mit Gouda">
                         <label class="form-check-label" for="salatGouda">Goudastreifen</label>
                     </div>
                 </div>
@@ -338,30 +338,30 @@
                 </div>
                 <div id="<?php echo $tag?>-wrapAuswahl" style="display:none;">
                     <div class="form-check offset-sm-1">
-                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>wrap" id="<?php echo $tag?>-wrapVegi" value="wrapVegi">
+                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>wrap" id="<?php echo $tag?>-wrapVegi" value="Vegetarischer Wrap">
                         <label class="form-check-label" for="wrapVegi">Vegetsrisch</label>
                     </div>
                     <div class="form-check offset-sm-1">
-                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>wrap" id="<?php echo $tag?>-wrapPute" value="wrapPute">
+                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>wrap" id="<?php echo $tag?>-wrapPute" value="Wrap mit Pute">
                         <label class="form-check-label" for="wrapPute">mit Pute</label>
                     </div>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" value="capreseAbend" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="capreseAbend">
+                    <input class="form-check-input" value="Caprese" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="capreseAbend">
                     <label class="form-check-label" for="capreseAbend">Caprese</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" value="suppeAbend" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="suppeAbend">
+                    <input class="form-check-input" value="Suppe" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="suppeAbend">
                     <label class="form-check-label" for="suppeAbend">Suppe</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" value="" type="checkbox" value="extrasAbend" name="<?php echo $tag?>-extrasAbend" id="<?php echo $tag?>-extrasAbend" onchange="zeigeAbendExtras('<?php echo $tag?>')">
+                    <input class="form-check-input" type="checkbox" value="extrasAbend" name="<?php echo $tag?>-extrasAbend" id="<?php echo $tag?>-extrasAbend" onchange="zeigeAbendExtras('<?php echo $tag?>')">
                     <label class="form-check-label" for="extrasAbend">Extras</label>
                 </div>
                 <div id="<?php echo $tag?>-extrasAbendTxt" style="display: none;">
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Extras beim Abendessen" name="<?php echo $tag . '-'?>extrasAbend" id="extrasAbend-txt" style="height:15vh;"></textarea>
-                        <label for="extrasAbend-txt">Hier können Sie Anmerkungen für Ihr Abendessen am <?php echo $tag?> eintragen</label>
+                        <textarea class="form-control" placeholder="Extras beim Abendessen" name="<?php echo $tag . '-'?>extrasAbendTxt" id="extrasAbend-txt" style="height:15vh;"></textarea>
+                        <label for="extrasAbend-txt">Anmerkungen für Ihr Abendessen am <?php echo $tag?></label>
                     </div>
                 </div>
             </div>
