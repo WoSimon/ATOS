@@ -13,22 +13,54 @@
       }
     </style>
 
+    <script type="text/javascript" src="../JS/functions.js"></script>
+
     <script>
 
       function saveData () {
-        var vorname = document.getElementById("vorname").value;
-        var nachname = document.getElementById("nachname").value;
-        var zimmernummer = document.getElementById("zimmernummer").value;
+
+        saved = true;
+
+        if (checkData()){
+          var vorname = document.getElementById("vorname").value;
+          var nachname = document.getElementById("nachname").value;
+          var zimmernummer = document.getElementById("zimmernummer").value;
+          var aufnahmedatum = document.getElementById("aufnahmedatum").value;
+          var entlassungsdatum = document.getElementById("entlassungsdatum").value;
+
+          localStorage.setItem("vorname", vorname);
+          localStorage.setItem("nachname", nachname);
+          localStorage.setItem("zimmernummer", zimmernummer);
+          localStorage.setItem("aufnahmedatum", aufnahmedatum);
+          localStorage.setItem("entlassungsdatum", entlassungsdatum);
+        }
+        else {
+          saved = false;
+        }
+
+        return saved;
+        
+      }
+
+      function checkData () {
         var aufnahmedatum = document.getElementById("aufnahmedatum").value;
         var entlassungsdatum = document.getElementById("entlassungsdatum").value;
 
-        localStorage.setItem("vorname", vorname);
-        localStorage.setItem("nachname", nachname);
-        localStorage.setItem("zimmernummer", zimmernummer);
-        localStorage.setItem("aufnahmedatum", aufnahmedatum);
-        localStorage.setItem("entlassungsdatum", entlassungsdatum);
+        aufnahmedatum = stringToDate(aufnahmedatum);
+        entlassungsdatum = stringToDate(entlassungsdatum);
 
-        return false;
+        heute = new Date();
+        heute.setHours(0,0,0,0);
+
+        if (aufnahmedatum < heute) {
+          alert("Aufnahmedatum darf nicht in der Vergangenheit liegen!");
+          return false;
+        }
+        if (aufnahmedatum > entlassungsdatum) {
+          alert("Entlassungsdatum darf nicht vor dem Aufnahmedatum sein!");
+          return false;
+        }
+      return true;
       }
 
     </script>
@@ -44,7 +76,7 @@
         <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
         <h1>Bitte zunächst Ihre allgemeinen Informationen überprüfen!</h1>
 
-        <form class="row g-3" action="allergien.php" method="POST">
+        <form class="row g-3" action="allergien.php" method="POST" onsubmit="return(saveData())">
           <div class="col-md-4">
             <label for="vorname" class="form-label">Vorname</label>
             <input type="text" name="vorname" class="form-control" id="vorname" required>
@@ -66,7 +98,7 @@
             <input type="date" name="entlassung" class="form-control" id="entlassungsdatum" required>
           </div>
           <div class="col-md-12">
-            <button type="submit"  value="Weiter" name="submit" class="btn btn-primary" onclick="saveData()">Weiter</button>
+            <button type="submit"  value="Weiter" name="submit" class="btn btn-primary">Weiter</button>
           </div>
 
           <script>

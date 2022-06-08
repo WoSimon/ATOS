@@ -46,13 +46,13 @@
 
 <script>
 
-    localStorage.removeItem(allergien);
-    localStorage.removeItem(aufnahmedatum);
-    localStorage.removeItem(entlassungsdatum)
-    localStorage.removeItem(keineAllergien);
-    localStorage.removeItem(nachname);
-    localStorage.removeItem(vorname);
-    localStorage.removeItem(zimmernummer);
+    localStorage.removeItem('allergien');
+    localStorage.removeItem('aufnahmedatum');
+    localStorage.removeItem('entlassungsdatum')
+    localStorage.removeItem('keineAllergien');
+    localStorage.removeItem('nachname');
+    localStorage.removeItem('vorname');
+    localStorage.removeItem('zimmernummer');
     
 </script>
 
@@ -139,7 +139,7 @@
                 ${"bestellung".$day}["frühstück"] = $_POST[$tag . "-frühstück"];
             }
             
-            if ($_POST[$tag . "-vorMittag"] == "on") {
+            if (isset($_POST[$tag . "-vorMittag"])) {
                 echo "Vorspeise Mittag: Ja <br>";
                 ${"bestellung".$day}["vorMittag"] = "Ja";
             }
@@ -147,21 +147,27 @@
                 echo "Vorspeise Mittag: Nein <br>";
                 ${"bestellung".$day}["vorMittag"] = "Nein";
             }
-            switch ($_POST[$tag . "-mittag"]){
-                case "mittag1":
+            if (isset($_POST[$tag . "-mittag"])){
+                switch ($_POST[$tag . "-mittag"]){
+                    case "mittag1":
                     echo "Mittag: Aktiv Vegetarisch <br>";
                     ${"bestellung".$day}["mittag"] = "Aktiv Vegetarisch";
-                    break;
+                        break;
                     case "mittag2":
                         echo "Mittag: Der Küchenchef empfielht <br>";
                         ${"bestellung".$day}["mittag"] = "Der Küchenchef empfielht";
                         break;
-                        case "mittag3":
-                            echo "Mittag: Köstlich Bewährt <br>";
-                            ${"bestellung".$day}["mittag"] = "Köstlich Bewährt";
-                            break;
-                        }
-                        if ($_POST[$tag . "desMittag"] = "on") {
+                    case "mittag3":
+                        echo "Mittag: Köstlich Bewährt <br>";
+                        ${"bestellung".$day}["mittag"] = "Köstlich Bewährt";
+                        break;
+                }
+            } 
+            else {
+                echo "Mittag: <i>Keine Auswahl</i><br>";
+                ${"bestellung".$day}["mittag"] = " - ";
+            }      
+            if (isset($_POST[$tag . "-desMittag"])) {
                     echo "Desert Mittag: Ja <br>";
                     ${"bestellung".$day}["desMittag"] = "Ja";
                 }

@@ -39,17 +39,22 @@
         }
 
         const mittagessen = document.querySelectorAll('input[name="' + tag + '-mittag"]');
-        for (const mittag of mittagessen) {
-            if (mittag.checked) {
-                var isMittag = true;
-                break;
+        if (mittagessen[0].required){
+            for (const mittag of mittagessen) {
+                if (mittag.checked) {
+                    var isMittag = true;
+                    break;
+                }
+                else {
+                    var isMittag = false;
+                }
             }
-            else {
-                var isMittag = false;
+            if (!isMittag) {
+                missing.push("Mittagessen");
             }
         }
-        if (!isMittag) {
-            missing.push("Mittagessen");
+        else {
+            var isMittag = true;
         }
 
         const abendessen = document.querySelectorAll('input[name="' + tag + '-abend"]');

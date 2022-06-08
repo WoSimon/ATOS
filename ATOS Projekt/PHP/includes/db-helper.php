@@ -143,35 +143,20 @@
                 }
             }
 
-            echo "Es gibt: " . count($arrayDays) . " Tage und " . count($bestellungen) . " Bestellungen<br>";
-            for ($i = 0; count($arrayDays) > $i; $i++){
-                echo "i ist " . $i . "<br>";
-                $tag = $arrayDays[$i];
-                echo "Tag ist " . $tag . "<br>";
-                $bestellung = $bestellungen[$i];
-                echo "Bestellung ist " . $bestellung['abend'] . "<br>";
+            for ($i = 0; count($arrayDays) > $i; $i++){    
+                $tag = $arrayDays[$i];    
+                $bestellung = $bestellungen[$i];    
                 $fruehstueck = $bestellung["frühstück"];
                 $vorspeise_mittag = $bestellung["vorMittag"];
                 $mittag = $bestellung["mittag"];
                 $dessert_mittag = $bestellung["desMittag"];
                 $abend = $bestellung["abend"];
                 if ($result = mysqli_query($conn, "SHOW TABLES LIKE '$tag'")) {
-                    if ($result->num_rows == 0) {
-                        $sqlNeueTabelle = "CREATE TABLE `$tag` (`Name` varchar(255) NOT NULL,`Vorname` varchar(255) NOT NULL,`Zimmernummer` int(11) NOT NULL,`Fruehstueck` varchar(255) NOT NULL,`Vorspeise_Mittag` varchar(255) NOT NULL,`Mittag` varchar(255) NOT NULL,`Dessert_Mittag` varchar(255) NOT NULL,`Abend` varchar(255) NOT NULL,`PatientenID` int(11) NOT NULL,`Datum` varchar(255) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-                        echo $sqlNeueTabelle . "<br>";
-                        $sqlPrimarschlüssel = "ALTER TABLE `$tag` ADD PRIMARY KEY (`PatientenID`,`Datum`);";
-                        echo $sqlPrimarschlüssel . "<br>";
-                        mysqli_query($conn, $sqlNeueTabelle);
-                        mysqli_query($conn, $sqlPrimarschlüssel);
-                        //mysqli_refresh($conn, 1);
-                    }
-                }
-                $sqlDrei = "INSERT INTO `$tag`(`Name`, `Vorname`, `Zimmernummer`, `Fruehstueck`, `Vorspeise_Mittag`, `Mittag`, `Dessert_Mittag`, `Abend`, `Patienten_ID`, `Datum`) VALUES ('$name','$vorname','$zimmer','$fruehstueck','$vorspeise_mittag','$mittag','$dessert_mittag','$abend','$patienten_id','$tag')";
-                echo $sqlDrei . "<br>";
+                $sqlDrei = "INSERT INTO `Bestellungen`(`Fruehstueck`, `Vorspeise_Mittag`, `Mittag`, `Dessert_Mittag`, `Abend`, `PatientenID`, `Datum`) VALUES ('$fruehstueck','$vorspeise_mittag','$mittag','$dessert_mittag','$abend','$patienten_id','$tag');";
                 mysqli_query($conn, $sqlDrei);
+                }
             }
         }
-
     }
 
 ?>
