@@ -3,6 +3,116 @@
     $datum = $_POST['datum'];
     $Tempdatum = date_create($datum);
     $datum = $Tempdatum -> format('d.m.Y');
+    
+    include_once '../../PHP/includes/db-helper.php';
+
+    $frühstückBasic = 0;
+    $frühstückVegie = 0;
+    $frühstückFitness = 0;
+    $frühstückFranzösisch = 0;
+    $VorspeiseMittag = 0;
+    $mittag1 = 0;
+    $mittag2 = 0;
+    $mittag3 = 0;
+    $dessertMittag = 0;
+    $abendessenbasic  = 0;
+    $abendessenVegetarisch = 0;
+    $abendessenSalatHänchen = 0;
+    $abendessenSalatFeta = 0;
+    $abendessenSalatThun = 0;
+    $abendessenSalatGouda = 0;
+    $abendessenWrapVegetarisch = 0;
+    $abendessenWrapPute = 0;
+    $abendessenCaprese = 0;
+    $abendessenSuppe = 0;
+
+    $sql = "SELECT * FROM `Bestellungen` WHERE `Datum` = '$datum';";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result -> num_rows > 0){
+        while ($row = $result -> fetch_assoc()){
+            $fr = $row['Fruehstueck'];
+            echo $fr . " - ";
+            echo str_contains($fr, "Französisches Frühstück") . "<br>";
+            if (str_contains($fr, "Basic Frühstück")){
+                $frühstückBasic++;
+            }
+            else if (str_contains($fr, "Vegetarisches Frühstück")){
+                $frühstückVegie++;
+            }
+            else if (str_contains($fr, "Fitness Frühstück")){
+                $frühstückFitness++;
+            }
+            else if (str_contains($fr, "Französisches Frühstück")){
+                $frühstückFranzösisch++;
+            }
+            if (strpos($fr, "+")){
+            //Es gibt Frühstücksextras
+            }
+
+            $vm = $row['Vorspeise_Mittag'];
+            switch ($vm){
+                case "Ja":
+                    $VorspeiseMittag++;
+                    break;
+            }  
+            $m = $row['Mittag'];
+            switch ($m){
+                case "Aktiv Vegetarisch":
+                    $mittag1++;
+                    break;
+                case "Der Küchenchef empfielht":
+                    $mittag2++;
+                    break;
+                case "Köstlich Bewährt":
+                    $mittag3++;
+                    break;
+            }
+            $dm = $row['Dessert_Mittag'];
+            switch ($dm){
+                case "Ja":
+                    $dessertMittag++;
+                    break;
+            }
+            $ab = $row['Abend'];
+            if (str_contains($ab, "Basic Abendessen")){
+                $abendessenbasic++;
+            }
+            else if (str_contains($ab, "Vegetarisches Abendessen")){
+                $abendessenVegetarisch++;
+            }
+            else if (str_contains($ab, "Salat mit Hänchen")){
+                $abendessenSalatHänchen++;
+            }
+            else if (str_contains($ab, "Salat mit Feta")){
+                $abendessenSalatFeta++;
+            }
+            else if (str_contains($ab, "Salat mit Thunfisch")){
+                $abendessenSalatThun++;
+            }
+            else if (str_contains($ab, "Salat mit Gouda")){
+                $abendessenSalatGouda++;
+            }
+            else if (str_contains($ab, "Vegetarischer Wrap")){
+                $abendessenWrapVegetarisch++;
+            }
+            else if (str_contains($ab, "Wrap mit Pute")){
+                $abendessenWrapPute++;
+            }
+            else if (str_contains($ab, "Caprese")){
+                $abendessenCaprese++;
+            }
+            else if (str_contains($ab, "Suppe")){
+                $abendessenSuppe++;
+            }
+            if (str_contains($ab, "+")){
+                //Es gibt Abendessen Extras
+            }
+        }
+    }
+    else{
+        echo "Keine Bestellungen für den Tag " . $date . " vorhanden";
+    }
 
 ?>
 <!doctype html>
@@ -53,19 +163,19 @@
                     <td colspan="2"><b>Frühstück</b></td>
                 </tr>
                 <tr>
-                    <td>5</td>
+                    <td><?php echo $frühstückBasic?></td>
                     <td>Frühstück Basic</td>
                 </tr>
                 <tr>
-                    <td>4</td>
+                    <td><?php echo $frühstückVegie?></td>
                     <td>Frühstück Vegie</td>
                 </tr>
                 <tr>
-                    <td>3</td>
+                    <td><?php echo $frühstückFitness?></td>
                     <td>Frühstück Fitness</td>
                 </tr>
                 <tr>
-                    <td>1</td>
+                    <td><?php echo $frühstückFranzösisch?></td>
                     <td>Frühstück Französisch</td>
                 </tr>
                 <tr class="table-dark">
@@ -76,23 +186,23 @@
                     <td colspan="2"><b>Mittagessen</b></td>
                 </tr>
                 <tr>
-                    <td>12</td>
+                    <td><?php echo $VorspeiseMittag?></td>
                     <td>Vorspeise Mittag</td>
                 </tr>
                 <tr>
-                    <td>3</td>
+                    <td><?php echo $mittag1?></td>
                     <td>Mittag 1</td>
                 </tr>
                 <tr>
-                    <td>6</td>
+                    <td><?php echo $mittag2?></td>
                     <td>Mittag 2</td>
                 </tr>
                 <tr>
-                    <td>9</td>
+                    <td><?php echo $mittag3?></td>
                     <td>Mittag 3</td>
                 </tr>
                 <tr>
-                    <td>13</td>
+                    <td><?php echo $dessertMittag?></td>
                     <td>Dessert Mittag</td>
                 </tr>
                 <tr class="table-dark">
@@ -103,43 +213,43 @@
                     <td colspan="2"><b>Abendessen</b></td>
                 </tr>
                 <tr>
-                    <td>1</td>
+                    <td><?php echo $abendessenbasic?></td>
                     <td>Basic Abendessen</td>
                 </tr>
                 <tr>
-                    <td>4</td>
+                    <td><?php echo $abendessenVegetarisch?></td>
                     <td>Vegetarisch Abendessen</td>
                 </tr>
                 <tr>
-                    <td>3</td>
+                    <td><?php echo $abendessenSalatHänchen?></td>
                     <td>Abendessen Salat Hänchen</td>
                 </tr>
                 <tr>
-                    <td>1</td>
+                    <td><?php echo $abendessenSalatFeta?></td>
                     <td>Abendessen Salat Feta</td>
                 </tr>
                 <tr>
-                    <td>5</td>
+                    <td><?php echo $abendessenSalatThun?></td>
                     <td>Abendessen Salat Thun</td>
                 </tr>
                 <tr>
-                    <td>6</td>
+                    <td><?php echo $abendessenSalatGouda?></td>
                     <td>Abendessen Salat Gouda</td>
                 </tr>
                 <tr>
-                    <td>2</td>
+                    <td><?php echo $abendessenWrapVegetarisch?></td>
                     <td>Abendessen Wrap Vegetarisch</td>
                 </tr>
                 <tr>
-                    <td>8</td>
+                    <td><?php echo $abendessenWrapPute?></td>
                     <td>Abendessen Wrap Pute</td>
                 </tr>
                 <tr>
-                    <td>5</td>
+                    <td><?php echo $abendessenCaprese?></td>
                     <td>Abendessen Caprese</td>
                 </tr>
                 <tr>
-                    <td>8</td>
+                    <td><?php echo $abendessenSuppe?></td>
                     <td>Abendessen Suppe</td>
                 </tr>
             </tbody>
