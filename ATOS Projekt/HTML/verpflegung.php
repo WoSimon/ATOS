@@ -50,7 +50,9 @@
       function zeigeSalatAuswahl(tag){
         if (document.getElementById(tag + "-salatAbend").checked) {
             document.getElementById(tag + "-salatAuswahl").style.display = "block";
+            document.getElementById(tag + "-salatDressing").style.display = "block";
             document.getElementById(tag + "-salatHächen").required = true;
+            document.getElementById(tag + "-dressingBalsamico").required = true;
           }
           else {
             document.getElementById(tag + "-salatAuswahl").style.display = "none";
@@ -59,6 +61,11 @@
             document.getElementById(tag + "-salatFeta").checked = false;
             document.getElementById(tag + "-salatThunfisch").checked = false;
             document.getElementById(tag + "-salatGouda").checked = false;
+            document.getElementById(tag + "-salatDressing").style.display = "none";
+            document.getElementById(tag + "-dressingBalsamico").required = false;
+            document.getElementById(tag + "-dressingBalsamico").checked = false;
+            document.getElementById(tag + "-dressingJoghurt").checked = false;
+            document.getElementById(tag + "-dressingÖl").checked = false;
           }
           return;
       }

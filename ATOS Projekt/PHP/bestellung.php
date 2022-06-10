@@ -376,6 +376,21 @@ $menu = bestimmeTag($tag);
                         <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salat" id="<?php echo $tag?>-salatGouda" value="Salat mit Gouda">
                         <label class="form-check-label" for="salatGouda">Goudastreifen</label>
                     </div>
+                    <br>
+                </div>
+                <div id="<?php echo $tag?>-salatDressing" style="display:none;">
+                    <div class="form-check offset-sm-1">
+                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salatDressing" id="<?php echo $tag?>-dressingBalsamico" value="Balsamico Dressing">
+                        <label class="form-check-label" for="dressingBalsamico">Balsamico Dressing</label>
+                    </div>
+                    <div class="form-check offset-sm-1">
+                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salatDressing" id="<?php echo $tag?>-dressingJoghurt" value="Joghurt Dressing">
+                        <label class="form-check-label" for="dressingJoghurt">Joghurt Dressing</label>
+                    </div>
+                    <div class="form-check offset-sm-1">
+                        <input class="form-check-input" type="radio" name="<?php echo $tag . '-'?>salatDressing" id="<?php echo $tag?>-dressingÖl" value="Öl Dressing">
+                        <label class="form-check-label" for="dressingÖl">Öl Dressing</label>
+                    </div>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" value="wrapAbend" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="<?php echo $tag?>-wrapAbend">

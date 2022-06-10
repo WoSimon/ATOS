@@ -179,46 +179,48 @@
                     echo "Desert Mittag: Nein <br>";
                     ${"bestellung".$day}["desMittag"] = "Nein";
                 }
-                if (isset($_POST[$tag . "-extrasAbend"])){
-                    if ($_POST[$tag . "-abend"] == "salatAbend"){
-                        $abend = $_POST[$tag . "-salat"];
-                        echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
-                        ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
-                    }
-                    else if ($_POST[$tag . "-abend"] == "wrapAbend"){
-                        $abend = $_POST[$tag . "-wrap"];
-                        echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
-                        ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
-                    }
-                    else {
-                        $abend = $_POST[$tag . "-abend"];
-                        echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
-                        ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
-                    }
+
+
+            if (isset($_POST[$tag . "-extrasAbend"])){
+                if ($_POST[$tag . "-abend"] == "salatAbend"){
+                    $abend = $_POST[$tag . "-salat"] . " + " . $_POST[$tag . "-salatDressing"];
+                    echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
+                    ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
                 }
-                else if (isset($_POST[$tag . "-abend"])){
-                    if ($_POST[$tag . "-abend"] == "salatAbend"){
-                        $abend = $_POST[$tag . "-salat"];
-                        echo "Abend: " . $abend . "<br>";
-                        ${"bestellung".$day}["abend"] = $abend;
-                    }
-                    else if ($_POST[$tag . "-abend"] == "wrapAbend"){
-                        $abend = $_POST[$tag . "-wrap"];
-                        echo "Abend: " . $abend . "<br>";
-                        ${"bestellung".$day}["abend"] = $abend;
-                    }
-                    else {
-                        $abend = $_POST[$tag . "-abend"];
-                        echo "Abend: " . $abend . "<br>";
-                        ${"bestellung".$day}["abend"] = $abend;
-                    }
+                else if ($_POST[$tag . "-abend"] == "wrapAbend"){
+                    $abend = $_POST[$tag . "-wrap"];
+                    echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
+                    ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
                 }
                 else {
-                    echo "Abend: - <br>";
-                    ${"bestellung".$day}["abend"] = "-";
+                    $abend = $_POST[$tag . "-abend"];
+                    echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
+                    ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
                 }
-                echo "<br><br>";
-                array_push($bestellungen, ${"bestellung".$day});
+            }
+            else if (isset($_POST[$tag . "-abend"])){
+                if ($_POST[$tag . "-abend"] == "salatAbend"){
+                    $abend = $_POST[$tag . "-salat"] . " + " . $_POST[$tag . "-salatDressing"];
+                    echo "Abend: " . $abend . "<br>";
+                    ${"bestellung".$day}["abend"] = $abend;
+                }
+                else if ($_POST[$tag . "-abend"] == "wrapAbend"){
+                    $abend = $_POST[$tag . "-wrap"];
+                    echo "Abend: " . $abend . "<br>";
+                    ${"bestellung".$day}["abend"] = $abend;
+                }
+                else {
+                    $abend = $_POST[$tag . "-abend"];
+                    echo "Abend: " . $abend . "<br>";
+                    ${"bestellung".$day}["abend"] = $abend;
+                }
+            }
+            else {
+                echo "Abend: - <br>";
+                ${"bestellung".$day}["abend"] = "-";
+            }
+            echo "<br><br>";
+            array_push($bestellungen, ${"bestellung".$day});
             }
             echo "  </div>";
             echo "</div> ";

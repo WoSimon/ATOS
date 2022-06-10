@@ -21,6 +21,9 @@
     $abendessenSalatFeta = 0;
     $abendessenSalatThun = 0;
     $abendessenSalatGouda = 0;
+    $dressingBalsamico = 0;
+    $dressingJoghurt = 0;
+    $dressingÖl = 0;
     $abendessenWrapVegetarisch = 0;
     $abendessenWrapPute = 0;
     $abendessenCaprese = 0;
@@ -32,8 +35,6 @@
     if ($result -> num_rows > 0){
         while ($row = $result -> fetch_assoc()){
             $fr = $row['Fruehstueck'];
-            echo $fr . " - ";
-            echo str_contains($fr, "Französisches Frühstück") . "<br>";
             if (str_contains($fr, "Basic Frühstück")){
                 $frühstückBasic++;
             }
@@ -81,17 +82,29 @@
             else if (str_contains($ab, "Vegetarisches Abendessen")){
                 $abendessenVegetarisch++;
             }
-            else if (str_contains($ab, "Salat mit Hänchen")){
-                $abendessenSalatHänchen++;
-            }
-            else if (str_contains($ab, "Salat mit Feta")){
-                $abendessenSalatFeta++;
-            }
-            else if (str_contains($ab, "Salat mit Thunfisch")){
-                $abendessenSalatThun++;
-            }
-            else if (str_contains($ab, "Salat mit Gouda")){
-                $abendessenSalatGouda++;
+            else if (str_contains($ab, "Salat")){
+                if (str_contains($ab, "Salat mit Hächen")){
+                    $abendessenSalatHänchen++;
+                }
+                else if (str_contains($ab, "Salat mit Feta")){
+                    $abendessenSalatFeta++;
+                }
+                else if (str_contains($ab, "Salat mit Thunfisch")){
+                    $abendessenSalatThun++;
+                }
+                else if (str_contains($ab, "Salat mit Gouda")){
+                    $abendessenSalatGouda++;
+                }
+
+                if (str_contains($ab, "Balsamico Dressing")){
+                    $dressingBalsamico++;
+                }
+                else if (str_contains($ab, "Joghurt Dressing")){
+                    $dressingJoghurt++;
+                }
+                else if (str_contains($ab, "Öl Dressing")){
+                    $dressingÖl++;
+                }
             }
             else if (str_contains($ab, "Vegetarischer Wrap")){
                 $abendessenWrapVegetarisch++;
@@ -230,11 +243,23 @@
                 </tr>
                 <tr>
                     <td><?php echo $abendessenSalatThun?></td>
-                    <td>Abendessen Salat Thun</td>
+                    <td>Abendessen Salat Thunfisch</td>
                 </tr>
                 <tr>
                     <td><?php echo $abendessenSalatGouda?></td>
                     <td>Abendessen Salat Gouda</td>
+                </tr>
+                <tr>
+                    <td><?php echo $dressingBalsamico?></td>
+                    <td>Dressing Balsamico</td>
+                </tr>
+                <tr>
+                    <td><?php echo $dressingJoghurt?></td>
+                    <td>Dressing Joghurt</td>
+                </tr>
+                <tr>
+                    <td><?php echo $dressingÖl?></td>
+                    <td>Dressing Öl</td>
                 </tr>
                 <tr>
                     <td><?php echo $abendessenWrapVegetarisch?></td>
