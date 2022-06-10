@@ -22,6 +22,16 @@
       <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>desMittag" id="<?php echo $tag?>-desMittag" checked>
       <label class="form-check-label" for="desMittag">Dessert</label>
     </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="extrasMittag" name="<?php echo $tag . '-'?>extraMittag" id="<?php echo $tag?>-extrasMittag" onchange="zeigeMittagExtras('<?php echo $tag?>')">
+      <label class="form-check-label" for="extrasMittag">Extras</label>
+    </div>
+    <div id="<?php echo $tag?>-extrasMittagTxt" style="display: none;">
+      <div class="form-floating">
+        <textarea class="form-control" placeholder="Extras beim Mittagessen" name="<?php echo $tag . '-'?>extrasMittagTxt" id="extrasMittag-txt" style="height:15vh;"></textarea>
+        <label for="extrasAbend-txt">Anmerkungen für Ihr Mittagessen am <?php echo $tag?></label>
+      </div>
+    </div>
   </div>
 
   <div class="col-md-6">

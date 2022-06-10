@@ -29,10 +29,10 @@
 
       function zeigeFrückstückExtras(tag){
         if (document.getElementById(tag + "-extrasFrüh").checked) {
-            document.getElementById(tag + "-optionenExtrasFrüh").style.display = "block";
+            document.getElementById(tag + "-extrasFrühTxt").style.display = "block";
           }
           else {
-            document.getElementById(tag + "-optionenExtrasFrüh").style.display = "none";
+            document.getElementById(tag + "-extrasFrühTxt").style.display = "none";
           }
           return;
       }
@@ -43,6 +43,17 @@
           }
           else {
             document.getElementById(tag + "-extrasAbendTxt").style.display = "none";
+          }
+          return;
+      }
+
+      function zeigeMittagExtras(tag){
+        if (document.getElementById(tag + "-extrasMittag").checked) {
+            document.getElementById(tag + "-extrasMittagTxt").style.display = "block";
+          }
+          else {
+            document.getElementById(tag + "-extrasMittagTxt").style.display = "none";
+            document.getElementById(tag + "-extrasMittagTxt").style.display = "none";
           }
           return;
       }

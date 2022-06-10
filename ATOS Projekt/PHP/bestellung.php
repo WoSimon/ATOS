@@ -27,12 +27,30 @@
     window.onload = function() {
         var tag1 = document.getElementById("<?php echo $tagEins; ?>");
         tag1.style.display = "block";
+
+        const mittagessen = document.querySelectorAll('input[name="<?php echo $tagEins?>-mittag"]');
+        document.getElementById("<?php echo $tagEins?>-extrasMittag").checked = true;
+        document.getElementById("<?php echo $tagEins?>-extrasMittagTxt").style.display = "block";
+        if (!(mittagessen[0].required)){
+            var extrasMittag = document.querySelector('textarea[name="<?php echo $tagEins . '-'?>extrasMittagTxt"]');
+            extrasMittag.value = "Jemand vom Küchenteam wir bei Ihrem Aufenthalt auf Sie zukommen und Sie bezüglich der Optionen für das Mittagessen beraten.";
+        }
     }
 
     function nächsterTag(tag){
         var leereFelder = formFull(tag);
         if (leereFelder.length == 0) {
-            zeigeNächstenTag(tag);
+            var nächsterTag = zeigeNächstenTag(tag);
+
+            console.log(nächsterTag);
+
+            const mittagessen = document.querySelectorAll('input[name="' + nächsterTag + '-mittag"]');
+                document.getElementById(nächsterTag + "-extrasMittag").checked = true;
+                document.getElementById(nächsterTag + "-extrasMittagTxt").style.display = "block";
+                if (!(mittagessen[0].required)){
+                    var extrasMittag = document.querySelector('textarea[name="' + nächsterTag + '-extrasMittagTxt"]');
+                    extrasMittag.value = "Jemand vom Küchenteam wir bei Ihrem Aufenthalt auf Sie zukommen und Sie bezüglich der Optionen für das Mittagessen beraten.";
+                }
         }
         else{
             var felder = leereFelder.join(", ");
@@ -146,7 +164,7 @@
         aktuellerBlock.style.display = "none";
         nächsterBlock.style.display = "block";
     
-        return;
+        return nächsterTag;
     }
 
     function vorherigerTag(tag){
@@ -194,51 +212,11 @@
                 <input class="form-check-input" type="checkbox" value="extrasFrüh" name="<?php echo $tag . '-'?>extraFrühstück" id="<?php echo $tag?>-extrasFrüh" onchange="zeigeFrückstückExtras('<?php echo $tag?>')">
                 <label class="form-check-label" for="extrasFrüh">Extras</label>
             </div>
-            <div id="<?php echo $tag ?>-optionenExtrasFrüh" style="display: none;">
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraBrötchen" value="extraBrötchen" id="extraBrötchen">
-                    <label class="form-check-label" for="extraBrötchen">Extra Brötchen/ Brot</label>
+            <div id="<?php echo $tag?>-extrasFrühTxt" style="display: none;">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Extras beim Frühstück" name="<?php echo $tag . '-'?>extrasFrühTxt" id="extrasFrüh-txt" style="height:15vh;"></textarea>
+                    <label for="extrasAbend-txt">Anmerkungen für Ihr Frühstück am <?php echo $tag?></label>
                 </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraPorrigde" value="porridge" id="porridge">
-                    <label class="form-check-label" for="porridge">Porridge</label>
-                </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraObst" value="frischesObst" id="frischesObst">
-                    <label class="form-check-label" for="frischesObst">Frisches Obst</label>
-                </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraMüsli" value="vollkornmüsli" id="vollkornmüsli">
-                    <label class="form-check-label" for="vollkornmüsli">Vollkornmüsli</label>
-                </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraSojaMilch" value="sojamilch" id="sojamilch">
-                    <label class="form-check-label" for="sojamilch">Sojamilch/ L-Milch</label>
-                </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraSojaJughurg" value="sojajughurt" id="sojajughurt">
-                    <label class="form-check-label" for="sojajughurt">Sojajughurt</label>
-                </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraZwieback" value="zwieback" id="zwieback">
-                    <label class="form-check-label" for="zwieback">Zwieback</label>
-                </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraKnäckebrot" value="knäckebrot" id="knäckebrot">
-                    <label class="form-check-label" for="knäckebrot">Knäckebrot</label>
-                </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraLightMarmelade" value="lightMarmelade" id="lightMarmelade">
-                    <label class="form-check-label" for="lightMarmelade">Light Marmelade</label>
-                </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraNutella" value="nutella" id="nutella">
-                    <label class="form-check-label" for="nutella">Nutella</label>
-                </div>
-                <div class="form-check offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-'?>extraHonig" value="honig" id="honig">
-                    <label class="form-check-label" for="honig">Honig</label>
-                </div> 
             </div>
         </div>
         <div class="col-md-6">
