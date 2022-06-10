@@ -1,4 +1,4 @@
-<div class="row g-3" id="mittag">
+<div class="row g-3" id="<?php echo $tag . '-'?>mittag">
   <h2 style="text-align:center ;">Mittag</h1>
     <div class="col-md-6">
       <h4>Mittagessen bestellen</h4>

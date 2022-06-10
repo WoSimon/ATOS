@@ -1,10 +1,28 @@
 <?php
 
     $tagEins = $arrayDays[0];
+    $letzterTag = $arrayDays[count($arrayDays) - 1];
 
 ?>
 
 <script>
+
+    function versteckeFrühstück(tag) {
+        console.log(tag + "-frühstück");
+        console.log(document.getElementById("<?php echo $tag?> + -frühstück"));
+        document.getElementById(tag + "-frühstück").style.display = "none";
+        document.getElementById(tag + "-basicFrüh").required = false;
+    }
+
+    function versteckeMittag(tag) {
+        document.getElementById(tag + "-mittag").style.display = "none";
+        document.getElementById(tag + "-aktivMittag").required = false;
+    }
+
+    function versteckeAbend(tag) {
+        document.getElementById(tag + "-abend").style.display = "none";
+        document.getElementById(tag + "-basicAbend").required = false;
+    }
 
     window.onload = function() {
         var tag1 = document.getElementById("<?php echo $tagEins; ?>");
@@ -24,18 +42,24 @@
 
     function formFull(tag){
         var missing = [];
+
         const frühstück = document.querySelectorAll('input[name="' + tag + '-frühstück"]');
-        for (const früh of frühstück) {
-            if (früh.checked) {
-                var isFrühstück = true;
-                break;
+        if (frühstück[0].required){
+            for (const früh of frühstück) {
+                if (früh.checked) {
+                    var isFrühstück = true;
+                    break;
+                }
+                else {
+                    var isFrühstück = false;
+                }
             }
-            else {
-                var isFrühstück = false;
+            if (!isFrühstück) {
+                missing.push("Frühstück");
             }
         }
-        if (!isFrühstück) {
-            missing.push("Frühstück");
+        else {
+            var isFrühstück = true;
         }
 
         const mittagessen = document.querySelectorAll('input[name="' + tag + '-mittag"]');
@@ -58,42 +82,47 @@
         }
 
         const abendessen = document.querySelectorAll('input[name="' + tag + '-abend"]');
-        for (const abend of abendessen) {
-            if (abend.checked) {
-                if (abend.value == "salatAbend"){
-                    const salate = document.querySelectorAll('input[name="' + tag + '-salat"]');
-                    for (const salat of salate) {
-                        if (salat.checked) {
-                            var isAbend = true;
-                            break;
+        if (abendessen[0].required){
+            for (const abend of abendessen) {
+                if (abend.checked) {
+                    if (abend.value == "salatAbend"){
+                        const salate = document.querySelectorAll('input[name="' + tag + '-salat"]');
+                        for (const salat of salate) {
+                            if (salat.checked) {
+                                var isAbend = true;
+                                break;
+                            }
+                            else {
+                                var isAbend = false;
+                            }
                         }
-                        else {
-                            var isAbend = false;
-                        }
+                        break;
                     }
-                    break;
-                }
-                else if (abend.value == "wrapAbend"){
-                    const wraps = document.querySelectorAll('input[name="' + tag + '-wrap"]');
-                    for (const wrap of wraps) {
-                        if (wrap.checked) {
-                            var isAbend = true;
-                            break;
+                    else if (abend.value == "wrapAbend"){
+                        const wraps = document.querySelectorAll('input[name="' + tag + '-wrap"]');
+                        for (const wrap of wraps) {
+                            if (wrap.checked) {
+                                var isAbend = true;
+                                break;
+                            }
+                            else {
+                                var isAbend = false;
+                            }
                         }
-                        else {
-                            var isAbend = false;
-                        }
+                        break;
                     }
-                    break;
+                    else {
+                        var isAbend = true;
+                        break;
+                    }
                 }
                 else {
-                    var isAbend = true;
-                    break;
+                    var isAbend = false;
                 }
             }
-            else {
-                var isAbend = false;
-            }
+        }
+        else{
+            var isAbend = true;
         }
         if (!isAbend) {
             missing.push("Abendessen");
@@ -141,12 +170,12 @@
 
 <div id="<?php echo $tag ?>" style="display:none;"> 
     <h1>Hier können Sie Ihre Verpflegung für den <?php echo $tag ?> bestellen</h1>
-    <div class="row g-3" id="frühstück">
+    <div class="row g-3" id="<?php echo $tag . '-'?>frühstück">
         <h2 style="text-align:center ;">Frühstück</h1>
         <div class="col-md-6">
             <h4>Frühstücksbestellung</h4>
             <div class="form-check">
-                <input class="form-check-input" value="Basic Frühstück" type="radio" name="<?php echo $tag . '-'?>frühstück" id="basicFrüh" required>
+                <input class="form-check-input" value="Basic Frühstück" type="radio" name="<?php echo $tag . '-'?>frühstück" id="<?php echo $tag . '-'?>basicFrüh" required>
                 <label class="form-check-label" for="basicFrüh">Basic</label>
             </div>
             <div class="form-check">
@@ -212,7 +241,6 @@
                 </div> 
             </div>
         </div>
-
         <div class="col-md-6">
             <h4>Inhalte Frühstück</h4>
             <div>
@@ -236,9 +264,19 @@
             </div>
         </div>
     </div>
+    <div class="row"><br><br></div>
+
     <?php
 
-    $menu = bestimmeTag($tag);
+    if ($tag == $tagEins) {
+        echo "<script> versteckeFrühstück('" . $tag . "') </script>";
+    } 
+
+    ?>
+    
+    <?php
+
+$menu = bestimmeTag($tag);
 
     switch ($menu){
         case "1":
@@ -303,12 +341,14 @@
 
     ?>
 
-    <div class="row g-3" id="abend">
+    <div class="row"><br><br></div>
+
+    <div class="row g-3" id="<?php echo $tag . '-'?>abend">
         <h2 style="text-align:center ;">Abendessen</h1>
         <div class="col-md-6">
             <h4>Abendessenbestellung</h4>
                 <div class="form-check">
-                    <input class="form-check-input" value="Basic Abendessen" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="basicAbend" required>
+                    <input class="form-check-input" value="Basic Abendessen" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="<?php echo $tag . '-'?>basicAbend" required>
                     <label class="form-check-label" for="basicAbend">Basic</label>
                 </div>
                 <div class="form-check">
@@ -405,6 +445,15 @@
             </div>
         </div>
     </div>
+
+    <?php
+
+        if ($tag == $letzterTag) {
+            echo "<script> versteckeMittag('" . $tag . "') </script>";
+            echo "<script> versteckeAbend('" . $tag . "') </script>";
+        }
+
+    ?>
 
     <div class="row g-3">
         <br>

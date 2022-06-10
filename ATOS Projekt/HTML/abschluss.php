@@ -134,9 +134,13 @@
                 echo "Frühstück: " . $frühstück . "<br>";
                 ${"bestellung".$day}["frühstück"] = $frühstück;
             }
-            else {
+            else if (isset($_POST[$tag . "-frühstück"])){
                 echo "Frühstück: " . $_POST[$tag . "-frühstück"] . "<br>";
                 ${"bestellung".$day}["frühstück"] = $_POST[$tag . "-frühstück"];
+            }
+            else {
+                echo "Frühstück: - <br>";
+                ${"bestellung".$day}["frühstück"] = "-";
             }
             
             if (isset($_POST[$tag . "-vorMittag"])) {
@@ -192,7 +196,7 @@
                         ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
                     }
                 }
-                else {
+                else if (isset($_POST[$tag . "-abend"])){
                     if ($_POST[$tag . "-abend"] == "salatAbend"){
                         $abend = $_POST[$tag . "-salat"];
                         echo "Abend: " . $abend . "<br>";
@@ -208,6 +212,10 @@
                         echo "Abend: " . $abend . "<br>";
                         ${"bestellung".$day}["abend"] = $abend;
                     }
+                }
+                else {
+                    echo "Abend: - <br>";
+                    ${"bestellung".$day}["abend"] = "-";
                 }
                 echo "<br><br>";
                 array_push($bestellungen, ${"bestellung".$day});
