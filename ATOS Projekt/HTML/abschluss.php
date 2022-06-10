@@ -168,8 +168,8 @@
                 }
             } 
             else {
-                echo "Mittag: <i>Keine Auswahl</i><br>";
-                ${"bestellung".$day}["mittag"] = " - ";
+                echo "Mittag: -<br>";
+                ${"bestellung".$day}["mittag"] = "-";
             }      
             if (isset($_POST[$tag . "-desMittag"])) {
                     echo "Desert Mittag: Ja <br>";
