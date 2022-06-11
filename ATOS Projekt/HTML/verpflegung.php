@@ -33,6 +33,7 @@
           }
           else {
             document.getElementById(tag + "-extrasFrühTxt").style.display = "none";
+            document.getElementById(tag + "-extrasFrüh-txt").value = "";
           }
           return;
       }
@@ -43,6 +44,7 @@
           }
           else {
             document.getElementById(tag + "-extrasAbendTxt").style.display = "none";
+            document.getElementById(tag + "-extrasAbend-txt").value = "";
           }
           return;
       }
@@ -53,7 +55,74 @@
           }
           else {
             document.getElementById(tag + "-extrasMittagTxt").style.display = "none";
-            document.getElementById(tag + "-extrasMittagTxt").style.display = "none";
+            document.getElementById(tag + "-extrasMittag-txt").value = "";
+          }
+          return;
+      }
+
+      function zeigeFrühstückAuswahl(tag){
+        if (document.getElementById(tag + "-keinFrühstück").checked) {
+            document.getElementById(tag + "-frühstückAuswahl").style.display = "none";
+            document.getElementById(tag + "-basicFrüh").checked = false;
+            document.getElementById(tag + "-basicFrüh").required = false;
+            document.getElementById(tag + "-vegetarischFrüh").checked = false;
+            document.getElementById(tag + "-fitnessFrüh").checked = false;
+            document.getElementById(tag + "-französischFrüh").checked = false;
+            document.getElementById(tag + "-extrasFrüh").checked = false;
+            document.getElementById(tag + "-extrasFrühTxt").style.display = "none";
+            document.getElementById(tag + "-extrasFrüh-txt").value = "";
+          }
+          else {
+            document.getElementById(tag + "-frühstückAuswahl").style.display = "block";
+          }
+          return;
+      }
+
+      function zeigeMittagAuswahl(tag){
+        if (document.getElementById(tag + "-keinMittagessen").checked) {
+            document.getElementById(tag + "-mittagAuswahl").style.display = "none";
+            document.getElementById(tag + "-aktivMittag").checked = false;
+            document.getElementById(tag + "-aktivMittag").required = false;
+            document.getElementById(tag + "-chefMittag").checked = false;
+            document.getElementById(tag + "-köstlichMittag").checked = false;
+          }
+        else {
+          document.getElementById(tag + "-mittagAuswahl").style.display = "block";
+        }
+        return;
+      }
+
+      function zeigeAbendAuswahl(tag){
+        if (document.getElementById(tag + "-keinAbendessen").checked) {
+            document.getElementById(tag + "-abendAuswahl").style.display = "none";
+            document.getElementById(tag + "-basicAbend").checked = false;
+            document.getElementById(tag + "-basicAbend").required = false;
+            document.getElementById(tag + "-vegetarischAbend").checked = false;
+            document.getElementById(tag + "-salatAbend").checked = false;
+            document.getElementById(tag + "-salatAuswahl").style.display = "none";
+            document.getElementById(tag + "-salatHächen").checked = false;
+            document.getElementById(tag + "-salatHächen").required = false;
+            document.getElementById(tag + "-salatFeta").checked = false;
+            document.getElementById(tag + "-salatThunfisch").checked = false;
+            document.getElementById(tag + "-salatGouda").checked = false;
+            document.getElementById(tag + "-salatDressing").style.display = "none";
+            document.getElementById(tag + "-dressingBalsamico").checked = false;
+            document.getElementById(tag + "-dressingBalsamico").required = false;
+            document.getElementById(tag + "-dressingJoghurt").checked = false;
+            document.getElementById(tag + "-dressingÖl").checked = false;
+            document.getElementById(tag + "-wrapAbend").checked = false;
+            document.getElementById(tag + "-wrapAuswahl").style.display = "none";
+            document.getElementById(tag + "-wrapVegi").checked = false;
+            document.getElementById(tag + "-wrapVegi").required = false;
+            document.getElementById(tag + "-wrapPute").checked = false;
+            document.getElementById(tag + "-capreseAbend").checked = false;
+            document.getElementById(tag + "-suppeAbend").checked = false;
+            document.getElementById(tag + "-extrasAbend").checked = false;
+            document.getElementById(tag + "-extrasAbendTxt").style.display = "none";
+            document.getElementById(tag + "-extrasAbend-txt").value = "";
+          }
+          else {
+            document.getElementById(tag + "-abendAuswahl").style.display = "block";
           }
           return;
       }

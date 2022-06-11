@@ -7,16 +7,26 @@
       <label class="form-check-label" for="vorMittag">Vorspeise</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" value="mittag1" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-aktivMittag">
-      <label class="form-check-label" for="aktivMittag">Aktiv Vegetarisch</label>
+      <input class="form-check-input" value="Kein Mittagessen" type="radio" name="<?php echo $tag . '-'?>KeinMittagessen" id="<?php echo $tag . '-'?>keinMittagessen" onchange="zeigeMittagAuswahl('<?php echo $tag?>')">
+      <label class="form-check-label" for="<?php echo $tag . '-'?>keinMittagessen">Kein Mittagessen</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" value="mittag2" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-chefMittag">
-      <label class="form-check-label" for="chefMittag">Der Küchenchef empfiehlt</label>
+      <input class="form-check-input" value="Ich möchte Mittagessen" type="radio" name="<?php echo $tag . '-'?>KeinMittagessen" id="<?php echo $tag . '-'?>Mittagessen" onchange="zeigeMittagAuswahl('<?php echo $tag?>')" checked>
+      <label class="form-check-label" for="<?php echo $tag . '-'?>Mittagessen">Ich möchte Mittagessen</label>
     </div>
-    <div class="form-check">
-      <input class="form-check-input" value="mittag3" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-köstlichMittag">
-      <label class="form-check-label" for="köstlichMittag">Köstlich bewährt</label>
+    <div id="<?php echo $tag . '-'?>mittagAuswahl" class="offset-sm-1">
+      <div class="form-check">
+        <input class="form-check-input" value="mittag1" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-aktivMittag" required>
+        <label class="form-check-label" for="aktivMittag">Aktiv Vegetarisch</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" value="mittag2" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-chefMittag">
+        <label class="form-check-label" for="chefMittag">Der Küchenchef empfiehlt</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" value="mittag3" type="radio" name="<?php echo $tag . '-' ?>mittag" id="<?php echo $tag?>-köstlichMittag">
+        <label class="form-check-label" for="köstlichMittag">Köstlich bewährt</label>
+      </div>
     </div>
     <div class="form-check">
       <input class="form-check-input" type="checkbox" name="<?php echo $tag . '-' ?>desMittag" id="<?php echo $tag?>-desMittag" checked>
@@ -28,7 +38,7 @@
     </div>
     <div id="<?php echo $tag?>-extrasMittagTxt" style="display: none;">
       <div class="form-floating">
-        <textarea class="form-control" placeholder="Extras beim Mittagessen" name="<?php echo $tag . '-'?>extrasMittagTxt" id="extrasMittag-txt" style="height:15vh;"></textarea>
+        <textarea class="form-control" placeholder="Extras beim Mittagessen" name="<?php echo $tag . '-'?>extrasMittagTxt" id="<?php echo $tag?>-extrasMittag-txt" style="height:15vh;"></textarea>
         <label for="extrasAbend-txt">Anmerkungen für Ihr Mittagessen am <?php echo $tag?></label>
       </div>
     </div>

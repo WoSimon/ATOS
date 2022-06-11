@@ -87,7 +87,7 @@
           </div>
           <div class="col-md-4">
             <label for="zimmernummer" class="form-label">Zimmernummer</label>
-            <input type="text" name="zimmer" class="form-control" id="zimmernummer" required>
+            <input type="number" name="zimmer" class="form-control" id="zimmernummer" required>
           </div>
           <div class="col-md-6">
             <label for="aufnahmedatum" class="form-label">Aufnahmedatum</label>
