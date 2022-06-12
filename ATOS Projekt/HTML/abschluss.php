@@ -56,6 +56,43 @@
     
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+
+
+<script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+<script type="text/javascript">
+	$(document).ready(function($) 
+	{ 
+
+		$(document).on('click', '#exportBtn', function(event) 
+		{
+			event.preventDefault();
+			
+			var element = document.getElementById('bestellung'); 
+
+
+			//more custom settings
+			var opt = 
+			{
+			  margin:       1,
+			  filename:     'bestellungATOS.pdf',
+			  image:        { type: 'jpeg', quality: 0.98 },
+			  html2canvas:  { scale: 2 },
+			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+			};
+
+			// New Promise-based usage:
+			html2pdf().set(opt).from(element).save();
+			 
+		});
+ 
+	});
+	</script>
+
 <!doctype html>
 <html lang="de">
     <head>
@@ -80,137 +117,142 @@
 <body>
     <div class="container mt-5">
         <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
-        <h1>Vielen Dank für Ihre Bestellung!</h1>
-        <br>
-        <br>
-        <h4>Sie haben folgendes Bestellt:</h4>
-        <br>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Sie haben folgendes Bestellt:</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="exportBtn">Exportieren</button>
+                </div>
+            </div>
+        </div>
+        <div id="bestellung">
         
-        <?php
+            <?php
 
-        $bestellungen = array();
-        
-        echo '<div class="row">';
-        foreach ($arrayDays as $day) {
-            ${"bestellung".$day} = array();
-            echo "<div class='col'>";
-            echo "<b>Am " . $day . ":</b><br>";
-            $tag = str_replace(".", "_", $day);
-
-            if (isset($_POST[$tag . "-extrasFrühTxt"]) && $_POST[$tag . "-extrasFrühTxt"] != "" && isset($_POST[$tag . "-frühstück"])) {
-                $frühstück = $_POST[$tag . "-frühstück"] . " + " . $_POST[$tag . "-extrasFrühTxt"];
-                echo "Frühstück: " . $frühstück . "<br>";
-                ${"bestellung".$day}["frühstück"] = $frühstück;
-            }
-            else if (isset($_POST[$tag . "-frühstück"]) && !isset($_POST[$tag . "-extrasFrühTxt"])) {
-                echo "Frühstück: " . $_POST[$tag . "-frühstück"] . "<br>";
-                ${"bestellung".$day}["frühstück"] = $_POST[$tag . "-frühstück"];
-            }
-            else if (isset($_POST[$tag . "-extrasFrühTxt"]) && $_POST[$tag . "-extrasFrühTxt"] != "" && !isset($_POST[$tag . "-frühstück"])) {
-                $frühstück = " - + " . $_POST[$tag . "-extrasFrühTxt"];
-                echo "Frühstück: " . $frühstück . "<br>";
-                ${"bestellung".$day}["frühstück"] = $frühstück;
-            }
-            else {
-                echo "Frühstück: - <br>";
-                ${"bestellung".$day}["frühstück"] = "-";
-            }
-
+            $bestellungen = array();
             
-            if (isset($_POST[$tag . "-vorMittag"])) {
-                echo "Vorspeise Mittag: Ja <br>";
-                ${"bestellung".$day}["vorMittag"] = "Ja";
-            }
-            else {
-                echo "Vorspeise Mittag: Nein <br>";
-                ${"bestellung".$day}["vorMittag"] = "Nein";
-            }
+            echo '<div class="row">';
+            foreach ($arrayDays as $day) {
+                ${"bestellung".$day} = array();
+                echo "<div class='col'>";
+                echo "<b>Am " . $day . ":</b><br>";
+                $tag = str_replace(".", "_", $day);
 
-            if (isset($_POST[$tag . "extrasMittagTxt"]) && $_POST[$tag . "extrasMittagTxt"] != "") {
-                $Mittag = $_POST[$tag . "-mittag"] . " + " . $_POST[$tag . "-extrasMittagTxt"];
-            }
-            else if (isset($_POST[$tag . "-mittag"])){
-                switch ($_POST[$tag . "-mittag"]){
-                    case "mittag1":
-                    echo "Mittag: Aktiv Vegetarisch <br>";
-                    ${"bestellung".$day}["mittag"] = "Aktiv Vegetarisch";
-                        break;
-                    case "mittag2":
-                        echo "Mittag: Der Küchenchef empfielht <br>";
-                        ${"bestellung".$day}["mittag"] = "Der Küchenchef empfielht";
-                        break;
-                    case "mittag3":
-                        echo "Mittag: Köstlich Bewährt <br>";
-                        ${"bestellung".$day}["mittag"] = "Köstlich Bewährt";
-                        break;
+                if (isset($_POST[$tag . "-extrasFrühTxt"]) && $_POST[$tag . "-extrasFrühTxt"] != "" && isset($_POST[$tag . "-frühstück"])) {
+                    $frühstück = $_POST[$tag . "-frühstück"] . " + " . $_POST[$tag . "-extrasFrühTxt"];
+                    echo "Frühstück: " . $frühstück . "<br>";
+                    ${"bestellung".$day}["frühstück"] = $frühstück;
                 }
-            } 
-            else {
-                echo "Mittag: -<br>";
-                ${"bestellung".$day}["mittag"] = "-";
-            } 
-
-            if (isset($_POST[$tag . "-desMittag"])) {
-                    echo "Desert Mittag: Ja <br>";
-                    ${"bestellung".$day}["desMittag"] = "Ja";
+                else if (isset($_POST[$tag . "-frühstück"]) && !isset($_POST[$tag . "-extrasFrühTxt"])) {
+                    echo "Frühstück: " . $_POST[$tag . "-frühstück"] . "<br>";
+                    ${"bestellung".$day}["frühstück"] = $_POST[$tag . "-frühstück"];
+                }
+                else if (isset($_POST[$tag . "-extrasFrühTxt"]) && $_POST[$tag . "-extrasFrühTxt"] != "" && !isset($_POST[$tag . "-frühstück"])) {
+                    $frühstück = " - + " . $_POST[$tag . "-extrasFrühTxt"];
+                    echo "Frühstück: " . $frühstück . "<br>";
+                    ${"bestellung".$day}["frühstück"] = $frühstück;
                 }
                 else {
-                    echo "Desert Mittag: Nein <br>";
-                    ${"bestellung".$day}["desMittag"] = "Nein";
+                    echo "Frühstück: - <br>";
+                    ${"bestellung".$day}["frühstück"] = "-";
                 }
 
+                
+                if (isset($_POST[$tag . "-vorMittag"])) {
+                    echo "Vorspeise Mittag: Ja <br>";
+                    ${"bestellung".$day}["vorMittag"] = "Ja";
+                }
+                else {
+                    echo "Vorspeise Mittag: Nein <br>";
+                    ${"bestellung".$day}["vorMittag"] = "Nein";
+                }
 
-            if (isset($_POST[$tag . "-extrasAbend"]) && $_POST[$tag . "-extrasAbendTxt"] != "" && isset($_POST[$tag . "-abend"])) {
-                if ($_POST[$tag . "-abend"] == "salatAbend"){
-                    $abend = $_POST[$tag . "-salat"] . " , " . $_POST[$tag . "-salatDressing"];
-                    echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
-                    ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
+                if (isset($_POST[$tag . "extrasMittagTxt"]) && $_POST[$tag . "extrasMittagTxt"] != "") {
+                    $Mittag = $_POST[$tag . "-mittag"] . " + " . $_POST[$tag . "-extrasMittagTxt"];
                 }
-                else if ($_POST[$tag . "-abend"] == "wrapAbend"){
-                    $abend = $_POST[$tag . "-wrap"];
-                    echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
-                    ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
+                else if (isset($_POST[$tag . "-mittag"])){
+                    switch ($_POST[$tag . "-mittag"]){
+                        case "mittag1":
+                        echo "Mittag: Aktiv Vegetarisch <br>";
+                        ${"bestellung".$day}["mittag"] = "Aktiv Vegetarisch";
+                            break;
+                        case "mittag2":
+                            echo "Mittag: Der Küchenchef empfielht <br>";
+                            ${"bestellung".$day}["mittag"] = "Der Küchenchef empfielht";
+                            break;
+                        case "mittag3":
+                            echo "Mittag: Köstlich Bewährt <br>";
+                            ${"bestellung".$day}["mittag"] = "Köstlich Bewährt";
+                            break;
+                    }
+                } 
+                else {
+                    echo "Mittag: -<br>";
+                    ${"bestellung".$day}["mittag"] = "-";
+                } 
+
+                if (isset($_POST[$tag . "-desMittag"])) {
+                        echo "Desert Mittag: Ja <br>";
+                        ${"bestellung".$day}["desMittag"] = "Ja";
+                    }
+                    else {
+                        echo "Desert Mittag: Nein <br>";
+                        ${"bestellung".$day}["desMittag"] = "Nein";
+                    }
+
+
+                if (isset($_POST[$tag . "-extrasAbend"]) && $_POST[$tag . "-extrasAbendTxt"] != "" && isset($_POST[$tag . "-abend"])) {
+                    if ($_POST[$tag . "-abend"] == "salatAbend"){
+                        $abend = $_POST[$tag . "-salat"] . " , " . $_POST[$tag . "-salatDressing"];
+                        echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
+                        ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
+                    }
+                    else if ($_POST[$tag . "-abend"] == "wrapAbend"){
+                        $abend = $_POST[$tag . "-wrap"];
+                        echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
+                        ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
+                    }
+                    else {
+                        $abend = $_POST[$tag . "-abend"];
+                        echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
+                        ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
+                    }
+                }
+                else if (isset($_POST[$tag . "-abend"]) && !isset($_POST[$tag . "-extrasAbendTxt"])) {
+                    if ($_POST[$tag . "-abend"] == "salatAbend"){
+                        $abend = $_POST[$tag . "-salat"] . " , " . $_POST[$tag . "-salatDressing"];
+                        echo "Abend: " . $abend . "<br>";
+                        ${"bestellung".$day}["abend"] = $abend;
+                    }
+                    else if ($_POST[$tag . "-abend"] == "wrapAbend"){
+                        $abend = $_POST[$tag . "-wrap"];
+                        echo "Abend: " . $abend . "<br>";
+                        ${"bestellung".$day}["abend"] = $abend;
+                    }
+                    else {
+                        $abend = $_POST[$tag . "-abend"];
+                        echo "Abend: " . $abend . "<br>";
+                        ${"bestellung".$day}["abend"] = $abend;
+                    }
+                }
+                else if (isset($_POST[$tag . "-extrasAbend"]) && $_POST[$tag . "-extrasAbend"] != "" && !isset($_POST[$tag . "-abend"])) {
+                    $abendessen = " - + " . $_POST[$tag . "-extrasAbendTxt"];
+                    echo "Abend: " . $abendessen . "<br>";
+                    ${"bestellung".$day}["abend"] = $abendessen;
                 }
                 else {
-                    $abend = $_POST[$tag . "-abend"];
-                    echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
-                    ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
+                    echo "Abend: - <br>";
+                    ${"bestellung".$day}["abend"] = "-";
                 }
-            }
-            else if (isset($_POST[$tag . "-abend"]) && !isset($_POST[$tag . "-extrasAbendTxt"])) {
-                if ($_POST[$tag . "-abend"] == "salatAbend"){
-                    $abend = $_POST[$tag . "-salat"] . " , " . $_POST[$tag . "-salatDressing"];
-                    echo "Abend: " . $abend . "<br>";
-                    ${"bestellung".$day}["abend"] = $abend;
+                echo "<br><br>";
+                array_push($bestellungen, ${"bestellung".$day});
                 }
-                else if ($_POST[$tag . "-abend"] == "wrapAbend"){
-                    $abend = $_POST[$tag . "-wrap"];
-                    echo "Abend: " . $abend . "<br>";
-                    ${"bestellung".$day}["abend"] = $abend;
-                }
-                else {
-                    $abend = $_POST[$tag . "-abend"];
-                    echo "Abend: " . $abend . "<br>";
-                    ${"bestellung".$day}["abend"] = $abend;
-                }
-            }
-            else if (isset($_POST[$tag . "-extrasAbend"]) && $_POST[$tag . "-extrasAbend"] != "" && !isset($_POST[$tag . "-abend"])) {
-                $abendessen = " - + " . $_POST[$tag . "-extrasAbendTxt"];
-                echo "Abend: " . $abendessen . "<br>";
-                ${"bestellung".$day}["abend"] = $abendessen;
-            }
-            else {
-                echo "Abend: - <br>";
-                ${"bestellung".$day}["abend"] = "-";
-            }
-            echo "<br><br>";
-            array_push($bestellungen, ${"bestellung".$day});
-            }
-            echo "  </div>";
-            echo "</div> ";
-            
-            bestellungAufnehmen($conn, $nachname, $vorname, $zimmer, $aufnahme, $entlassung, $bestellungen);
-        ?>
+                echo "  </div>";
+                echo "</div> ";
+                
+                bestellungAufnehmen($conn, $nachname, $vorname, $zimmer, $aufnahme, $entlassung, $bestellungen);
+            ?>
+        </div>
 
 <!-- Optional JavaScript; choose one of the two! -->
 
