@@ -97,14 +97,19 @@
             echo "<b>Am " . $day . ":</b><br>";
             $tag = str_replace(".", "_", $day);
 
-            if (isset($_POST[$tag . "-extrasFrühTxt"]) && $_POST[$tag . "-extrasFrühTxt"] != "") {
+            if (isset($_POST[$tag . "-extrasFrühTxt"]) && $_POST[$tag . "-extrasFrühTxt"] != "" && isset($_POST[$tag . "-frühstück"])) {
                 $frühstück = $_POST[$tag . "-frühstück"] . " + " . $_POST[$tag . "-extrasFrühTxt"];
                 echo "Frühstück: " . $frühstück . "<br>";
                 ${"bestellung".$day}["frühstück"] = $frühstück;
             }
-            else if (isset($_POST[$tag . "-frühstück"])){
+            else if (isset($_POST[$tag . "-frühstück"]) && !isset($_POST[$tag . "-extrasFrühTxt"])) {
                 echo "Frühstück: " . $_POST[$tag . "-frühstück"] . "<br>";
                 ${"bestellung".$day}["frühstück"] = $_POST[$tag . "-frühstück"];
+            }
+            else if (isset($_POST[$tag . "-extrasFrühTxt"]) && $_POST[$tag . "-extrasFrühTxt"] != "" && !isset($_POST[$tag . "-frühstück"])) {
+                $frühstück = " - + " . $_POST[$tag . "-extrasFrühTxt"];
+                echo "Frühstück: " . $frühstück . "<br>";
+                ${"bestellung".$day}["frühstück"] = $frühstück;
             }
             else {
                 echo "Frühstück: - <br>";
@@ -155,7 +160,7 @@
                 }
 
 
-            if (isset($_POST[$tag . "-extrasAbend"]) && $_POST[$tag . "-extrasAbend"] != "") {
+            if (isset($_POST[$tag . "-extrasAbend"]) && $_POST[$tag . "-extrasAbendTxt"] != "" && isset($_POST[$tag . "-abend"])) {
                 if ($_POST[$tag . "-abend"] == "salatAbend"){
                     $abend = $_POST[$tag . "-salat"] . " , " . $_POST[$tag . "-salatDressing"];
                     echo "Abend: " . $abend . " + " . $_POST[$tag . "-extrasAbendTxt"] . "<br>";
@@ -172,7 +177,7 @@
                     ${"bestellung".$day}["abend"] = $abend . " + " . $_POST[$tag . "-extrasAbendTxt"];
                 }
             }
-            else if (isset($_POST[$tag . "-abend"])){
+            else if (isset($_POST[$tag . "-abend"]) && !isset($_POST[$tag . "-extrasAbendTxt"])) {
                 if ($_POST[$tag . "-abend"] == "salatAbend"){
                     $abend = $_POST[$tag . "-salat"] . " , " . $_POST[$tag . "-salatDressing"];
                     echo "Abend: " . $abend . "<br>";
@@ -188,6 +193,11 @@
                     echo "Abend: " . $abend . "<br>";
                     ${"bestellung".$day}["abend"] = $abend;
                 }
+            }
+            else if (isset($_POST[$tag . "-extrasAbend"]) && $_POST[$tag . "-extrasAbend"] != "" && !isset($_POST[$tag . "-abend"])) {
+                $abendessen = " - + " . $_POST[$tag . "-extrasAbendTxt"];
+                echo "Abend: " . $abendessen . "<br>";
+                ${"bestellung".$day}["abend"] = $abendessen;
             }
             else {
                 echo "Abend: - <br>";

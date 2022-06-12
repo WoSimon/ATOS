@@ -68,9 +68,6 @@
             document.getElementById(tag + "-vegetarischFrüh").checked = false;
             document.getElementById(tag + "-fitnessFrüh").checked = false;
             document.getElementById(tag + "-französischFrüh").checked = false;
-            document.getElementById(tag + "-extrasFrüh").checked = false;
-            document.getElementById(tag + "-extrasFrühTxt").style.display = "none";
-            document.getElementById(tag + "-extrasFrüh-txt").value = "";
           }
           else {
             document.getElementById(tag + "-frühstückAuswahl").style.display = "block";
@@ -117,9 +114,6 @@
             document.getElementById(tag + "-wrapPute").checked = false;
             document.getElementById(tag + "-capreseAbend").checked = false;
             document.getElementById(tag + "-suppeAbend").checked = false;
-            document.getElementById(tag + "-extrasAbend").checked = false;
-            document.getElementById(tag + "-extrasAbendTxt").style.display = "none";
-            document.getElementById(tag + "-extrasAbend-txt").value = "";
           }
           else {
             document.getElementById(tag + "-abendAuswahl").style.display = "block";
@@ -286,6 +280,23 @@
       }
 
     ?>
+    
+    <!-- Modal Hilfe -->
+    <div class="modal fade" id="HilfeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Haben Sie Probleme beim Ausfüllen des Formulars?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Bitte wenden Sie sich an unseren Support. <br>
+            Sie können uns per Telefon unter der folgenden Nummer kontaktieren: <br>
+            <b>123456789</b>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="container mt-5">
       <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
@@ -370,6 +381,15 @@
       ?>
 
       </form>
+
+      <br>
+
+      <div class="px-4 py-5 my-5 text-center">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HilfeModal">
+          Ich brauche Hilfe beim Ausfüllen!
+        </button>
+      </div>
 
       <!-- Optional JavaScript; choose one of the two! -->
       

@@ -215,15 +215,15 @@
                     <input class="form-check-input" value="Französisches Frühstück" type="radio" name="<?php echo $tag . '-'?>frühstück" id="<?php echo $tag . '-'?>französischFrüh">
                     <label class="form-check-label" for="französischFrüh">Französiches Frühstück</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="extrasFrüh" name="<?php echo $tag . '-'?>extraFrühstück" id="<?php echo $tag?>-extrasFrüh" onchange="zeigeFrückstückExtras('<?php echo $tag?>')">
-                    <label class="form-check-label" for="extrasFrüh">Extras</label>
-                </div>
-                <div id="<?php echo $tag?>-extrasFrühTxt" style="display: none;">
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Extras beim Frühstück" name="<?php echo $tag . '-'?>extrasFrühTxt" id="<?php echo $tag . '-'?>extrasFrüh-txt" style="height:15vh;"></textarea>
-                        <label for="extrasAbend-txt">Anmerkungen für Ihr Frühstück am <?php echo $tag?></label>
-                    </div>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="extrasFrüh" name="<?php echo $tag . '-'?>extraFrühstück" id="<?php echo $tag?>-extrasFrüh" onchange="zeigeFrückstückExtras('<?php echo $tag?>')">
+                <label class="form-check-label" for="extrasFrüh">Extras</label>
+            </div>
+            <div id="<?php echo $tag?>-extrasFrühTxt" style="display: none;">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Extras beim Frühstück" name="<?php echo $tag . '-'?>extrasFrühTxt" id="<?php echo $tag . '-'?>extrasFrüh-txt" style="height:15vh;"></textarea>
+                    <label for="extrasAbend-txt">Anmerkungen für Ihr Frühstück am <?php echo $tag?></label>
                 </div>
             </div>
         </div>
@@ -409,15 +409,15 @@ $menu = bestimmeTag($tag);
                     <input class="form-check-input" value="Suppe" type="radio" name="<?php echo $tag . '-'?>abend" onchange="zeigeAbendSpezifikationen('<?php echo $tag?>')" id="<?php echo $tag . '-'?>suppeAbend">
                     <label class="form-check-label" for="suppeAbend">Suppe</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="extrasAbend" name="<?php echo $tag?>-extrasAbend" id="<?php echo $tag?>-extrasAbend" onchange="zeigeAbendExtras('<?php echo $tag?>')">
-                    <label class="form-check-label" for="extrasAbend">Extras</label>
-                </div>
-                <div id="<?php echo $tag?>-extrasAbendTxt" style="display: none;">
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Extras beim Abendessen" name="<?php echo $tag . '-'?>extrasAbendTxt" id="<?php echo $tag . '-'?>extrasAbend-txt" style="height:15vh;"></textarea>
-                        <label for="extrasAbend-txt">Anmerkungen für Ihr Abendessen am <?php echo $tag?></label>
-                    </div>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="extrasAbend" name="<?php echo $tag?>-extrasAbend" id="<?php echo $tag?>-extrasAbend" onchange="zeigeAbendExtras('<?php echo $tag?>')">
+                <label class="form-check-label" for="extrasAbend">Extras</label>
+            </div>
+            <div id="<?php echo $tag?>-extrasAbendTxt" style="display: none;">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Extras beim Abendessen" name="<?php echo $tag . '-'?>extrasAbendTxt" id="<?php echo $tag . '-'?>extrasAbend-txt" style="height:15vh;"></textarea>
+                    <label for="extrasAbend-txt">Anmerkungen für Ihr Abendessen am <?php echo $tag?></label>
                 </div>
             </div>
         </div>

@@ -72,6 +72,23 @@
   </head>
 
   <body>
+    <!-- Modal Hilfe -->
+    <div class="modal fade" id="HilfeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Haben Sie Probleme beim Ausfüllen des Formulars?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Bitte wenden Sie sich an unseren Support. <br>
+            Sie können uns per Telefon unter der folgenden Nummer kontaktieren: <br>
+            <b>123456789</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container mt-5">
         <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
         <h1>Bitte zunächst Ihre allgemeinen Informationen überprüfen!</h1>
@@ -112,6 +129,13 @@
           </script>
 
         </form>
+        <br>
+        <div class="px-4 py-5 my-5 text-center">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HilfeModal">
+            Ich brauche Hilfe beim Ausfüllen!
+          </button>
+        </div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
