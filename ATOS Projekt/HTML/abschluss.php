@@ -148,7 +148,7 @@
                     ${"bestellung".$day}["frühstück"] = $_POST[$tag . "-frühstück"];
                 }
                 else if (isset($_POST[$tag . "-extrasFrühTxt"]) && $_POST[$tag . "-extrasFrühTxt"] != "" && !isset($_POST[$tag . "-frühstück"])) {
-                    $frühstück = " - + " . $_POST[$tag . "-extrasFrühTxt"];
+                    $frühstück = " Kein Frühstück + " . $_POST[$tag . "-extrasFrühTxt"];
                     echo "Frühstück: " . $frühstück . "<br>";
                     ${"bestellung".$day}["frühstück"] = $frühstück;
                 }
@@ -157,48 +157,79 @@
                     ${"bestellung".$day}["frühstück"] = "-";
                 }
 
-                
-                if (isset($_POST[$tag . "-vorMittag"])) {
-                    echo "Vorspeise Mittag: Ja <br>";
-                    ${"bestellung".$day}["vorMittag"] = "Ja";
-                }
-                else {
-                    echo "Vorspeise Mittag: Nein <br>";
+                if ($day == $arrayDays[count($arrayDays) - 1]){
                     ${"bestellung".$day}["vorMittag"] = "Nein";
-                }
 
-                if (isset($_POST[$tag . "extrasMittagTxt"]) && $_POST[$tag . "extrasMittagTxt"] != "") {
-                    $Mittag = $_POST[$tag . "-mittag"] . " + " . $_POST[$tag . "-extrasMittagTxt"];
-                }
-                else if (isset($_POST[$tag . "-mittag"])){
-                    switch ($_POST[$tag . "-mittag"]){
-                        case "mittag1":
-                        echo "Mittag: Aktiv Vegetarisch <br>";
-                        ${"bestellung".$day}["mittag"] = "Aktiv Vegetarisch";
-                            break;
-                        case "mittag2":
-                            echo "Mittag: Der Küchenchef empfielht <br>";
-                            ${"bestellung".$day}["mittag"] = "Der Küchenchef empfielht";
-                            break;
-                        case "mittag3":
-                            echo "Mittag: Köstlich Bewährt <br>";
-                            ${"bestellung".$day}["mittag"] = "Köstlich Bewährt";
-                            break;
-                    }
-                } 
-                else {
-                    echo "Mittag: -<br>";
+                    echo "Mittag: - <br>";
                     ${"bestellung".$day}["mittag"] = "-";
-                } 
 
-                if (isset($_POST[$tag . "-desMittag"])) {
-                        echo "Desert Mittag: Ja <br>";
-                        ${"bestellung".$day}["desMittag"] = "Ja";
+                    echo "Desert Mittag: Nein <br>";
+                    ${"bestellung".$day}["desMittag"] = "Nein";
+                }
+                else {
+                    if (isset($_POST[$tag . "-vorMittag"])) {
+                        echo "Vorspeise Mittag: Ja <br>";
+                        ${"bestellung".$day}["vorMittag"] = "Ja";
                     }
                     else {
-                        echo "Desert Mittag: Nein <br>";
-                        ${"bestellung".$day}["desMittag"] = "Nein";
+                        echo "Vorspeise Mittag: Nein <br>";
+                        ${"bestellung".$day}["vorMittag"] = "Nein";
                     }
+
+                    if (isset($_POST[$tag . "-extrasMittagTxt"]) && $_POST[$tag . "-extrasMittagTxt"] != "" && isset($_POST[$tag . "-mittag"])) {
+                        switch ($_POST[$tag . "-mittag"]){
+                            case "mittag1":
+                                $mittag = "Aktiv Vegetarisch + " . $_POST[$tag . "-extrasMittagTxt"];
+                                echo "Mittag: " . $mittag . " <br>";
+                                ${"bestellung".$day}["mittag"] = $mittag;
+                                break;
+                            case "mittag2":
+                                $mittag = "Der Küchenchef empfielht + " . $_POST[$tag . "-extrasMittagTxt"];
+                                echo "Mittag: " . $mittag . " <br>";
+                                ${"bestellung".$day}["mittag"] = $mittag;
+                                break;
+                            case "mittag3":
+                                $mittag = "Köstlich Bewährt + " . $_POST[$tag . "-extrasMittagTxt"];
+                                echo "Mittag: " . $mittag . " <br>";
+                                ${"bestellung".$day}["mittag"] = $mittag;
+                                break;
+                        }
+                    }
+                    else if (isset($_POST[$tag . "-mittag"]) && (!isset($_POST[$tag . "-extrasMittagTxt"]) || $_POST[$tag . "-extrasMittagTxt"] == "" )) {
+                        switch ($_POST[$tag . "-mittag"]){
+                            case "mittag1":
+                            echo "Mittag: Aktiv Vegetarisch <br>";
+                            ${"bestellung".$day}["mittag"] = "Aktiv Vegetarisch";
+                                break;
+                            case "mittag2":
+                                echo "Mittag: Der Küchenchef empfielht <br>";
+                                ${"bestellung".$day}["mittag"] = "Der Küchenchef empfielht";
+                                break;
+                            case "mittag3":
+                                echo "Mittag: Köstlich Bewährt <br>";
+                                ${"bestellung".$day}["mittag"] = "Köstlich Bewährt";
+                                break;
+                        }
+                    } 
+                    else if (!isset($_POST[$tag . "-mittag"]) && (isset($_POST[$tag . "-extrasMittagTxt"]) && $_POST[$tag . "-extrasMittagTxt"] != "")) {
+                        $mittag = "Kein Mittag + " . $_POST[$tag . "-extrasMittagTxt"];
+                        echo "Mittag: " . $mittag . "<br>";
+                        ${"bestellung".$day}["mittag"] = $mittag;
+                    }
+                    else {
+                        echo "Mittag: - <br>";
+                        ${"bestellung".$day}["mittag"] = "-";
+                    }
+
+                    if (isset($_POST[$tag . "-desMittag"])) {
+                            echo "Desert Mittag: Ja <br>";
+                            ${"bestellung".$day}["desMittag"] = "Ja";
+                        }
+                        else {
+                            echo "Desert Mittag: Nein <br>";
+                            ${"bestellung".$day}["desMittag"] = "Nein";
+                        }
+                }
 
 
                 if (isset($_POST[$tag . "-extrasAbend"]) && $_POST[$tag . "-extrasAbendTxt"] != "" && isset($_POST[$tag . "-abend"])) {
