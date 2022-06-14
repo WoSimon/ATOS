@@ -268,7 +268,7 @@
         </div>
           
         <div class="col-md-6">
-          <a href="index.php"><button type="button" class="btn btn-secondary">Zurück</button></a>
+          <a href="algemein.php"><button type="button" class="btn btn-secondary">Zurück</button></a>
         </div>
         <div class="col-md-6">
           <button type="submit" class="btn btn-primary" onclick="saveAllergies()">Weiter</button>
