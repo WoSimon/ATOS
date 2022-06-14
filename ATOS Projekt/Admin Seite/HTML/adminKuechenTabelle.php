@@ -401,6 +401,9 @@
 
                 </script>
             </div>
+            <br>
+            <br>
+            <a href="adminKueche.php"><button type="button" class="btn btn-outline-primary">Zurück</button></a>
         </div>
     </div>
     <br>

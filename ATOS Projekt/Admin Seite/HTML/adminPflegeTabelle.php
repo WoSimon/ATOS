@@ -629,8 +629,11 @@
                 </script>
 
             </div>
+            <a href="adminPflege.php"><button type="button" class="btn btn-outline-primary">Zurück</button></a>
         </div>
     </div>
+    <br>
+    <br>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

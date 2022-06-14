@@ -43,25 +43,27 @@
   </head>
 
   <body>
-    <div class="container mt-5">
-        
-        <div class="px-4 py-5 my-5 text-center">
-            <img src="../../Images/ATOS_Logo.jpg" class="img-fluid">
-            <h1 class="display-5 fw-bold">Tag auswählen</h1>
-            <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">Bitte wählen Sie den Tag aus für den Sie die Essensbestellungen Extrahieren möchten.</p>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <form class="row" method="POST" action="adminKuechenTabelle.php" onsubmit="return(datumValidieren())">
-                        <div class="col-md-12">
-                            <input type="date" name="datum" class="form-control" id="datum" required>
-                        </div>
-                        <div class="col-md-12"><br></div>
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-outline-dark btn-lg px-4">Tabelle generieren</button>
-                        </div>
-                    </form>
+    <div>
+        <div class="container mt-5"> 
+            <div class="px-4 py-5 my-5 text-center">
+                <img src="../../Images/ATOS_Logo.jpg" class="img-fluid">
+                <h1 class="display-5 fw-bold">Tag auswählen</h1>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">Bitte wählen Sie den Tag aus für den Sie die Essensbestellungen Extrahieren möchten.</p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <form class="row" method="POST" action="adminKuechenTabelle.php" onsubmit="return(datumValidieren())">
+                            <div class="col-md-12">
+                                <input type="date" name="datum" class="form-control" id="datum" required>
+                            </div>
+                            <div class="col-md-12"><br></div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-outline-dark btn-lg px-4">Tabelle generieren</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <a href="adminIndex.html"><button type="button" class="btn btn-outline-primary">Zurück</button></a>
         </div>
     </div>
 
