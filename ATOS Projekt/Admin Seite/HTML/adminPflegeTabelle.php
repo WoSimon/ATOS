@@ -28,24 +28,64 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+
+
+    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+    <script type="text/javascript">
+        $(document).ready(function($) 
+        { 
+
+            $(document).on('click', '#exportBtn', function(event) 
+            {
+                event.preventDefault();
+                
+                var element = document.getElementById('container'); 
+
+
+                //more custom settings
+                var opt = 
+                {
+                margin:       1,
+                filename:     '<?php echo $datum?>-Tabelle_Pflege.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', orientation: 'landscape' }
+                };
+
+                // New Promise-based usage:
+                html2pdf().set(opt).from(element).save();
+                
+            });
+    
+        });
+	</script>
+
     <title>ATOS Tabelle für die Pflegestation </title>
 
   </head>
 
   <body>
-    <div class="container mt-5">
+    <div class="container mt-5" id="container">
         <img src="../../Images/ATOS_Logo.jpg" class="img-fluid">
         
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Frühstück für den <?php echo $datum?></h1>
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-success">Exportieren</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="exportBtn">PDF</button>
+                    <button type="button" class="btn btn-sm btn-outline-success" onclick="ExportToExcel()">Excel</button>
                 </div>
             </div>
         </div>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered border-dark table-sm">
+                <table class="table table-striped table-bordered border-dark table-sm" id="tabelleFrüh">
                     <thead>
                         <tr>
                         <th scope="col" style="width:5%">Zimmer</th>
@@ -148,14 +188,9 @@
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Mittagessen für den <?php echo $datum?></h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-success">Exportieren</button>
-                </div>
-            </div>
         </div>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered border-dark table-sm">
+                <table class="table table-striped table-bordered border-dark table-sm" id="tabelleMittag">
                     <thead>
                         <tr>
                         <th scope="col" style="width:5%">Zimmer</th>
@@ -268,14 +303,9 @@
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Abendessen für den <?php echo $datum?></h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-success">Exportieren</button>
-                </div>
-            </div>
         </div>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered border-dark table-sm">
+                <table class="table table-striped table-bordered border-dark table-sm" id="tabelleAbend">
                     <thead>
                         <tr>
                             <th scope="col" style="width:5%">Zimmer</th>
@@ -576,6 +606,28 @@
                         
                     </tbody>
                 </table>
+
+                <script>
+
+                    function ExportToExcel() {
+                        var workbook = XLSX.utils.book_new();
+                        var tbl1= document.getElementById('tabelleFrüh');
+                        var tbl2= document.getElementById('tabelleMittag');
+                        var tbl3= document.getElementById('tabelleAbend');
+                        var wb1 = XLSX.utils.table_to_sheet(tbl1);
+                        XLSX.utils.book_append_sheet(workbook, wb1,'Frühstück');
+
+                        var wb2 = XLSX.utils.table_to_sheet(tbl2);
+                        XLSX.utils.book_append_sheet(workbook, wb2,'Mittag');
+
+                        var wb3 = XLSX.utils.table_to_sheet(tbl3);
+                        XLSX.utils.book_append_sheet(workbook, wb3,'Abendessen');
+                            
+                        XLSX.writeFile(workbook,'<?php echo $datum?>-Tabelle_Pflege.xlsx');
+                    }
+
+                </script>
+
             </div>
         </div>
     </div>

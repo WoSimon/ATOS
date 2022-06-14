@@ -146,25 +146,65 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+
+
+    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+    <script type="text/javascript">
+        $(document).ready(function($) 
+        { 
+
+            $(document).on('click', '#exportBtn', function(event) 
+            {
+                event.preventDefault();
+                
+                var element = document.getElementById('container'); 
+
+
+                //more custom settings
+                var opt = 
+                {
+                margin:       1,
+                filename:     '<?php echo $datum?>-Tabelle_Küche.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', orientation: 'landscape' }
+                };
+
+                // New Promise-based usage:
+                html2pdf().set(opt).from(element).save();
+                
+            });
+    
+        });
+	</script>
+
     <title>ATOS Tabelle für die Küche </title>
 
   </head>
 
   <body>
-    <div class="container mt-5">
+    <div class="container mt-5" id="container">
         <img src="../../Images/ATOS_Logo.jpg" class="img-fluid">
         
         
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Essensbestellungen für den <?php echo $datum?></h1>
             <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-success">Exportieren</button>
+            <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="exportBtn">PDF</button>
+                    <button type="button" class="btn btn-sm btn-outline-success" onclick="ExportToExcel()">Excel</button>
                 </div>
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm" id="tabelleGesamt">
                 <thead>
                     <tr>
                     <th scope="col">Anzahl Personen</th>
@@ -283,18 +323,12 @@
 
         <br>
         <br>
-        <br>
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Extras für den <?php echo $datum?></h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-success">Exportieren</button>
-                </div>
-            </div>
         </div>
             <div class="table-responsive">
-                <table class="table table-striped table-sm">
+                <table class="table table-striped table-sm" id="tabelleExtras">
                     <thead>
                         <tr>
                         <th scope="col" style="width:5%">Suite</th>
@@ -350,9 +384,27 @@
                         
                     </tbody>
                 </table>
+                <script>
+
+                    function ExportToExcel() {
+                        var workbook = XLSX.utils.book_new();
+                        var tbl1= document.getElementById('tabelleGesamt');
+                        var tbl2= document.getElementById('tabelleExtras');
+                        var wb1 = XLSX.utils.table_to_sheet(tbl1);
+                        XLSX.utils.book_append_sheet(workbook, wb1,'Gesamt Bestellungen');
+
+                        var wb2 = XLSX.utils.table_to_sheet(tbl2);
+                        XLSX.utils.book_append_sheet(workbook, wb2,'Extras');
+                            
+                        XLSX.writeFile(workbook,'<?php echo $datum?>-Tabelle_Küche.xlsx');
+                    }
+
+                </script>
             </div>
         </div>
     </div>
+    <br>
+    <br>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
