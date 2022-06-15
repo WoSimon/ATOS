@@ -1,6 +1,21 @@
 <?php
 
   session_start();
+  if (isset($_SESSION["login"])){
+    if ($_SESSION["login"] == true){
+      $vorname = $_SESSION["vorname"];
+      $nachname = $_SESSION["nachname"];
+      $zimmer = $_SESSION["zimmer"];
+      $aufnahme = $_SESSION["aufnahme"];
+      $entlassung = $_SESSION["entlassung"];
+    }
+    else{
+      header("Location: login.php?error=4");
+    }
+  }
+    else{
+        header("Location: login.php?error=4");
+  }
   
 ?>
 <!doctype html>

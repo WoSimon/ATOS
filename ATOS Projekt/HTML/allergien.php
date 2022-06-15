@@ -1,20 +1,21 @@
 <?php
 
-  if (isset ($_POST['vorname'])){
-    $vorname = $_POST["vorname"];
-    $nachname = $_POST["nachname"];
-    $zimmer = $_POST["zimmer"];
-    $aufnahme = $_POST["aufnahme"];
-    $entlassung = $_POST["entlassung"];}
-
-  session_start();
-  if (isset($vorname)){
-    $_SESSION["vorname"] = $vorname;
-    $_SESSION["nachname"] = $nachname;
-    $_SESSION["zimmer"] = $zimmer;
-    $_SESSION["aufnahme"] = $aufnahme;
-    $_SESSION["entlassung"] = $entlassung;
+session_start();
+if (isset($_SESSION["login"])){
+  if ($_SESSION["login"] == true){
+    $vorname = $_SESSION["vorname"];
+    $nachname = $_SESSION["nachname"];
+    $zimmer = $_SESSION["zimmer"];
+    $aufnahme = $_SESSION["aufnahme"];
+    $entlassung = $_SESSION["entlassung"];
   }
+  else{
+    header("Location: login.php?error=4");
+  }
+}
+  else{
+      header("Location: login.php?error=4");
+}
 
 ?>
 
@@ -143,13 +144,13 @@
           <label for="vorname" class="form-label">Vorname</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="vorname"> 
+          <input type="text" readonly class="form-control-plaintext" id="vorname" value="<?php echo $vorname?>"> 
         </div>
         <div class="col-md-3">
           <label for="aufnahmedatum" class="form-label">Aufnahmedatum</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="aufnahmedatum"> 
+          <input type="text" readonly class="form-control-plaintext" id="aufnahmedatum" value="<?php echo date_create($aufnahme)->format('d.m.Y')?>"> 
         </div>
       </div>
 
@@ -162,13 +163,13 @@
           <label for="nachname" class="form-label">Nachname</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="nachname"> 
+          <input type="text" readonly class="form-control-plaintext" id="nachname" value="<?php echo $nachname?>"> 
         </div>
         <div class="col-md-3">
           <label for="entlassungsdatum" class="form-label">Entlassungsdatum</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="entlassungsdatum"> 
+          <input type="text" readonly class="form-control-plaintext" id="entlassungsdatum" value="<?php echo date_create($entlassung)->format('d.m.Y')?>"> 
         </div>
       </div>
         
@@ -181,11 +182,11 @@
           <label for="zimmernummer" class="form-label">Zimmernummer</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="zimmernummer"> 
+          <input type="text" readonly class="form-control-plaintext" id="zimmernummer" value="<?php echo $zimmer?>"> 
         </div>
       </div>
 
-      <script>
+      <!--<script>
       document.getElementById("vorname").value = localStorage.getItem("vorname");
       document.getElementById("nachname").value = localStorage.getItem("nachname");
       document.getElementById("zimmernummer").value = localStorage.getItem("zimmernummer");
@@ -193,7 +194,7 @@
       document.getElementById("aufnahmedatum").value = aufnahmedatum;
       var entlassungsdatum = dateToString(stringToDate(localStorage.getItem("entlassungsdatum")));
       document.getElementById("entlassungsdatum").value = entlassungsdatum;
-      </script>
+      </script>-->
 
       <div class="row-g-3">
         <br>

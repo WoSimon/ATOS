@@ -1,3 +1,23 @@
+<?php 
+
+  session_start();
+  if (isset($_SESSION["login"])){
+    if ($_SESSION["login"] == true){
+      $vorname = $_SESSION["vorname"];
+      $nachname = $_SESSION["nachname"];
+      $zimmer = $_SESSION["zimmer"];
+      $aufnahme = $_SESSION["aufnahme"];
+      $entlassung = $_SESSION["entlassung"];
+    }
+    else{
+      header("Location: login.php?error=4");
+    }
+  }
+    else{
+        header("Location: login.php?error=4");
+  }
+
+?>
 <!doctype html>
 <html lang="de">
   <head>
@@ -96,37 +116,27 @@
         <form class="row g-3" action="allergien.php" method="POST" onsubmit="return(saveData())">
           <div class="col-md-4">
             <label for="vorname" class="form-label">Vorname</label>
-            <input type="text" name="vorname" class="form-control" id="vorname" required>
+            <input type="text" name="vorname" class="form-control" value="<?php echo $vorname?>" id="vorname" required>
           </div>
           <div class="col-md-4">
             <label for="nachname" class="form-label">Nachname</label>
-            <input type="text" name="nachname" class="form-control" id="nachname" required>
+            <input type="text" name="nachname" class="form-control" value="<?php echo $nachname?>" id="nachname" required>
           </div>
           <div class="col-md-4">
             <label for="zimmernummer" class="form-label">Zimmernummer</label>
-            <input type="number" name="zimmer" class="form-control" id="zimmernummer" required>
+            <input type="number" name="zimmer" class="form-control" id="zimmernummer" value="<?php echo $zimmer?>" readonly required>
           </div>
           <div class="col-md-6">
             <label for="aufnahmedatum" class="form-label">Aufnahmedatum</label>
-            <input type="date" name="aufnahme" class="form-control" id="aufnahmedatum" required>
+            <input type="date" name="aufnahme" class="form-control" id="aufnahmedatum" value="<?php echo $aufnahme?>" required readonly>
           </div>
           <div class="col-md-6">
             <label for="entlassungsdatum" class="form-label">Entlassungsdatum</label>
-            <input type="date" name="entlassung" class="form-control" id="entlassungsdatum" required>
+            <input type="date" name="entlassung" class="form-control" id="entlassungsdatum" value="<?php echo $entlassung?>" required readonly>
           </div>
           <div class="col-md-12">
             <button type="submit"  value="Weiter" name="submit" class="btn btn-primary">Weiter</button>
           </div>
-
-          <script>
-
-            document.getElementById("vorname").value = localStorage.getItem("vorname");
-            document.getElementById("nachname").value = localStorage.getItem("nachname");
-            document.getElementById("zimmernummer").value = localStorage.getItem("zimmernummer");
-            document.getElementById("aufnahmedatum").value = localStorage.getItem("aufnahmedatum");
-            document.getElementById("entlassungsdatum").value = localStorage.getItem("entlassungsdatum");
-
-          </script>
 
         </form>
         <br>

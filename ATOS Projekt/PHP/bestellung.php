@@ -10,16 +10,19 @@
     function versteckeFrühstück(tag) {
         document.getElementById(tag + "-frühstück").style.display = "none";
         document.getElementById(tag + "-basicFrüh").required = false;
+        document.getElementById(tag + "-keinFrühstück").checked = true;
     }
 
     function versteckeMittag(tag) {
         document.getElementById(tag + "-mittag").style.display = "none";
         document.getElementById(tag + "-aktivMittag").required = false;
+        document.getElementById(tag + "-keinMittagessen").checked = true;
     }
 
     function versteckeAbend(tag) {
         document.getElementById(tag + "-abend").style.display = "none";
         document.getElementById(tag + "-basicAbend").required = false;
+        document.getElementById(tag + "-keinAbendessen").checked = true;
     }
 
     window.onload = function() {

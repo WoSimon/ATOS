@@ -2,12 +2,24 @@
 
     if (isset($_GET['error'])){
         if ($_GET['error'] == 1){
-            echo '<div class="alert alert-danger" role="alert">';
-            echo 'Es gab Probleme beim Übermitteln der Logidaten, bitte erneut versuchen!';
-            echo '</div>';
+          echo '<div class="alert alert-danger" role="alert">';
+          echo 'Es gab Probleme beim Übermitteln der Logidaten, bitte erneut versuchen!';
+          echo '</div>';
         }
         else if ($_GET['error'] == 2){
-            echo "<p>Der Nutzername oder das Passwort ist falsch.</p>";
+          echo '<div class="alert alert-danger" role="alert">';
+          echo "Das Passwort ist falsch.";
+          echo '</div>';
+        }
+        else if ($_GET['error'] == 3){
+          echo '<div class="alert alert-danger" role="alert">';
+          echo "Der Nutzer existiert nicht.";
+          echo '</div>';
+        }
+        else if ($_GET['error'] == 4){
+          echo '<div class="alert alert-danger" role="alert">';
+          echo "Sie müssen sich zuerst einloggen.";
+          echo '</div>';
         }
     }
 
@@ -66,7 +78,7 @@
                             </div>
                             <div class="row"><br></div>
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="passwort" id="passwort" placeholder="Passwort" required>
+                                <input type="password" class="form-control" id="passwort" name="passwort" placeholder="Passwort" required>
                                 <label for="passwort">Passwort</label>
                             </div>
                             <div class="row"><br></div>
