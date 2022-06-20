@@ -7,7 +7,7 @@
 
     $conn = mysqli_connect($servername, $user, $pw, $db);
 
-    function bestellungAufnehmen ($conn, $name, $vorname, $zimmer, $aufnahmedatum, $entlasungsdatum, $bestellungen){
+    function bestellungAufnehmen ($conn, $name, $vorname, $zimmer, $bett, $aufnahmedatum, $entlasungsdatum, $bestellungen){
         $aufnahme = date_create($aufnahmedatum);
         $entlassung = date_create($entlasungsdatum);
         
@@ -28,31 +28,32 @@
         $resultCheck = mysqli_query($conn, $sqlCheck);
 
         if ($resultCheck -> num_rows > 0){
-            //Patient existiert bereits
+            $sqlModify = "UPDATE `Patienten` SET `Zimmer` = '$zimmer', `Bett` = '$bett', `Aufnahmedatum` = '$aufnahmedatum', `Entlassungsdatum` = '$entlasungsdatum' WHERE `Name` = '$name' AND `Vorname` = '$vorname' AND `Aufnahmedatum` = '$aufnahmedatum' AND `Entlassungsdatum` = '$entlasungsdatum';";
+            mysqli_query($conn, $sqlModify);
         }
         else{
-            $sqlEins = "INSERT INTO `Patienten`(`Name`, `Vorname`, `Zimmer`, `Aufnahmedatum`, `Entlassungsdatum`) VALUES ('$name','$vorname','$zimmer','$aufnahmedatum','$entlasungsdatum')";
+            $sqlEins = "INSERT INTO `Patienten`(`Name`, `Vorname`, `Zimmer`, `Bett`, `Aufnahmedatum`, `Entlassungsdatum`) VALUES ('$name','$vorname','$zimmer','$bett','$aufnahmedatum','$entlasungsdatum')";
             mysqli_query($conn, $sqlEins);
-            $sqlZwei = "SELECT * FROM `Patienten` WHERE `Name` = '$name' AND `Vorname` = '$vorname' AND 'Aufnahmedatum' = '$aufnahmedatum' AND 'Entlassungsdatum' = '$entlasungsdatum';";
-            $rs = $conn -> query($sqlCheck) or die("Error: " . mysqli_error($conn));
-            if ($rs -> num_rows > 0){
-                while ($row = $rs -> fetch_assoc()){
-                    $patienten_id = $row['PatientenID'];
-                }
+        }
+        $sqlZwei = "SELECT * FROM `Patienten` WHERE `Name` = '$name' AND `Vorname` = '$vorname' AND 'Aufnahmedatum' = '$aufnahmedatum' AND 'Entlassungsdatum' = '$entlasungsdatum';";
+        $rs = $conn -> query($sqlCheck) or die("Error: " . mysqli_error($conn));
+        if ($rs -> num_rows > 0){
+            while ($row = $rs -> fetch_assoc()){
+                $patienten_id = $row['PatientenID'];
             }
+        }
 
-            for ($i = 0; count($arrayDays) > $i; $i++){    
-                $tag = $arrayDays[$i];    
-                $bestellung = $bestellungen[$i];    
-                $fruehstueck = $bestellung["frühstück"];
-                $vorspeise_mittag = $bestellung["vorMittag"];
-                $mittag = $bestellung["mittag"];
-                $dessert_mittag = $bestellung["desMittag"];
-                $abend = $bestellung["abend"];
-                if ($result = mysqli_query($conn, "SHOW TABLES LIKE '$tag'")) {
-                $sqlDrei = "INSERT INTO `Bestellungen`(`Fruehstueck`, `Vorspeise_Mittag`, `Mittag`, `Dessert_Mittag`, `Abend`, `PatientenID`, `Datum`) VALUES ('$fruehstueck','$vorspeise_mittag','$mittag','$dessert_mittag','$abend','$patienten_id','$tag');";
-                mysqli_query($conn, $sqlDrei);
-                }
+        for ($i = 0; count($arrayDays) > $i; $i++){    
+            $tag = $arrayDays[$i];    
+            $bestellung = $bestellungen[$i];    
+            $fruehstueck = $bestellung["frühstück"];
+            $vorspeise_mittag = $bestellung["vorMittag"];
+            $mittag = $bestellung["mittag"];
+            $dessert_mittag = $bestellung["desMittag"];
+            $abend = $bestellung["abend"];
+            if ($result = mysqli_query($conn, "SHOW TABLES LIKE '$tag'")) {
+            $sqlDrei = "INSERT INTO `Bestellungen`(`Fruehstueck`, `Vorspeise_Mittag`, `Mittag`, `Dessert_Mittag`, `Abend`, `PatientenID`, `Datum`) VALUES ('$fruehstueck','$vorspeise_mittag','$mittag','$dessert_mittag','$abend','$patienten_id','$tag');";
+            mysqli_query($conn, $sqlDrei);
             }
         }
     }

@@ -2,6 +2,10 @@
     
     session_start();
 
+    if (!isset($_SESSION['login'])){
+        header("Location: login.php?error=4");
+    }
+
     $aufnahmeStr = $_SESSION['aufnahme'];
     $entlassungStr = $_SESSION['entlassung'];
 
@@ -38,6 +42,7 @@
     $vorname = $_SESSION["vorname"];
     $nachname = $_SESSION["nachname"];
     $zimmer = $_SESSION["zimmer"];
+    $bett = $_SESSION["bett"];
     $aufnahme = $_SESSION["aufnahme"];
     $entlassung = $_SESSION["entlassung"];
 
@@ -291,7 +296,7 @@
                 echo "  </div>";
                 echo "</div> ";
                 
-                bestellungAufnehmen($conn, $nachname, $vorname, $zimmer, $aufnahme, $entlassung, $bestellungen);
+                bestellungAufnehmen($conn, $nachname, $vorname, $zimmer, $bett, $aufnahme, $entlassung, $bestellungen);
             ?>
         </div>
 

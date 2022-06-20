@@ -19,11 +19,12 @@
                 $_SESSION["vorname"] = $eintrag[2];
                 $_SESSION["nachname"] = $eintrag[3];
                 $_SESSION["zimmer"] = $eintrag[4];
-                $aufnahme = $eintrag[5];
+                $_SESSION["bett"] = $eintrag[5];
+                $aufnahme = $eintrag[6];
                 $aufnahme = date_create($aufnahme);
                 $aufnahme = $aufnahme->format('Y-m-d');
                 $_SESSION["aufnahme"] = $aufnahme;
-                $entlassung = $eintrag[6];
+                $entlassung = $eintrag[7];
                 $entlassung = date_create($entlassung);
                 $entlassung = $entlassung->format('Y-m-d');
                 $_SESSION["entlassung"] = $entlassung;

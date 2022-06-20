@@ -5,7 +5,14 @@ if (isset($_SESSION["login"])){
   if ($_SESSION["login"] == true){
     $vorname = $_SESSION["vorname"];
     $nachname = $_SESSION["nachname"];
+    if (isset($_POST['vorname']) && isset($_POST['nachname'])){
+      $vorname = $_POST['vorname'];
+      $nachname = $_POST['nachname'];
+      $_SESSION["vorname"] = $vorname;
+      $_SESSION["nachname"] = $nachname;
+    }
     $zimmer = $_SESSION["zimmer"];
+    $bett = $_SESSION["bett"];
     $aufnahme = $_SESSION["aufnahme"];
     $entlassung = $_SESSION["entlassung"];
   }
@@ -184,17 +191,13 @@ if (isset($_SESSION["login"])){
         <div class="col-md-3">
           <input type="text" readonly class="form-control-plaintext" id="zimmernummer" value="<?php echo $zimmer?>"> 
         </div>
+        <div class="col-md-3">
+          <label for="bettennummer" class="form-label">Bettennummer</label>
+        </div>
+        <div class="col-md-3">
+          <input type="text" readonly class="form-control-plaintext" id="bettennummer" value="<?php echo $bett?>"> 
+        </div>
       </div>
-
-      <!--<script>
-      document.getElementById("vorname").value = localStorage.getItem("vorname");
-      document.getElementById("nachname").value = localStorage.getItem("nachname");
-      document.getElementById("zimmernummer").value = localStorage.getItem("zimmernummer");
-      var aufnahmedatum = dateToString(stringToDate(localStorage.getItem("aufnahmedatum")));
-      document.getElementById("aufnahmedatum").value = aufnahmedatum;
-      var entlassungsdatum = dateToString(stringToDate(localStorage.getItem("entlassungsdatum")));
-      document.getElementById("entlassungsdatum").value = entlassungsdatum;
-      </script>-->
 
       <div class="row-g-3">
         <br>
@@ -269,7 +272,7 @@ if (isset($_SESSION["login"])){
         </div>
           
         <div class="col-md-6">
-          <a href="algemein.php"><button type="button" class="btn btn-secondary">Zurück</button></a>
+          <a href="allgemein.php"><button type="button" class="btn btn-secondary">Zurück</button></a>
         </div>
         <div class="col-md-6">
           <button type="submit" class="btn btn-primary" onclick="saveAllergies()">Weiter</button>

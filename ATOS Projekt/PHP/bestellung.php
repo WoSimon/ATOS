@@ -115,6 +115,17 @@
                                 var isAbend = false;
                             }
                         }
+                        
+                        const dressings = document.querySelectorAll('input[name="' + tag + '-salatDressing"]');
+                        for (const dressing of dressings) {
+                            if (dressing.checked) {
+                                var isAbend = true;
+                                break;
+                            }
+                            else {
+                                var isAbend = false;
+                            }
+                        }
                         break;
                     }
                     else if (abend.value == "wrapAbend"){
@@ -265,7 +276,7 @@
     
     <?php
 
-$menu = bestimmeTag($tag);
+    $menu = bestimmeTag($tag);
 
     switch ($menu){
         case "1":

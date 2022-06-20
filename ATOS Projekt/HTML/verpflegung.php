@@ -6,6 +6,7 @@
       $vorname = $_SESSION["vorname"];
       $nachname = $_SESSION["nachname"];
       $zimmer = $_SESSION["zimmer"];
+      $bett = $_SESSION["bett"];
       $aufnahme = $_SESSION["aufnahme"];
       $entlassung = $_SESSION["entlassung"];
     }
@@ -190,17 +191,17 @@
         $aufnahmeStr = $_SESSION['aufnahme'];
         $entlassungStr = $_SESSION['entlassung'];
 
-        $aufnahme = date_create($aufnahmeStr);
-        $entlassung = date_create($entlassungStr);
+        $aufnahmeDt = date_create($aufnahmeStr);
+        $entlassungDt = date_create($entlassungStr);
 
-        $anzahlTage = date_diff($aufnahme, $entlassung);
+        $anzahlTage = date_diff($aufnahmeDt, $entlassungDt);
         $anzahlTage = $anzahlTage->format('%a') + 1;
 
         $arrayDays = array();
 
         for ($i=0; $i < $anzahlTage; $i++) { 
-          $arrayDays[$i] = $aufnahme->format('d.m.Y');
-          $aufnahme->modify('+1 day');
+          $arrayDays[$i] = $aufnahmeDt->format('d.m.Y');
+          $aufnahmeDt->modify('+1 day');
         }
 
         function bestimmeTag($tag){
@@ -321,13 +322,13 @@
           <label for="vorname" class="form-label">Vorname</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="vorname"> 
+          <input type="text" readonly class="form-control-plaintext" id="vorname" value="<?php echo $vorname?>"> 
         </div>
         <div class="col-md-3">
           <label for="aufnahmedatum" class="form-label">Aufnahmedatum</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="aufnahmedatum"> 
+          <input type="text" readonly class="form-control-plaintext" id="aufnahmedatum" value="<?php echo date_create($aufnahme)->format('d.m.Y')?>"> 
         </div>
       </div>
             
@@ -340,13 +341,13 @@
           <label for="nachname" class="form-label">Nachname</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="nachname"> 
+          <input type="text" readonly class="form-control-plaintext" id="nachname" value="<?php echo $nachname?>"> 
         </div>
         <div class="col-md-3">
           <label for="entlassungsdatum" class="form-label">Entlassungsdatum</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="entlassungsdatum"> 
+          <input type="text" readonly class="form-control-plaintext" id="entlassungsdatum" value="<?php echo date_create($entlassung)->format('d.m.Y')?>"> 
         </div>
       </div>
         
@@ -359,25 +360,19 @@
           <label for="zimmernummer" class="form-label">Zimmernummer</label>
         </div>
         <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="zimmernummer"> 
+          <input type="text" readonly class="form-control-plaintext" id="zimmernummer" value="<?php echo $zimmer?>"> 
+        </div>
+        <div class="col-md-3">
+          <label for="bettennummer" class="form-label">Bettennummer</label>
+        </div>
+        <div class="col-md-3">
+          <input type="text" readonly class="form-control-plaintext" id="bettennummer" value="<?php echo $bett?>"> 
         </div>
       </div>
 
       <div class="row-g-3">
         <br>
       </div>
-          
-      <script>
-        
-        document.getElementById("vorname").value = localStorage.getItem("vorname");
-        document.getElementById("nachname").value = localStorage.getItem("nachname");
-        document.getElementById("zimmernummer").value = localStorage.getItem("zimmernummer");
-        var aufnahmedatum = dateToString(stringToDate(localStorage.getItem("aufnahmedatum")));
-        document.getElementById("aufnahmedatum").value = aufnahmedatum;
-        var entlassungsdatum = dateToString(stringToDate(localStorage.getItem("entlassungsdatum")));
-        document.getElementById("entlassungsdatum").value = entlassungsdatum;
-        
-      </script>
 
       <form class="row g-3" method="POST" action="abschluss.php">
 

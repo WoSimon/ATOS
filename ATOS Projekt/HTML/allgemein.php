@@ -6,6 +6,7 @@
       $vorname = $_SESSION["vorname"];
       $nachname = $_SESSION["nachname"];
       $zimmer = $_SESSION["zimmer"];
+      $bett = $_SESSION["bett"];
       $aufnahme = $_SESSION["aufnahme"];
       $entlassung = $_SESSION["entlassung"];
     }
@@ -122,9 +123,13 @@
             <label for="nachname" class="form-label">Nachname</label>
             <input type="text" name="nachname" class="form-control" value="<?php echo $nachname?>" id="nachname" required>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-2">
             <label for="zimmernummer" class="form-label">Zimmernummer</label>
             <input type="number" name="zimmer" class="form-control" id="zimmernummer" value="<?php echo $zimmer?>" readonly required>
+          </div>
+          <div class="col-md-2">
+            <label for="bettennummer" class="form-label">Bettennummer</label>
+            <input type="number" name="bett" class="form-control" id="bettennummer" value="<?php echo $bett?>" readonly required>
           </div>
           <div class="col-md-6">
             <label for="aufnahmedatum" class="form-label">Aufnahmedatum</label>
@@ -137,8 +142,8 @@
           <div class="col-md-12">
             <button type="submit"  value="Weiter" name="submit" class="btn btn-primary">Weiter</button>
           </div>
-
         </form>
+        
         <br>
         <div class="px-4 py-5 my-5 text-center">
           <!-- Button trigger modal -->
