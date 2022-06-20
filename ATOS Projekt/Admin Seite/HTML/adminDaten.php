@@ -57,11 +57,23 @@
 
             if (attribut == "zimmer"){
                 document.getElementById("zimmernummerNeu").style.display = "block";
-                document.getElementById("zimmer").required = true;
+                document.getElementById("zimmerNeu").required = true;
+
+                document.getElementById("bettennummerNeu").style.display = "none";
+                document.getElementById("bettNeu").required = false;
             }
-            else{
+            else if (attribut == "bett"){
+                document.getElementById("bettennummerNeu").style.display = "block";
+                document.getElementById("bettNeu").required = true;
+
                 document.getElementById("zimmernummerNeu").style.display = "none";
-                document.getElementById("zimmer").required = false;
+                document.getElementById("zimmerNeu").required = false;
+            }
+            else if (attribut == "Attribut wählen"){
+                document.getElementById("zimmernummerNeu").style.display = "none";
+                document.getElementById("zimmerNeu").required = false;
+                document.getElementById("bettennummerNeu").style.display = "none";
+                document.getElementById("bettNeu").required = false;
             }
         }
 
@@ -110,42 +122,55 @@
                         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                             <form class="row" method="POST" action="../PHP/datenÄndern.php">
                                 <div class="col">
-                                <div class="mb-3">
-                                    <label for="vorname" class="form-label">Vorname des Patienten</label>
-                                    <input class="form-control" name="vorname" type="text" id="vorname" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nachname" class="form-label">Nachname des Patienten</label>
-                                    <input class="form-control" name="nachname" type="text" id="nachname" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="zimmer" class="form-label">Zimmernummer</label>
-                                    <input class="form-control" name="zimmer" type="number" id="zimmer" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="aufnahme" class="form-label">Aufnahmedatum</label>
-                                    <input class="form-control" name="aufnahme" type="date" id="aufnahme" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="entlassung" class="form-label">Entlassungsdatum</label>
-                                    <input class="form-control" name="entlassung" type="date" id="entlassung" required>
-                                </div>
-                                <p class="lead mb-4">In der nächsten Eingabe können das Attribut wählen, welches Sie ändern mmöchten.</p>
-                                <div class="mb-3">
-                                    <label for="zimmer" class="form-label">Attribut</label>
-                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="zeigeÄndern()" id="ändern" name="ändern" required>
-                                    <option selected>Attribut wählen</option>
-                                    <option value="zimmer">Zimmernummer</option>
-                                    </select>
-                                </div>
-                                <div id="zimmernummerNeu" style="display:none">
-                                    <p class="lead mb-4">Jetzt bitte den neuen Wert eingeben.</p>
+                                    <div class="mb-3">
+                                        <label for="vorname" class="form-label">Vorname des Patienten</label>
+                                        <input class="form-control" name="vorname" type="text" id="vorname" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nachname" class="form-label">Nachname des Patienten</label>
+                                        <input class="form-control" name="nachname" type="text" id="nachname" required>
+                                    </div>
                                     <div class="mb-3">
                                         <label for="zimmer" class="form-label">Zimmernummer</label>
-                                        <input class="form-control" type="number" id="zimmer" name="zimmerNeu">
+                                        <input class="form-control" name="zimmer" type="number" id="zimmer" required>
                                     </div>
-                                    <button type="submit" name="submit" class="btn btn-outline-warning btn-lg px-4">Daten ändern</button>
-                                </div>
+                                    <div class="mb-3">
+                                        <label for="bett" class="form-label">Bettennummer</label>
+                                        <input class="form-control" name="bett" type="number" id="bett" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="aufnahme" class="form-label">Aufnahmedatum</label>
+                                        <input class="form-control" name="aufnahme" type="date" id="aufnahme" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="entlassung" class="form-label">Entlassungsdatum</label>
+                                        <input class="form-control" name="entlassung" type="date" id="entlassung" required>
+                                    </div>
+                                    <p class="lead mb-4">In der nächsten Eingabe können das Attribut wählen, welches Sie ändern mmöchten.</p>
+                                    <div class="mb-3">
+                                        <label for="zimmer" class="form-label">Attribut</label>
+                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="zeigeÄndern()" id="ändern" name="ändern" required>
+                                        <option selected>Attribut wählen</option>
+                                        <option value="zimmer">Zimmernummer</option>
+                                        <option value="bett">Bettennummer</option>
+                                        </select>
+                                    </div>
+                                    <div id="zimmernummerNeu" style="display:none">
+                                        <p class="lead mb-4">Jetzt bitte den neuen Wert eingeben.</p>
+                                        <div class="mb-3">
+                                            <label for="zimmer" class="form-label">Zimmernummer</label>
+                                            <input class="form-control" type="number" id="zimmerNeu" name="zimmerNeu">
+                                        </div>
+                                        <button type="submit" name="submit" class="btn btn-outline-warning btn-lg px-4">Daten ändern</button>
+                                    </div>
+                                    <div id="bettennummerNeu" style="display:none">
+                                        <p class="lead mb-4">Jetzt bitte den neuen Wert eingeben.</p>
+                                        <div class="mb-3">
+                                            <label for="bett" class="form-label">Bettennummer</label>
+                                            <input class="form-control" type="number" id="bettNeu" name="bettNeu">
+                                        </div>
+                                        <button type="submit" name="submit" class="btn btn-outline-warning btn-lg px-4">Daten ändern</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
