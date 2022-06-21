@@ -61,6 +61,10 @@
 
                 document.getElementById("bettennummerNeu").style.display = "none";
                 document.getElementById("bettNeu").required = false;
+                /*
+                document.getElementById("entlassungsdatumNeu").style.display = "none";
+                document.getElementById("entlassungNeu").required = false;
+                */
             }
             else if (attribut == "bett"){
                 document.getElementById("bettennummerNeu").style.display = "block";
@@ -68,12 +72,31 @@
 
                 document.getElementById("zimmernummerNeu").style.display = "none";
                 document.getElementById("zimmerNeu").required = false;
+                /*
+                document.getElementById("entlassungsdatumNeu").style.display = "none";
+                document.getElementById("entlassungNeu").required = false;
+                */
             }
+            /*
+            else if (attribut == "entlassung"){
+                document.getElementById("entlassungsdatumNeu").style.display = "block";
+                document.getElementById("entlassungNeu").required = true;
+
+                document.getElementById("zimmernummerNeu").style.display = "none";
+                document.getElementById("zimmerNeu").required = false;
+                document.getElementById("bettennummerNeu").style.display = "none";
+                document.getElementById("bettNeu").required = false;
+            }
+            */
             else if (attribut == "Attribut wählen"){
                 document.getElementById("zimmernummerNeu").style.display = "none";
                 document.getElementById("zimmerNeu").required = false;
                 document.getElementById("bettennummerNeu").style.display = "none";
                 document.getElementById("bettNeu").required = false;
+                /*
+                document.getElementById("entlassungsdatumNeu").style.display = "none";
+                document.getElementById("entlassungNeu").required = false;
+                */
             }
         }
 
@@ -148,17 +171,18 @@
                                     </div>
                                     <p class="lead mb-4">In der nächsten Eingabe können das Attribut wählen, welches Sie ändern mmöchten.</p>
                                     <div class="mb-3">
-                                        <label for="zimmer" class="form-label">Attribut</label>
+                                        <label for="ändern" class="form-label">Attribut</label>
                                         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="zeigeÄndern()" id="ändern" name="ändern" required>
                                         <option selected>Attribut wählen</option>
                                         <option value="zimmer">Zimmernummer</option>
                                         <option value="bett">Bettennummer</option>
+                                        <!--<option value="entlassung">Entlassungsdatum</option>-->
                                         </select>
                                     </div>
                                     <div id="zimmernummerNeu" style="display:none">
                                         <p class="lead mb-4">Jetzt bitte den neuen Wert eingeben.</p>
                                         <div class="mb-3">
-                                            <label for="zimmer" class="form-label">Zimmernummer</label>
+                                            <label for="zimmer" class="form-label">Zimmernummer Neu</label>
                                             <input class="form-control" type="number" id="zimmerNeu" name="zimmerNeu">
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-outline-warning btn-lg px-4">Daten ändern</button>
@@ -166,11 +190,21 @@
                                     <div id="bettennummerNeu" style="display:none">
                                         <p class="lead mb-4">Jetzt bitte den neuen Wert eingeben.</p>
                                         <div class="mb-3">
-                                            <label for="bett" class="form-label">Bettennummer</label>
+                                            <label for="bett" class="form-label">Bettennummer Neu</label>
                                             <input class="form-control" type="number" id="bettNeu" name="bettNeu">
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-outline-warning btn-lg px-4">Daten ändern</button>
                                     </div>
+                                    <!--
+                                    <div id="entlassungsdatumNeu" style="display:none">
+                                        <p class="lead mb-4">Jetzt bitte den neuen Wert eingeben.</p>
+                                        <div class="mb-3">
+                                            <label for="entlassung" class="form-label">Entlassungsdatum Neu</label>
+                                            <input class="form-control" type="date" id="entlassungNeu" name="entlassungNeu">
+                                        </div>
+                                        <button type="submit" name="submit" class="btn btn-outline-warning btn-lg px-4">Daten ändern</button>
+                                    </div>
+                                    -->
                                 </div>
                             </form>
                         </div>
