@@ -2,9 +2,21 @@
 
     if (isset($_GET['error'])){
         if ($_GET['error'] == 0){
+            if (isset($_GET['pw'])){
+                $nutzername = $_GET['user'];
+                $pw = $_GET['pw'];
+                echo '<div class="alert alert-success" role="alert">';
+                echo 'Die Daten wurden erfolgreich geändert! <br>';
+                echo 'Der neue Nutzername ist: <b>' . $nutzername . '</b> <br>';
+                echo 'Das neue Passwort ist: <b>' . $pw . '</b> <br>';
+                echo '</div>';     
+            }
+            else {
             echo '<div class="alert alert-success" role="alert">';
             echo 'Die Daten wurden erfolgreich geändert!';
             echo '</div>'; 
+            }
+
         }
         if ($_GET['error'] == 1){
             echo '<div class="alert alert-danger" role="alert">';
@@ -13,17 +25,40 @@
         }
         if ($_GET['error'] == 2){
             echo '<div class="alert alert-warning" role="alert">';
-            echo 'Es gibt keinen Patienten mit den von Ihnen eingetragenen Daten!';
+            echo 'Die Exceltabelle wurde erfolgreich angepasst. <br>';
+            echo 'Es gibt keinen Patienten mit den von Ihnen eingetragenen Daten in der Datenbank!';
             echo '</div>'; 
         }
         if ($_GET['error'] == 3){
             echo '<div class="alert alert-danger" role="alert">';
-            echo 'Die Daten konnten nicht geändert werden!';
+            echo 'Die Daten in der Exceltabelle wurden erfolgreich geändert!';
+            echo 'Die Daten in der Datenbank konnten nicht geändert werden!';
             echo '</div>'; 
         }
         if ($_GET['error'] == 4){
             echo '<div class="alert alert-success" role="alert">';
             echo 'Die Daten wurden erfolgreich gelöscht!';
+            echo '</div>'; 
+        }
+        if ($_GET['error'] == 5){
+            echo '<div class="alert alert-warning" role="alert">';
+            echo 'Die Daten konnten in der Datenbank aber nicht in der Exceltabelle geändert werden!';
+            echo '</div>'; 
+        }
+        if ($_GET['error'] == 6){
+            echo '<div class="alert alert-warning" role="alert">';
+            echo 'Die Daten konnten in der Datenbank geändert werden!';
+            echo 'Die Daten konnten nicht in der Exceltabelle geändert werden!';
+            echo '</div>'; 
+        }
+        if ($_GET['error'] == 7){
+            echo '<div class="alert alert-warning" role="alert">';
+            echo 'Es gibt keinen Patienten mit den von Ihnen eingegebennen Daten!';
+            echo '</div>'; 
+        }
+        if ($_GET['error'] == 8){
+            echo '<div class="alert alert-danger" role="alert">';
+            echo 'Die Daten konnten nicht geändert werden!';
             echo '</div>'; 
         }
     }
@@ -61,10 +96,9 @@
 
                 document.getElementById("bettennummerNeu").style.display = "none";
                 document.getElementById("bettNeu").required = false;
-                /*
                 document.getElementById("entlassungsdatumNeu").style.display = "none";
                 document.getElementById("entlassungNeu").required = false;
-                */
+                
             }
             else if (attribut == "bett"){
                 document.getElementById("bettennummerNeu").style.display = "block";
@@ -72,12 +106,11 @@
 
                 document.getElementById("zimmernummerNeu").style.display = "none";
                 document.getElementById("zimmerNeu").required = false;
-                /*
                 document.getElementById("entlassungsdatumNeu").style.display = "none";
                 document.getElementById("entlassungNeu").required = false;
-                */
+                
             }
-            /*
+        
             else if (attribut == "entlassung"){
                 document.getElementById("entlassungsdatumNeu").style.display = "block";
                 document.getElementById("entlassungNeu").required = true;
@@ -87,16 +120,14 @@
                 document.getElementById("bettennummerNeu").style.display = "none";
                 document.getElementById("bettNeu").required = false;
             }
-            */
+            
             else if (attribut == "Attribut wählen"){
                 document.getElementById("zimmernummerNeu").style.display = "none";
                 document.getElementById("zimmerNeu").required = false;
                 document.getElementById("bettennummerNeu").style.display = "none";
                 document.getElementById("bettNeu").required = false;
-                /*
                 document.getElementById("entlassungsdatumNeu").style.display = "none";
                 document.getElementById("entlassungNeu").required = false;
-                */
             }
         }
 
@@ -176,7 +207,7 @@
                                         <option selected>Attribut wählen</option>
                                         <option value="zimmer">Zimmernummer</option>
                                         <option value="bett">Bettennummer</option>
-                                        <!--<option value="entlassung">Entlassungsdatum</option>-->
+                                        <option value="entlassung">Entlassungsdatum</option>
                                         </select>
                                     </div>
                                     <div id="zimmernummerNeu" style="display:none">
@@ -195,7 +226,6 @@
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-outline-warning btn-lg px-4">Daten ändern</button>
                                     </div>
-                                    <!--
                                     <div id="entlassungsdatumNeu" style="display:none">
                                         <p class="lead mb-4">Jetzt bitte den neuen Wert eingeben.</p>
                                         <div class="mb-3">
@@ -204,7 +234,6 @@
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-outline-warning btn-lg px-4">Daten ändern</button>
                                     </div>
-                                    -->
                                 </div>
                             </form>
                         </div>

@@ -1,8 +1,8 @@
 <?php
 
-    /*require '../../vendor/autoload.php';
+    require '../../vendor/autoload.php';
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
-    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;*/
+    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
     
 
     if (isset($_POST["vorname"])){
@@ -24,11 +24,9 @@
         elseif ($ändern == "bett"){
             $bettnummerNeu = $_POST["bettNeu"];
         }
-        /*
         elseif ($ändern == "entlassung"){
-            $entlassungNeu = $_POST["entlassungNeu"];
+            $entlassungNeu = date_create($_POST["entlassungNeu"]) -> format ('d.m.Y');
         }
-        */ 
 
         include_once '../../PHP/includes/db-helper.php';
         
@@ -37,36 +35,169 @@
             $resultCheck = mysqli_query($conn, $sqlCheck);
             if (!(mysqli_num_rows($resultCheck) > 0)) {
                 $conn->close();
-                header("Location: ../HTML/adminDaten.php?error=2"); 
+                $db = "keine Ergebnisse";
+                //header("Location: ../HTML/adminDaten.php?error=2"); 
             }
-            $sql = "UPDATE `Patienten` SET `Zimmer`='$zimmernummerNeu' WHERE `Name` = '$nachname' AND `Vorname` = '$vorname' AND `Zimmer` = '$zimmer' AND `Bett` = '$bett' AND `Aufnahmedatum` = '$aufnahme' AND `Entlassungsdatum` = '$entlassung';";
-            if ($conn->query($sql) === TRUE) {
-                $conn->close();
-                header("Location: ../HTML/adminDaten.php?error=0"); 
-            } else {
-                $conn->close();
-                header("Location: ../HTML/adminDaten.php?error=3"); 
+            else{
+
+                $sql = "UPDATE `Patienten` SET `Zimmer`='$zimmernummerNeu' WHERE `Name` = '$nachname' AND `Vorname` = '$vorname' AND `Zimmer` = '$zimmer' AND `Bett` = '$bett' AND `Aufnahmedatum` = '$aufnahme' AND `Entlassungsdatum` = '$entlassung';";
+                if ($conn->query($sql) === TRUE) {
+                    $conn->close();
+                    $db = "erfolgreich"; 
+                    //header("Location: ../HTML/adminDaten.php?error=0"); 
+                } else {
+                    $conn->close();
+                    $db = "fehler";
+                    //header("Location: ../HTML/adminDaten.php?error=3"); 
+                }
             }
+
+            $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            $spreadsheet = $reader->load('../../Input/Patienten.xlsx');
+            $sheetdata = $spreadsheet->getActiveSheet()->toArray();
+            
+            $verändert = -1;
+            $excel;
+
+            $size = sizeof($sheetdata);
+            
+            foreach ($sheetdata as $eintrag){
+                $rowIndex = array_search($eintrag, $sheetdata);
+                if ($rowIndex == 0){}
+                else{
+
+                    $vornameRow = $eintrag[2];
+                    $nachnameRow = $eintrag[3];
+                    $zimmerRow = $eintrag[4];
+                    $bettRow = $eintrag[5];
+                    echo "Vorname Row: " . $vornameRow . " Vorname: " . $vorname . "<br>";
+                    echo "Nachname Row: " . $nachnameRow . " Nachname: " . $nachname . "<br>";
+                    echo "Zimmer Row: " . $zimmerRow . " Zimmer: " . $zimmer . "<br>";
+                    echo "Bett Row: " . $bettRow . " Bett: " . $bett . "<br>";
+                    echo '<br>';
+                    if ($vorname == $vornameRow && $nachname == $nachnameRow && $zimmer == $zimmerRow && $bett == $bettRow){                 
+                        $spreadsheet->getActiveSheet()->setCellValue('E'.($rowIndex + 1), $zimmernummerNeu);
+                        
+                        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+                        $writer->save('../../Input/Patienten.xlsx');
+                        
+                        $verändert = $rowIndex;
+                        $excel = "erfolgreich";
+                    }
+                }
+            }
+            if ($verändert == -1){
+                $excel = "keine Ergebnisse";
+            }
+
+            echo "d: " . $db . " <br> e: " . $excel;
+
+            if(!($excel == "keine Ergebnisse" && $db == "fehler")){
+                if ($excel == "erfolgreich" && $db == "erfolgreich"){
+                    header("Location: ../HTML/adminDaten.php?error=0"); 
+                }
+                if ($excel == "erfolgreich" && $db == "keine Ergebnisse"){
+                    header("Location: ../HTML/adminDaten.php?error=2"); 
+                }
+                if ($excel == "erfolgreich" && $db == "fehler"){
+                    header("Location: ../HTML/adminDaten.php?error=3"); 
+                }
+                if ($excel == "keine Ergebnisse" && $db == "erfolgreich"){
+                    header("Location: ../HTML/adminDaten.php?error=6"); 
+                }
+                if ($excel == "keine Ergebnisse" && $db == "keine Ergebnisse"){
+                    header("Location: ../HTML/adminDaten.php?error=7"); 
+                }
+            }
+            else {
+                header("Location: ../HTML/adminDaten.php?error=8"); 
+            }
+
         }   
 
         elseif ($ändern == "bett"){
             $sqlCheck = "SELECT * FROM `Patienten` WHERE `Name` = '$nachname' AND `Vorname` = '$vorname' AND `Zimmer` = '$zimmer' AND `Bett` = '$bett' AND `Aufnahmedatum` = '$aufnahme' AND `Entlassungsdatum` = '$entlassung'";
             $resultCheck = mysqli_query($conn, $sqlCheck);
+            $db;
             if (!(mysqli_num_rows($resultCheck) > 0)) {
                 $conn->close();
-                header("Location: ../HTML/adminDaten.php?error=2"); 
+                $db = "keine Ergebnisse";
             }
-            $sql = "UPDATE `Patienten` SET `Bett`='$bettnummerNeu' WHERE `Name` = '$nachname' AND `Vorname` = '$vorname' AND `Zimmer` = '$zimmer' AND `Bett` = '$bett' AND `Aufnahmedatum` = '$aufnahme' AND `Entlassungsdatum` = '$entlassung';";
-            if ($conn->query($sql) === TRUE) {
-                $conn->close();
-                header("Location: ../HTML/adminDaten.php?error=0"); 
-            } else {
-                $conn->close();
-                header("Location: ../HTML/adminDaten.php?error=3"); 
+            else {
+                $sql = "UPDATE `Patienten` SET `Bett`='$bettnummerNeu' WHERE `Name` = '$nachname' AND `Vorname` = '$vorname' AND `Zimmer` = '$zimmer' AND `Bett` = '$bett' AND `Aufnahmedatum` = '$aufnahme' AND `Entlassungsdatum` = '$entlassung';";
+                if ($conn->query($sql) === TRUE) {
+                    $conn->close();
+                    $db = "erfolgreich";
+                }
+                else {
+                    $conn->close();
+                    $db = "fehler";
+                }
             }
+            
+            $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            $spreadsheet = $reader->load('../../Input/Patienten.xlsx');
+            $sheetdata = $spreadsheet->getActiveSheet()->toArray();
+            
+            $verändert = -1;
+            $excel;
+
+            $size = sizeof($sheetdata);
+            
+            foreach ($sheetdata as $eintrag){
+                $rowIndex = array_search($eintrag, $sheetdata);
+                if ($rowIndex == 0){}
+                else{
+
+                    $vornameRow = $eintrag[2];
+                    $nachnameRow = $eintrag[3];
+                    $zimmerRow = $eintrag[4];
+                    $bettRow = $eintrag[5];
+                    echo "Vorname Row: " . $vornameRow . " Vorname: " . $vorname . "<br>";
+                    echo "Nachname Row: " . $nachnameRow . " Nachname: " . $nachname . "<br>";
+                    echo "Zimmer Row: " . $zimmerRow . " Zimmer: " . $zimmer . "<br>";
+                    echo "Bett Row: " . $bettRow . " Bett: " . $bett . "<br>";
+                    echo '<br>';
+                    if ($vorname == $vornameRow && $nachname == $nachnameRow && $zimmer == $zimmerRow && $bett == $bettRow){                 
+                        $spreadsheet->getActiveSheet()->setCellValue('F'.($rowIndex + 1), $bettnummerNeu);
+                        
+                        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+                        $writer->save('../../Input/Patienten.xlsx');
+                        
+                        $verändert = $rowIndex;
+                        $excel = "erfolgreich";
+                    }
+                }
+            }
+            if ($verändert == -1){
+                $excel = "keine Ergebnisse";
+            }
+
+            echo "d: " . $db . " <br> e: " . $excel;
+
+            if(!($excel == "keine Ergebnisse" && $db == "fehler")){
+                if ($excel == "erfolgreich" && $db == "erfolgreich"){
+                    header("Location: ../HTML/adminDaten.php?error=0"); 
+                }
+                if ($excel == "erfolgreich" && $db == "keine Ergebnisse"){
+                    header("Location: ../HTML/adminDaten.php?error=2"); 
+                }
+                if ($excel == "erfolgreich" && $db == "fehler"){
+                    header("Location: ../HTML/adminDaten.php?error=3"); 
+                }
+                if ($excel == "keine Ergebnisse" && $db == "erfolgreich"){
+                    header("Location: ../HTML/adminDaten.php?error=6"); 
+                }
+                if ($excel == "keine Ergebnisse" && $db == "keine Ergebnisse"){
+                    header("Location: ../HTML/adminDaten.php?error=7"); 
+                }
+            }
+            else {
+                header("Location: ../HTML/adminDaten.php?error=8"); 
+            }
+
         }
         
-        /*
         elseif ($ändern == "entlassung"){
 
             $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
@@ -78,7 +209,6 @@
 
             foreach ($sheetdata as $eintrag){
                 $rowIndex = $spreadsheet->getActiveSheet()->getRowIterator()->current()->getRowIndex();
-                echo $rowIndex;
                 if ($rowIndex == 1){}
                 else{
                     $vornameRow = $eintrag[2];
@@ -104,7 +234,7 @@
 
             if ($rowIndex == -1){
                 $conn->close();
-                //header("Location: ../HTML/adminDaten.php?error=2"); 
+                header("Location: ../HTML/adminDaten.php?error=2"); 
             }
             else {
                 $newUsername = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
@@ -116,17 +246,18 @@
                 $spreadsheet->getActiveSheet()->setCellValue('D'.($totalRows+1), $nachname);
                 $spreadsheet->getActiveSheet()->setCellValue('E'.($totalRows+1), $zimmer);
                 $spreadsheet->getActiveSheet()->setCellValue('F'.($totalRows+1), $bett);
+                $entlassung = date_create($entlassung)->format('d.m.Y');
                 $spreadsheet->getActiveSheet()->setCellValue('G'.($totalRows+1), $entlassung);
+                $entlassungNeu = date_create($entlassungNeu)->format('d.m.Y');
                 $spreadsheet->getActiveSheet()->setCellValue('H'.($totalRows+1), $entlassungNeu);
 
                 $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
                 $writer->save('../../Input/Patienten.xlsx');
 
-                //header("Location: ../HTML/adminDaten.php?error=0");
+                header("Location: ../HTML/adminDaten.php?error=0&user=$newUsername&pw=$newPassword");
             }
 
         }
-        */
     
     }
     else{
