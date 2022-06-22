@@ -175,6 +175,8 @@
 
         aktuellerBlock.style.display = "none";
         nächsterBlock.style.display = "block";
+
+        window.scrollTo(0, 0);
     
         return nächsterTag;
     }
