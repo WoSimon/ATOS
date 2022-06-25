@@ -88,7 +88,8 @@
                 <table class="table table-striped table-bordered border-dark table-sm" id="tabelleFrüh">
                     <thead>
                         <tr>
-                        <th scope="col" style="width:5%">Zimmer</th>
+                        <th scope="col" style="width:2.5%">Zimmer</th>
+                        <th scope="col" style="width:2.5%">Bett</th>
                         <th scope="col" style="width:20%">Name des Patienten</th>
                         <th scope="col" style="width:7.5%">1 -Basic</th>
                         <th scope="col" style="width:7.5%">2 - Vegie</th>
@@ -118,9 +119,11 @@
                                         $fr = substr($fr, 0, strpos($fr, "+"));
                                     }
                                     $zimmer = $row['Zimmer'];
+                                    $bett = $row['Bett'];
                                     $name = $row['Vorname'] . " " . $row['Name'];
                                     echo "<tr>";
                                     echo "<td>" . $zimmer . "</td>";
+                                    echo "<td>" . $bett . "</td>";
                                     echo "<td>" . $name . "</td>";
                                     if (str_contains($fr, "Basic Frühstück")){
                                         echo "<td> x </td>";
@@ -165,7 +168,7 @@
                                         echo "</tr>";
                                     }
                                 }
-                                echo "<td colspan=2> <b>Gesamt</b> </td>";
+                                echo "<td colspan=3> <b>Gesamt</b> </td>";
                                 echo "<td>" . $zähleBasic . "</td>";
                                 echo "<td>" . $zähleVegetarisch . "</td>";
                                 echo "<td>" . $zähleFitness . "</td>";
@@ -175,7 +178,9 @@
 
                             }
                             else {
-                                echo "Keine Bestellungen für den Tag " . $date . " vorhanden";
+                                echo '<div class="alert alert-warning" role="alert">';
+                                echo "Keine Bestellungen für den " . $datum . " vorhanden!";
+                                echo '</div>';
                             }
 
                         
@@ -193,7 +198,8 @@
                 <table class="table table-striped table-bordered border-dark table-sm" id="tabelleMittag">
                     <thead>
                         <tr>
-                        <th scope="col" style="width:5%">Zimmer</th>
+                        <th scope="col" style="width:2.5%">Zimmer</th>
+                        <th scope="col" style="width:2.5%">Bett</th>
                         <th scope="col" style="width:20%">Name des Patienten</th>
                         <th scope="col" style="width:7.5%">Vorspeise</th>
                         <th scope="col" style="width:7.5%">1</th>
@@ -227,9 +233,11 @@
                                     $vorMi = $row['Vorspeise_Mittag'];
                                     $desMi = $row['Dessert_Mittag'];
                                     $zimmer = $row['Zimmer'];
+                                    $bett = $row['Bett'];
                                     $name = $row['Vorname'] . " " . $row['Name'];
                                     echo "<tr>";
                                     echo "<td>" . $zimmer . "</td>";
+                                    echo "<td>" . $bett . "</td>";
                                     echo "<td>" . $name . "</td>";
                                     if ($vorMi == "Ja"){
                                         echo "<td> x </td>";
@@ -280,7 +288,7 @@
                                         echo "</tr>";
                                     }
                                 }
-                                echo "<td colspan=2> <b>Gesamt</b> </td>";
+                                echo "<td colspan=3> <b>Gesamt</b> </td>";
                                 echo "<td>" . $zähleVorspeise . "</td>";
                                 echo "<td>" . $zähleEins . "</td>";
                                 echo "<td>" . $zähleZwei . "</td>";
@@ -291,7 +299,9 @@
 
                             }
                             else {
-                                echo "Keine Bestellungen für den Tag " . $date . " vorhanden";
+                                echo '<div class="alert alert-warning" role="alert">';
+                                echo "Keine Bestellungen für den " . $datum . " vorhanden!";
+                                echo '</div>';
                             }
 
                         
@@ -308,7 +318,8 @@
                 <table class="table table-striped table-bordered border-dark table-sm" id="tabelleAbend">
                     <thead>
                         <tr>
-                            <th scope="col" style="width:5%">Zimmer</th>
+                            <th scope="col" style="width:2.5%">Zimmer</th>
+                            <th scope="col" style="width:2.5%">Bett</th>
                             <th scope="col" style="width:11%">Name des Patienten</th>
                             <th scope="col" style="width:5%">1 - Basic</th>
                             <th scope="col" style="width:5%">2 - Vegie</th>
@@ -320,7 +331,8 @@
                             <th scope="col" style="width:19%">Extras</th>
                         </tr>
                         <tr>
-                            <th scope="col" style="width:5%"></th>
+                            <th scope="col" style="width:2.5%"></th>
+                            <th scope="col" style="width:2.5%"></th>
                             <th scope="col" style="width:11%"></th>
                             <th scope="col" style="width:5%"></th>
                             <th scope="col" style="width:5%"></th>
@@ -368,9 +380,11 @@
                                         $ab = substr($ab, 0, strpos($ab, "+"));
                                     }
                                     $zimmer = $row['Zimmer'];
+                                    $bett = $row['Bett'];
                                     $name = $row['Vorname'] . " " . $row['Name'];
                                     echo "<tr>";
                                     echo "<td>" . $zimmer . "</td>";
+                                    echo "<td>" . $bett . "</td>";
                                     echo "<td>" . $name . "</td>";
                                     if (str_contains($ab, "Basic Abendessen")){
                                         $zähleBasicAb++;
@@ -579,7 +593,9 @@
                                         echo "</tr>";
                                     }
                                 }
-                                echo "<td colspan=2> <b>Gesamt</b> </td>";
+
+                                echo "<tr>";
+                                echo "<td colspan=3> <b>Gesamt</b> </td>";
                                 echo "<td>" . $zähleBasicAb . "</td>";
                                 echo "<td>" . $zähleVegiAb . "</td>";
                                 echo "<td>" . $zähleSalHäch . "</td>";
@@ -598,7 +614,9 @@
 
                             }
                             else {
-                                echo "Keine Bestellungen für den Tag " . $date . " vorhanden";
+                                echo '<div class="alert alert-warning" role="alert">';
+                                echo "Keine Bestellungen für den " . $datum . " vorhanden!";
+                                echo '</div>';
                             }
 
                         

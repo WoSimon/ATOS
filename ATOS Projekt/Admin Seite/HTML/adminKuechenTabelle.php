@@ -124,7 +124,9 @@
         }
     }
     else{
-        echo "Keine Bestellungen für den Tag " . $date . " vorhanden";
+        echo '<div class="alert alert-warning" role="alert">';
+        echo "Keine Bestellungen für den " . $datum . " vorhanden!";
+        echo '</div>';
     }
 
 ?>
@@ -331,9 +333,10 @@
                 <table class="table table-striped table-sm" id="tabelleExtras">
                     <thead>
                         <tr>
-                        <th scope="col" style="width:5%">Suite</th>
+                        <th scope="col" style="width:3%">Zimmer</th>
+                        <th scope="col" style="width:3%">Bett</th>
                         <th scope="col" style="width:20%">Name des Patienten</th>
-                        <th scope="col" style="width:75%">Bestellung</th>
+                        <th scope="col" style="width:74%">Bestellung</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -350,12 +353,14 @@
                                     $mi = $row['Mittag'];
                                     $ab = $row['Abend'];
                                     if (strpos($fr, "+") || strpos($mi, "+") || strpos($ab, "+")){
-                                        $suite = $row['Zimmer'];
+                                        $zimmer = $row['Zimmer'];
+                                        $bett = $row['Bett'];
                                         $name = $row['Vorname'] . " " . $row['Name'];
                                         if (strpos($fr, "+")){
                                             $bestellungFr = $fr;
                                             echo "<tr>";
-                                            echo "<td>$suite</td>";
+                                            echo "<td>$zimmer</td>";
+                                            echo "<td>$bett</td>";
                                             echo "<td>$name</td>";
                                             echo "<td>$bestellungFr</td>";
                                             echo "</tr>";
@@ -363,7 +368,8 @@
                                         if (strpos($mi, "+")){
                                             $bestellungMi = $mi;
                                             echo "<tr>";
-                                            echo "<td>$suite</td>";
+                                            echo "<td>$zimmer</td>";
+                                            echo "<td>$bett</td>";
                                             echo "<td>$name</td>";
                                             echo "<td>$bestellungMi</td>";
                                             echo "</tr>";
@@ -371,7 +377,8 @@
                                         if (strpos($ab, "+")){
                                             $bestellungAb = $ab;
                                             echo "<tr>";
-                                            echo "<td>$suite</td>";
+                                            echo "<td>$zimmer</td>";
+                                            echo "<td>$bett</td>";
                                             echo "<td>$name</td>";
                                             echo "<td>$bestellungAb</td>";
                                             echo "</tr>";
