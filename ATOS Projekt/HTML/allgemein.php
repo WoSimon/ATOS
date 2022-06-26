@@ -103,7 +103,7 @@
           </div>
           <div class="modal-body">
             Bitte wenden Sie sich an unseren Support. <br>
-            Sie können uns per Telefon unter der folgenden Nummer kontaktieren: <br>
+            Sie können uns telefonisch unter der folgenden Nummer kontaktieren: <br>
             <b>123456789</b>
           </div>
         </div>
@@ -112,7 +112,7 @@
 
     <div class="container mt-5">
         <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
-        <h1>Bitte zunächst Ihre allgemeinen Informationen überprüfen!</h1>
+        <h1>Ihre Informationen</h1>
 
         <form class="row g-3" action="allergien.php" method="POST" onsubmit="return(saveData())">
           <div class="col-md-4">
@@ -148,7 +148,7 @@
         <div class="px-4 py-5 my-5 text-center">
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HilfeModal">
-            Ich brauche Hilfe beim Ausfüllen!
+            Ich benötige Hilfe beim Ausfüllen!
           </button>
         </div>
     </div>

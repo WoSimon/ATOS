@@ -200,7 +200,7 @@
                                         <label for="entlassung" class="form-label">Entlassungsdatum</label>
                                         <input class="form-control" name="entlassung" type="date" id="entlassung" required>
                                     </div>
-                                    <p class="lead mb-4">In der nächsten Eingabe können das Attribut wählen, welches Sie ändern mmöchten.</p>
+                                    <p class="lead mb-4">In der nächsten Eingabe können Sie das Attribut wählen, welches Sie ändern mmöchten.</p>
                                     <div class="mb-3">
                                         <label for="ändern" class="form-label">Attribut</label>
                                         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="zeigeÄndern()" id="ändern" name="ändern" required>
@@ -240,9 +240,9 @@
                     </div>
                 </div>
                 <div class="col md-6">
-                <h1 class="display-5 fw-bold">Daten Löschen </h1>
+                <h1 class="display-5 fw-bold">Daten löschen </h1>
                     <div class="col-lg-6 mx-auto">
-                        <p class="lead mb-4">Durch das Drücken des Knopfes "Daten Löschen" werden alle Patienten mit einem Entlassungsdatum, welches in der Vergangenheit liegt aus der Datenbank entfernt.</p>
+                        <p class="lead mb-4">Durch das Drücken des Knopfes "Daten Löschen" werden alle Patienten mit einem Entlassungsdatum, welches in der Vergangenheit liegt, aus der Datenbank entfernt.</p>
                         <button type="button" class="btn btn-outline-danger btn-lg px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Daten löschen</button>
                     </div>
                 </div>

@@ -307,7 +307,7 @@
           </div>
           <div class="modal-body">
             Bitte wenden Sie sich an unseren Support. <br>
-            Sie können uns per Telefon unter der folgenden Nummer kontaktieren: <br>
+            Sie können uns telefonisch unter der folgenden Nummer kontaktieren: <br>
             <b>123456789</b>
           </div>
         </div>
@@ -397,7 +397,7 @@
       <div class="px-4 py-5 my-5 text-center">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HilfeModal">
-          Ich brauche Hilfe beim Ausfüllen!
+          Ich benötige Hilfe beim Ausfüllen!
         </button>
       </div>
 

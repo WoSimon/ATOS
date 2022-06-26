@@ -56,7 +56,7 @@
           </div>
           <div class="modal-body">
             Bitte wenden Sie sich an unseren Support. <br>
-            Sie können uns per Telefon unter der folgenden Nummer kontaktieren: <br>
+            Sie können uns telefonisch unter der folgenden Nummer kontaktieren: <br>
             <b>123456789</b>
           </div>
         </div>
@@ -66,10 +66,10 @@
     <div class="container mt-5">  
         <div class="px-4 py-5 my-5 text-center">
             <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
-            <h1>Bitte geben Sie ihre Login Daten ein!</h1>
+            <h1>Bitte geben Sie ihre Login Daten ein</h1>
             <div class="col md-6">
                 <div class="col-lg-6 mx-auto">
-                    <p class="lead mb-4">Sie haben im Rahmen Ihres Corona Check-in's in unserer Klinik Logindaten bekommen. Bitte geben Sie diese in dem Formular unten ein.</p>
+                    <p class="lead mb-4">Sie haben im Rahmen Ihres Corona Check-in's in unserer Klinik Logindaten erhalten. Bitte geben Sie diese in dem Formular unten ein.</p>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <form class="row" method="POST" action="../PHP/includes/checkLogin.php">
                             <div class="form-floating">
@@ -92,7 +92,7 @@
     <div class="px-4 py-5 my-5 text-center">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HilfeModal">
-        Ich brauche Hilfe beim Ausfüllen!
+        Ich benötige Hilfe beim Ausfüllen!
         </button>
     </div>
 
