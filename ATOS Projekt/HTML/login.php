@@ -37,6 +37,12 @@
         --LightGreen: 205, 255, 0;
         --HumanBlue: 72, 38, 131;
       }
+
+      .goog-te-banner-frame{
+      display:none !important;
+      }
+      #goog-gt-tt, .goog-te-balloon-frame{display: none !important;}
+      .goog-text-highlight { background: none !important; box-shadow: none !important;}
     </style>
 
     <!-- Bootstrap CSS -->
@@ -63,29 +69,39 @@
       </div>
     </div>
 
+    
     <div class="container mt-5">  
-        <div class="px-4 py-5 my-5 text-center">
-            <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
-            <h1>Bitte geben Sie ihre Login Daten ein</h1>
-            <div class="col md-6">
-                <div class="col-lg-6 mx-auto">
-                    <p class="lead mb-4">Sie haben im Rahmen Ihres Corona Check-in's in unserer Klinik Logindaten erhalten. Bitte geben Sie diese in dem Formular unten ein.</p>
-                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <form class="row" method="POST" action="../PHP/includes/checkLogin.php">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="nutzer" name="nutzer" placeholder="name@example.com" required>
-                                <label for="nutzer">Benutzername</label>
-                            </div>
-                            <div class="row"><br></div>
-                            <div class="form-floating">
-                                <input type="password" class="form-control" id="passwort" name="passwort" placeholder="Passwort" required>
-                                <label for="passwort">Passwort</label>
-                            </div>
-                            <div class="row"><br></div>
-                            <button class="btn btn-lg btn-primary" type="submit">Einloggen</button>
-                        </form>
-                    </div>
-                </div>
+    <div id="google_translate_element"></div>
+      
+      <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+  
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      <div class="px-4 py-5 my-5 text-center">
+          <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
+          <h1>Bitte geben Sie ihre Login Daten ein</h1>
+          <div class="col md-6">
+              <div class="col-lg-6 mx-auto">
+                  <p class="lead mb-4">Sie haben im Rahmen Ihres Corona Check-in's in unserer Klinik Logindaten erhalten. Bitte geben Sie diese in dem Formular unten ein.</p>
+                  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                      <form class="row" method="POST" action="../PHP/includes/checkLogin.php">
+                          <div class="form-floating">
+                              <input type="text" class="form-control" id="nutzer" name="nutzer" placeholder="name@example.com" required>
+                              <label for="nutzer">Benutzername</label>
+                          </div>
+                          <div class="row"><br></div>
+                          <div class="form-floating">
+                              <input type="password" class="form-control" id="passwort" name="passwort" placeholder="Passwort" required>
+                              <label for="passwort">Passwort</label>
+                          </div>
+                          <div class="row"><br></div>
+                          <button class="btn btn-lg btn-primary" type="submit">Einloggen</button>
+                      </form>
+                  </div>
+              </div>
             </div>
         </div>
     </div>
