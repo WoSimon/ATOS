@@ -113,6 +113,12 @@
                 --LightGreen: 205, 255, 0;
                 --HumanBlue: 72, 38, 131;
             }
+
+            .goog-te-banner-frame{
+                display:none !important;
+            }
+            #goog-gt-tt, .goog-te-balloon-frame{display: none !important;}
+            .goog-text-highlight { background: none !important; box-shadow: none !important;}
             </style>
 
 <!-- Bootstrap CSS -->
@@ -123,6 +129,13 @@
 
 <body>
     <div class="container mt-5">
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Sie haben folgendes bestellt:</h1>

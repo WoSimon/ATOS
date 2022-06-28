@@ -242,7 +242,7 @@
                 <div class="col md-6">
                 <h1 class="display-5 fw-bold">Daten löschen </h1>
                     <div class="col-lg-6 mx-auto">
-                        <p class="lead mb-4">Durch das Drücken des Knopfes "Daten Löschen" werden alle Patienten mit einem Entlassungsdatum, welches in der Vergangenheit liegt, aus der Datenbank entfernt.</p>
+                        <p class="lead mb-4">Durch das Drücken des Knopfes "Daten löschen" werden alle Patienten mit einem Entlassungsdatum, welches in der Vergangenheit liegt, aus der Datenbank entfernt.</p>
                         <button type="button" class="btn btn-outline-danger btn-lg px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Daten löschen</button>
                     </div>
                 </div>

@@ -40,6 +40,12 @@ if (isset($_SESSION["login"])){
         --LightGreen: 205, 255, 0;
         --HumanBlue: 72, 38, 131;
       }
+
+      .goog-te-banner-frame{
+      display:none !important;
+      }
+      #goog-gt-tt, .goog-te-balloon-frame{display: none !important;}
+      .goog-text-highlight { background: none !important; box-shadow: none !important;}
     </style>
 
     <!-- Bootstrap CSS -->
@@ -137,14 +143,21 @@ if (isset($_SESSION["login"])){
           </div>
           <div class="modal-body">
             Bitte wenden Sie sich an unseren Support. <br>
-            Sie können uns telefonisch unter der folgenden Nummer kontaktieren: <br>
-            <b>123456789</b>
+            Sie können uns per E-Mail unter der folgenden Adresse kontaktieren: <br>
+            <b>station1-mpk@atos.de</b>
           </div>
         </div>
       </div>
     </div>
 
     <div class="container mt-5">
+      <div id="google_translate_element"></div>
+      <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
       <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
       <div class="row g-3">
         <div class="col-md-3">
@@ -204,7 +217,7 @@ if (isset($_SESSION["login"])){
       </div>
 
 
-      <h1>Wenn Sie uner Lebensmittelallergien leiden geben Sie diese bitte hier an!</h1>
+      <h1>Wenn Sie uner Lebensmittelallergien leiden geben Sie diese bitte hier an</h1>
       <br>
       <form class="row g-3" action="verpflegung.php">
         <div class="col col-md-12">
@@ -284,7 +297,7 @@ if (isset($_SESSION["login"])){
       <div class="px-4 py-5 my-5 text-center">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HilfeModal">
-          Ich benötige Hilfe beim Ausfüllen!
+          Ich benötige Hilfe beim Ausfüllen
         </button>
       </div>
     </div>

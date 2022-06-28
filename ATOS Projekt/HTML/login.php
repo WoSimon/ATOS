@@ -62,8 +62,8 @@
           </div>
           <div class="modal-body">
             Bitte wenden Sie sich an unseren Support. <br>
-            Sie können uns telefonisch unter der folgenden Nummer kontaktieren: <br>
-            <b>123456789</b>
+            Sie können uns per E-Mail unter der folgenden Adresse kontaktieren: <br>
+            <b>station1-mpk@atos.de</b>
           </div>
         </div>
       </div>
@@ -71,14 +71,12 @@
 
     
     <div class="container mt-5">  
-    <div id="google_translate_element"></div>
-      
+      <div id="google_translate_element"></div>
       <script type="text/javascript">
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
       }
       </script>
-  
       <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
       <div class="px-4 py-5 my-5 text-center">
           <img src="../Images/ATOS_Logo.jpg" class="img-fluid">
@@ -108,7 +106,7 @@
     <div class="px-4 py-5 my-5 text-center">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HilfeModal">
-        Ich benötige Hilfe beim Ausfüllen!
+        Ich benötige Hilfe beim Ausfüllen
         </button>
     </div>
 
