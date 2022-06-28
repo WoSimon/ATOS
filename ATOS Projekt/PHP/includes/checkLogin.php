@@ -45,13 +45,21 @@
                     }
                 }
                 $aufnahme = $eintrag[5];
-                $aufnahme = date_create($aufnahme);
-                $aufnahme = $aufnahme->format('Y-m-d');
+                $aufnahme = DateTime::createFromFormat('d.m.y', $aufnahme);
+                if (!empty($aufnahme)){
+                    $aufnahme = $aufnahme->format('Y-m-d');
+                }
                 $_SESSION["aufnahme"] = $aufnahme;
+                
                 $entlassung = $eintrag[6];
-                $entlassung = date_create($entlassung);
-                $entlassung = $entlassung->format('Y-m-d');
+                echo 'Entlassung: ' . $entlassung;
+                $entlassung = DateTime::createFromFormat('d.m.y', $entlassung);
+                if (!empty($entlassung)){
+                    $entlassung = $entlassung->format('Y-m-d');
+                }
                 $_SESSION["entlassung"] = $entlassung;
+                echo 'Entlassung nach der Formatierung: ' . $entlassung;
+
                 $_SESSION["login"] = true;
                 $login = 'erfolgreich';
                 break;
