@@ -9,22 +9,46 @@
         $nutzer = $_POST['nutzer'];
         $passwort = $_POST['passwort'];
         
-        $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-        $spreadsheet = $reader->load('../../Input/Patienten.xlsx');
+        $reader = new PhpOffice\PhpSpreadsheet\Reader\Csv();
+        $spreadsheet = $reader->load('../../Input/ATOSEssenauswahlPatienten.csv');
         $sheetdata = $spreadsheet->getActiveSheet()->toArray();
 
         foreach ($sheetdata as $eintrag){
+            if ($eintrag[0] == 'Nutzername' && $eintrag[1] == 'Passwort'){
+                continue;
+            }
             if ($eintrag[0] == $nutzer && $eintrag[1] == $passwort){
                 session_start();
                 $_SESSION["vorname"] = $eintrag[2];
                 $_SESSION["nachname"] = $eintrag[3];
-                $_SESSION["zimmer"] = $eintrag[4];
-                $_SESSION["bett"] = $eintrag[5];
-                $aufnahme = $eintrag[6];
+                $zimmerUndBett = $eintrag[4];
+                if (is_numeric($zimmerUndBett)){
+                    $_SESSION["zimmer"] = $zimmerUndBett;
+                    $_SESSION["bett"] = "1";
+                }
+                else{
+                    if (str_contains($zimmerUndBett, 'a')){
+                        $_SESSION["zimmer"] = substr($zimmerUndBett, 0, -1);
+                        $_SESSION["bett"] = "2";
+                    }
+                    else if (str_contains($zimmerUndBett, 'b')){
+                        $_SESSION["zimmer"] = substr($zimmerUndBett, 0, -1);
+                        $_SESSION["bett"] = "3";
+                    }
+                    else if (str_contains($zimmerUndBett, 'c')){
+                        $_SESSION["zimmer"] = substr($zimmerUndBett, 0, -1);
+                        $_SESSION["bett"] = "4";
+                    }
+                    else{
+                        $_SESSION["zimmer"] = $zimmerUndBett;
+                        $_SESSION["bett"] = "1";
+                    }
+                }
+                $aufnahme = $eintrag[5];
                 $aufnahme = date_create($aufnahme);
                 $aufnahme = $aufnahme->format('Y-m-d');
                 $_SESSION["aufnahme"] = $aufnahme;
-                $entlassung = $eintrag[7];
+                $entlassung = $eintrag[6];
                 $entlassung = date_create($entlassung);
                 $entlassung = $entlassung->format('Y-m-d');
                 $_SESSION["entlassung"] = $entlassung;

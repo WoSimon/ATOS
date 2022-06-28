@@ -12,10 +12,14 @@
         $bett = $_POST["bett"];
         $aufnahme = $_POST["aufnahme"];
         $entlassung = $_POST["entlassung"];
-        $aufnahme = date_create($aufnahme);
-        $aufnahme = $aufnahme->format('d.m.Y');
-        $entlassung = date_create($entlassung);
-        $entlassung = $entlassung->format('d.m.Y');
+        $entlassung = DateTime::createFromFormat('Y-m-d', $entlassung);
+        if (!empty($entlassung)){
+            $entlassung = $entlassung->format('Y-m-d');
+        }
+        $aufnahme = DateTime::createFromFormat('Y-m-d', $aufnahme);
+        if (!empty($aufnahme)){
+            $aufnahme = $aufnahme->format('Y-m-d');
+        }
         $ändern = $_POST["ändern"];
 
         if ($ändern == "zimmer"){
@@ -25,7 +29,11 @@
             $bettnummerNeu = $_POST["bettNeu"];
         }
         elseif ($ändern == "entlassung"){
-            $entlassungNeu = date_create($_POST["entlassungNeu"]) -> format ('d.m.Y');
+            $entlassungNeu = $_POST["entlassungNeu"];
+            $entlassungNeu = DateTime::createFromFormat('Y-m-d', $entlassungNeu);
+            if (!empty($entlassungNeu)){
+                $entlassungNeu = $entlassungNeu->format('Y-m-d');
+            }
         }
 
         include_once '../../PHP/includes/db-helper.php';
@@ -52,8 +60,8 @@
                 }
             }
 
-            $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-            $spreadsheet = $reader->load('../../Input/Patienten.xlsx');
+            $reader = new PhpOffice\PhpSpreadsheet\Reader\Csv();
+            $spreadsheet = $reader->load('../../Input/ATOSEssenauswahlPatienten.csv');
             $sheetdata = $spreadsheet->getActiveSheet()->toArray();
             
             $verändert = -1;
@@ -65,21 +73,56 @@
                 $rowIndex = array_search($eintrag, $sheetdata);
                 if ($rowIndex == 0){}
                 else{
-
+            
                     $vornameRow = $eintrag[2];
                     $nachnameRow = $eintrag[3];
-                    $zimmerRow = $eintrag[4];
-                    $bettRow = $eintrag[5];
-                    echo "Vorname Row: " . $vornameRow . " Vorname: " . $vorname . "<br>";
-                    echo "Nachname Row: " . $nachnameRow . " Nachname: " . $nachname . "<br>";
-                    echo "Zimmer Row: " . $zimmerRow . " Zimmer: " . $zimmer . "<br>";
-                    echo "Bett Row: " . $bettRow . " Bett: " . $bett . "<br>";
+                    $zimmerUndBettRow = $eintrag[4];
+                    if (is_numeric($zimmerUndBettRow)){
+                        $zimmerRow = $zimmerUndBettRow;
+                        $bettRow = "1";
+                    }
+                    else{
+                        if (str_contains($zimmerUndBettRow, 'a')){
+                            $zimmerRow = substr($zimmerUndBettRow, 0, -1);
+                            $bettRow = "2";
+                        }
+                        else if (str_contains($zimmerUndBettRow, 'b')){
+                            $zimmerRow = substr($zimmerUndBettRow, 0, -1);
+                            $bettRow = "3";
+                        }
+                        else if (str_contains($zimmerUndBettRow, 'c')){
+                            $zimmerRow = substr($zimmerUndBettRow, 0, -1);
+                            $bettRow = "4";
+                        }
+                        else{
+                            $zimmerRow = $zimmerUndBettRow;
+                            $bettRow = "1";
+                        }
+                    }
+                    echo "Vorname Row: " . $vornameRow . " |||| Vorname: " . $vorname . "<br>";
+                    echo "Nachname Row: " . $nachnameRow . " |||| Nachname: " . $nachname . "<br>";
+                    echo "Zimmer Row: " . $zimmerRow . " |||| Zimmer: " . $zimmer . "<br>";
+                    echo "Bett Row: " . $bettRow . " |||| Bett: " . $bett . "<br>";
                     echo '<br>';
-                    if ($vorname == $vornameRow && $nachname == $nachnameRow && $zimmer == $zimmerRow && $bett == $bettRow){                 
-                        $spreadsheet->getActiveSheet()->setCellValue('E'.($rowIndex + 1), $zimmernummerNeu);
+                    if ($vorname == $vornameRow && $nachname == $nachnameRow && $zimmer == $zimmerRow && $bett == $bettRow){  
+                        switch ($bettRow){
+                            case "1":
+                                $bettRow = "";
+                                break;
+                            case "2":
+                                $bettRow = "a";
+                                break;
+                            case "3":
+                                $bettRow = "b";
+                                break;
+                            case "4":
+                                $bettRow = "c";
+                                break;
+                        }
+                        $spreadsheet->getActiveSheet()->setCellValue('E'.($rowIndex + 1), $zimmernummerNeu . $bettRow);
                         
-                        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-                        $writer->save('../../Input/Patienten.xlsx');
+                        $writer = new PhpOffice\PhpSpreadsheet\Writer\Csv($spreadsheet);
+                        $writer->save('../../Input/ATOSEssenauswahlPatienten.csv');
                         
                         $verändert = $rowIndex;
                         $excel = "erfolgreich";
@@ -135,8 +178,8 @@
                 }
             }
             
-            $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-            $spreadsheet = $reader->load('../../Input/Patienten.xlsx');
+            $reader = new PhpOffice\PhpSpreadsheet\Reader\Csv();
+            $spreadsheet = $reader->load('../../Input/ATOSEssenauswahlPatienten.csv');
             $sheetdata = $spreadsheet->getActiveSheet()->toArray();
             
             $verändert = -1;
@@ -148,21 +191,56 @@
                 $rowIndex = array_search($eintrag, $sheetdata);
                 if ($rowIndex == 0){}
                 else{
-
+                    
                     $vornameRow = $eintrag[2];
                     $nachnameRow = $eintrag[3];
-                    $zimmerRow = $eintrag[4];
-                    $bettRow = $eintrag[5];
-                    echo "Vorname Row: " . $vornameRow . " Vorname: " . $vorname . "<br>";
-                    echo "Nachname Row: " . $nachnameRow . " Nachname: " . $nachname . "<br>";
-                    echo "Zimmer Row: " . $zimmerRow . " Zimmer: " . $zimmer . "<br>";
-                    echo "Bett Row: " . $bettRow . " Bett: " . $bett . "<br>";
+                    $zimmerUndBettRow = $eintrag[4];
+                    if (is_numeric($zimmerUndBettRow)){
+                        $zimmerRow = $zimmerUndBettRow;
+                        $bettRow = "1";
+                    }
+                    else{
+                        if (str_contains($zimmerUndBettRow, 'a')){
+                            $zimmerRow = substr($zimmerUndBettRow, 0, -1);
+                            $bettRow = "2";
+                        }
+                        else if (str_contains($zimmerUndBettRow, 'b')){
+                            $zimmerRow = substr($zimmerUndBettRow, 0, -1);
+                            $bettRow = "3";
+                        }
+                        else if (str_contains($zimmerUndBettRow, 'c')){
+                            $zimmerRow = substr($zimmerUndBettRow, 0, -1);
+                            $bettRow = "4";
+                        }
+                        else{
+                            $zimmerRow = $zimmerUndBettRow;
+                            $bettRow = "1";
+                        }
+                    }
+                    echo "Vorname Row: " . $vornameRow . " ||| Vorname: " . $vorname . "<br>";
+                    echo "Nachname Row: " . $nachnameRow . " ||| Nachname: " . $nachname . "<br>";
+                    echo "Zimmer Row: " . $zimmerRow . " ||| Zimmer: " . $zimmer . "<br>";
+                    echo "Bett Row: " . $bettRow . " ||| Bett: " . $bett . "<br>";
                     echo '<br>';
-                    if ($vorname == $vornameRow && $nachname == $nachnameRow && $zimmer == $zimmerRow && $bett == $bettRow){                 
-                        $spreadsheet->getActiveSheet()->setCellValue('F'.($rowIndex + 1), $bettnummerNeu);
+                    if ($vorname == $vornameRow && $nachname == $nachnameRow && $zimmer == $zimmerRow && $bett == $bettRow){   
+                        switch ($bettnummerNeu){
+                            case "1":
+                                $bettnummerNeu = "";
+                                break;
+                            case "2":
+                                $bettnummerNeu = "a";
+                                break;
+                            case "3":
+                                $bettnummerNeu = "b";
+                                break;
+                            case "4":
+                                $bettnummerNeu = "c";
+                                break;
+                        }
+                        $spreadsheet->getActiveSheet()->setCellValue('E'.($rowIndex + 1), $zimmer . $bettnummerNeu);
                         
-                        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-                        $writer->save('../../Input/Patienten.xlsx');
+                        $writer = new PhpOffice\PhpSpreadsheet\Writer\Csv($spreadsheet);
+                        $writer->save('../../Input/ATOSEssenauswahlPatienten.csv');
                         
                         $verändert = $rowIndex;
                         $excel = "erfolgreich";
@@ -200,68 +278,124 @@
         
         elseif ($ändern == "entlassung"){
 
-            $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-            $spreadsheet = $reader->load('../../Input/Patienten.xlsx');
+            $reader = new PhpOffice\PhpSpreadsheet\Reader\Csv();
+            $spreadsheet = $reader->load('../../Input/ATOSEssenauswahlPatienten.csv');
             $sheetdata = $spreadsheet->getActiveSheet()->toArray();
 
             $rowIndex = -1;
             $totalRows = count($sheetdata);
 
             foreach ($sheetdata as $eintrag){
-                $rowIndex = $spreadsheet->getActiveSheet()->getRowIterator()->current()->getRowIndex();
-                if ($rowIndex == 1){}
+                if ($eintrag[0] == 'Nutzername' && $eintrag[1] == 'Passwort'){
+                    continue;
+                }
                 else{
+                    echo implode(', ', $eintrag);
+                    echo '<br>';
+                    echo '-----------<br>';
                     $vornameRow = $eintrag[2];
                     $nachnameRow = $eintrag[3];
-                    $zimmerRow = $eintrag[4];
-                    $bettRow = $eintrag[5];
-                    $aufnahmeRow = $eintrag[6];
-                    $entlassungRow = $eintrag[7];
-                    $aufnahmeRow = date_create($aufnahme);
+                    $zimmerUndBettRow = $eintrag[4];
+                    if (is_numeric($zimmerUndBettRow)){
+                        $zimmerRow = $zimmerUndBettRow;
+                        $bettRow = "1";
+                    }
+                    else{
+                        if (str_contains($zimmerUndBettRow, 'a')){
+                            $zimmerRow = substr($zimmerUndBettRow, 0, -1);
+                            $bettRow = "2";
+                        }
+                        else if (str_contains($zimmerUndBettRow, 'b')){
+                            $zimmerRow = substr($zimmerUndBettRow, 0, -1);
+                            $bettRow = "3";
+                        }
+                        else if (str_contains($zimmerUndBettRow, 'c')){
+                            $zimmerRow = substr($zimmerUndBettRow, 0, -1);
+                            $bettRow = "4";
+                        }
+                        else{
+                            $zimmerRow = $zimmerUndBettRow;
+                            $bettRow = "1";
+                        }
+                    }
+                    $aufnahmeRow = $eintrag[5];
+                    $entlassungRow = $eintrag[6];
+                    $aufnahmeRow = DateTime::createFromFormat('d.m.y', $aufnahmeRow);
                     if (!empty($aufnahmeRow)){
-                        $aufnahmeRow = $aufnahme->format('Y-m-d');
+                        $aufnahmeRow = $aufnahmeRow->format('Y-m-d');
                     }
-                    $entlassungRow = date_create($entlassung);
+                    $entlassungRow = DateTime::createFromFormat('d.m.y', $entlassungRow);
                     if (!empty($entlassungRow)){
-                        $entlassungRow = $entlassung->format('Y-m-d');
+                        $entlassungRow = $entlassungRow->format('Y-m-d');
                     }
+                    echo "Vorname Row: " . $vornameRow . " ||| Vorname: " . $vorname . "<br>";
+                    echo "Nachname Row: " . $nachnameRow . " ||| Nachname: " . $nachname . "<br>";
+                    echo "Zimmer Row: " . $zimmerRow . " ||| Zimmer: " . $zimmer . "<br>";
+                    echo "Bett Row: " . $bettRow . " ||| Bett: " . $bett . "<br>";
+                    echo "Aufnahme Row: " . $aufnahmeRow . " ||| Aufnahme: " . $aufnahme . "<br>";
+                    echo "Entlassung Row: " . $entlassungRow . " ||| Entlassung: " . $entlassung . "<br>";
+                    echo '<br>';
+                    echo '<br>';
                     if ($vorname == $vornameRow && $nachname == $nachnameRow && $zimmer == $zimmerRow && $bett == $bettRow && $aufnahme == $aufnahmeRow && $entlassung == $entlassungRow){
                         $rowIndex = $spreadsheet->getActiveSheet()->getRowIterator()->current()->getRowIndex();
                         break;
                     }
+                    echo 'RowIndex: ' . $rowIndex . '<br>';
                 }
             }
-
+            
             if ($rowIndex == -1){
-                $conn->close();
-                header("Location: ../HTML/adminDaten.php?error=2"); 
+                $excel = 'kein Eintrag gefunden';
+                //header("Location: ../HTML/adminDaten.php?error=7"); 
             }
             else {
                 $newUsername = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
                 $newPassword = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 10);
-
-                $spreadsheet->getActiveSheet()->setCellValue('A'.($totalRows+1), $newUsername);
-                $spreadsheet->getActiveSheet()->setCellValue('B'.($totalRows+1), $newPassword);
-                $spreadsheet->getActiveSheet()->setCellValue('C'.($totalRows+1), $vorname); 
-                $spreadsheet->getActiveSheet()->setCellValue('D'.($totalRows+1), $nachname);
-                $spreadsheet->getActiveSheet()->setCellValue('E'.($totalRows+1), $zimmer);
-                $spreadsheet->getActiveSheet()->setCellValue('F'.($totalRows+1), $bett);
-                $entlassung = date_create($entlassung)->format('d.m.Y');
-                $spreadsheet->getActiveSheet()->setCellValue('G'.($totalRows+1), $entlassung);
-                $entlassungNeu = date_create($entlassungNeu)->format('d.m.Y');
-                $spreadsheet->getActiveSheet()->setCellValue('H'.($totalRows+1), $entlassungNeu);
-
-                $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-                $writer->save('../../Input/Patienten.xlsx');
-
-                header("Location: ../HTML/adminDaten.php?error=0&user=$newUsername&pw=$newPassword");
-            }
-
+                switch ($bett){
+                    case "1":
+                        $bett = "";
+                        break;
+                    case "2":
+                        $bett = "a";
+                        break;
+                    case "3":
+                        $bett = "b";
+                        break;
+                    case "4":
+                        $bett = "c";
+                        break;
+                    }
+                    $spreadsheet->getActiveSheet()->setCellValue('A'.($totalRows+1), $newUsername);
+                    $spreadsheet->getActiveSheet()->setCellValue('B'.($totalRows+1), $newPassword);
+                    $spreadsheet->getActiveSheet()->setCellValue('C'.($totalRows+1), $vorname); 
+                    $spreadsheet->getActiveSheet()->setCellValue('D'.($totalRows+1), $nachname);
+                    $spreadsheet->getActiveSheet()->setCellValue('E'.($totalRows+1), $zimmer . $bett);
+                    $entlassung = DateTime::createFromFormat('Y-m-d', $entlassung); 
+                    if (!empty($entlassung)){
+                        $spreadsheet->getActiveSheet()->setCellValue('F'.($totalRows+1), $entlassung->format('d.m.y'));
+                        echo "Entlassung: " . $entlassung->format('Y-m-d') . "<br>";
+                    }
+                    /*$entlassung -> format('Y-m-d');
+                    $spreadsheet->getActiveSheet()->setCellValue('F'.($totalRows+1), $entlassung);*/
+                    $entlassungNeu = DateTime::createFromFormat('Y-m-d', $entlassungNeu);
+                    if (!empty($entlassungNeu)){
+                        $spreadsheet->getActiveSheet()->setCellValue('G'.($totalRows+1), $entlassungNeu->format('d.m.y'));
+                        echo "Entlassung Neu: " . $entlassungNeu->format('Y-m-d') . "<br>";
+                    }
+                    /*
+                    $entlassungNeu -> format('Y-m-d');
+                    $spreadsheet->getActiveSheet()->setCellValue('G'.($totalRows+1), $entlassungNeu);*/
+                    
+                    $writer = new PhpOffice\PhpSpreadsheet\Writer\Csv($spreadsheet);
+                    $writer->save('../../Input/ATOSEssenauswahlPatienten.csv');
+                    
+                    header("Location: ../HTML/adminDaten.php?error=0&user=$newUsername&pw=$newPassword");
+                    $excel = 'Eintrag wurde erfolgreich geändert';
+                }
+                
+                echo '<h1>Ergebnis: ' . $excel;
         }
-    
     }
-    else{
-        header("Location: ../HTML/adminDaten.php?error=1");
-    }
+                        
 
 ?>

@@ -200,7 +200,7 @@
                                         <label for="entlassung" class="form-label">Entlassungsdatum</label>
                                         <input class="form-control" name="entlassung" type="date" id="entlassung" required>
                                     </div>
-                                    <p class="lead mb-4">In der nächsten Eingabe können Sie das Attribut wählen, welches Sie ändern mmöchten.</p>
+                                    <p class="lead mb-4">In der nächsten Eingabe können Sie das Attribut wählen, welches Sie ändern möchten.</p>
                                     <div class="mb-3">
                                         <label for="ändern" class="form-label">Attribut</label>
                                         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="zeigeÄndern()" id="ändern" name="ändern" required>
