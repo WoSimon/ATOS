@@ -54,12 +54,11 @@
         }
         $sqlGetPatientId = "SELECT `PatientenID` FROM `Patienten` WHERE `Name` = '$nachname' AND `Vorname` = '$vorname' AND `Zimmer` = '$zimmer' AND `Bett` = '$bett';";
         $result = mysqli_query($conn, $sqlGetPatientId);
-        //if we have one row get the PatientID
         if (mysqli_num_rows($result) > 0){
             $row = mysqli_fetch_assoc($result);
             $patientId = $row['PatientenID'];
 
-            $sqlGetOrders = "SELECT * FROM `Bestellungen` WHERE `PatientenID` = '$patientId' ;";
+            $sqlGetOrders = "SELECT * FROM `Bestellungen` WHERE `PatientenID` = '$patientId';";
             $result = mysqli_query($conn, $sqlGetOrders);
             if (mysqli_num_rows($result) > 0){
                 continue;

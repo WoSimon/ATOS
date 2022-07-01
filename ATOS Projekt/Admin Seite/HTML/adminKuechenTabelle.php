@@ -5,7 +5,7 @@
     }
     $datum = $_POST['datum'];
     $Tempdatum = date_create($datum);
-    $datum = $Tempdatum -> format('d.m.Y');
+    $datum = $Tempdatum -> format('Y-m-d');
     
     include_once '../../PHP/includes/db-helper.php';
 
@@ -125,7 +125,7 @@
     }
     else{
         echo '<div class="alert alert-warning" role="alert">';
-        echo "Keine Bestellungen für den " . $datum . " vorhanden!";
+        echo "Keine Bestellungen für den " . $Tempdatum->format('d.m.Y') . " vorhanden!";
         echo '</div>';
     }
 
@@ -197,7 +197,7 @@
         
         
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Essensbestellungen für den <?php echo $datum?></h1>
+            <h1 class="h2">Essensbestellungen für den <?php echo $Tempdatum->format('d.m.Y')?></h1>
             <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
                     <button type="button" class="btn btn-sm btn-outline-danger" id="exportBtn">PDF</button>
@@ -327,7 +327,7 @@
         <br>
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Extras für den <?php echo $datum?></h1>
+            <h1 class="h2">Extras für den <?php echo $Tempdatum->format('d.m.Y')?></h1>
         </div>
             <div class="table-responsive">
                 <table class="table table-striped table-sm" id="tabelleExtras">

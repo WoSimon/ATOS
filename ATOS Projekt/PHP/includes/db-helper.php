@@ -17,7 +17,7 @@
         $arrayDays = array();
         
         for ($i=0; $i < $anzahlTage; $i++) { 
-            $arrayDays[$i] = $aufnahme->format('d.m.Y');
+            $arrayDays[$i] = $aufnahme->format('Y-m-d');
             $aufnahme->modify('+1 day');
         }
 
@@ -51,10 +51,8 @@
             $mittag = $bestellung["mittag"];
             $dessert_mittag = $bestellung["desMittag"];
             $abend = $bestellung["abend"];
-            if ($result = mysqli_query($conn, "SHOW TABLES LIKE '$tag'")) {
             $sqlDrei = "INSERT INTO `Bestellungen`(`Fruehstueck`, `Vorspeise_Mittag`, `Mittag`, `Dessert_Mittag`, `Abend`, `PatientenID`, `Datum`) VALUES ('$fruehstueck','$vorspeise_mittag','$mittag','$dessert_mittag','$abend','$patienten_id','$tag');";
             mysqli_query($conn, $sqlDrei);
-            }
         }
     }
 

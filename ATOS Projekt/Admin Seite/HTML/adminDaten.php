@@ -148,7 +148,7 @@
                     <?php
                     
                         include_once '../../PHP/includes/db-helper.php';
-                        $heute = date("d.m.Y");
+                        $heute = date("Y-m-d");
                         $sql = "SELECT * FROM `Patienten` WHERE `Entlassungsdatum` < '$heute';";
                         $result = mysqli_query($conn, $sql);
                         $anzahl = mysqli_num_rows($result);

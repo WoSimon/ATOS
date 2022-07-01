@@ -3,7 +3,7 @@
     if (isset($_GET['löschen']) && $_GET['löschen'] == "true"){
 
         include_once '../../PHP/includes/db-helper.php';
-        $heute = date("d.m.Y");
+        $heute = date("Y-m-d");
         $sql = "DELETE FROM `Patienten` WHERE `Entlassungsdatum` < '$heute';";
         if ($conn->query($sql) === TRUE) {
             $conn->close();
