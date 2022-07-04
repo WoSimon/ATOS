@@ -5,11 +5,12 @@
             if (isset($_GET['pw'])){
                 $nutzername = $_GET['user'];
                 $pw = $_GET['pw'];
-                echo '<div class="alert alert-success" role="alert">';
+                echo '<div class="alert alert-success" role="alert" id="newData">';
                 echo 'Die Daten wurden erfolgreich geändert! <br>';
                 echo 'Der neue Nutzername ist: <b>' . $nutzername . '</b> <br>';
                 echo 'Das neue Passwort ist: <b>' . $pw . '</b> <br>';
-                echo '</div>';     
+                echo '</div>';
+                $download = true;
             }
             else {
             echo '<div class="alert alert-success" role="alert">';
@@ -81,6 +82,35 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+
+
+    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+    <script type="text/javascript">
+
+        function downloadPDF() {   
+            var element = document.getElementById('newData'); 
+
+
+            //more custom settings
+            var opt = 
+            {
+            margin:       1,
+            filename:     'neuerLogin.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'in', orientation: 'landscape' }
+            };
+
+            // New Promise-based usage:
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
 
     <title>ATOS Adminseite zum Ändern von Daten</title>
 
@@ -164,6 +194,14 @@
             </div>
         </div>
     </div>
+
+    <?php
+    
+        if (isset($download) && $download == true){
+            echo '<script>downloadPDF();</script>';
+        }
+
+    ?>
 
     <div class="container mt-5"> 
         <div class="px-4 py-5 my-5 text-center">
