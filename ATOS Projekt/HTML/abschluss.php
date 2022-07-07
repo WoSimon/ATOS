@@ -115,11 +115,20 @@
             }
 
             .goog-te-banner-frame{
-                display:none !important;
+            display:none !important;
             }
             #goog-gt-tt, .goog-te-balloon-frame{display: none !important;}
+            .goog-logo-link{display:none!important;}
+            .goog-te-gadget{color:transparent!important;} 
             .goog-text-highlight { background: none !important; box-shadow: none !important;}
-            </style>
+            .goog-te-combo {
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                width: 300px;
+                font-size: 27px;
+                padding-bottom: 10px;
+            }
+        </style>
 
 <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -132,7 +141,7 @@
         <div id="google_translate_element"></div>
         <script type="text/javascript">
         function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+            new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.INLINE}, 'google_translate_element');
         }
         </script>
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

@@ -37,7 +37,16 @@
       display:none !important;
       }
       #goog-gt-tt, .goog-te-balloon-frame{display: none !important;}
+      .goog-logo-link{display:none!important;}
+      .goog-te-gadget{color:transparent!important;} 
       .goog-text-highlight { background: none !important; box-shadow: none !important;}
+      .goog-te-combo {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: 300px;
+        font-size: 27px;
+        padding-bottom: 10px;
+      }
     </style>
 
     <script type="text/javascript" src="../JS/functions.js"></script>
@@ -120,7 +129,7 @@
       <div id="google_translate_element"></div>
       <script type="text/javascript">
       function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.INLINE}, 'google_translate_element');
       }
       </script>
       <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -128,21 +137,23 @@
         <h1>Ihre Informationen</h1>
 
         <form class="row g-3" action="allergien.php" method="POST" onsubmit="return(saveData())">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <label for="vorname" class="form-label">Vorname</label>
             <input type="text" name="vorname" class="form-control" value="<?php echo $vorname?>" id="vorname" required>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <label for="nachname" class="form-label">Nachname</label>
             <input type="text" name="nachname" class="form-control" value="<?php echo $nachname?>" id="nachname" required>
           </div>
-          <div class="col-md-2">
-            <label for="zimmernummer" class="form-label">Zimmernummer</label>
-            <input type="number" name="zimmer" class="form-control" id="zimmernummer" value="<?php echo $zimmer?>" readonly required>
-          </div>
-          <div class="col-md-2">
-            <label for="bettennummer" class="form-label">Bettennummer</label>
-            <input type="number" name="bett" class="form-control" id="bettennummer" value="<?php echo $bett?>" readonly required>
+          <div style="display:none">
+            <div class="col-md-2">
+              <label for="zimmernummer" class="form-label">Zimmernummer</label>
+              <input type="number" name="zimmer" class="form-control" id="zimmernummer" value="<?php echo $zimmer?>" readonly required>
+            </div>
+            <div class="col-md-2">
+              <label for="bettennummer" class="form-label">Bettennummer</label>
+              <input type="number" name="bett" class="form-control" id="bettennummer" value="<?php echo $bett?>" readonly required>
+            </div>
           </div>
           <div class="col-md-6">
             <label for="aufnahmedatum" class="form-label">Aufnahmedatum</label>

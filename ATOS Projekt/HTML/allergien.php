@@ -45,7 +45,16 @@ if (isset($_SESSION["login"])){
       display:none !important;
       }
       #goog-gt-tt, .goog-te-balloon-frame{display: none !important;}
+      .goog-logo-link{display:none!important;}
+      .goog-te-gadget{color:transparent!important;} 
       .goog-text-highlight { background: none !important; box-shadow: none !important;}
+      .goog-te-combo {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: 300px;
+        font-size: 27px;
+        padding-bottom: 10px;
+      }
     </style>
 
     <!-- Bootstrap CSS -->
@@ -154,7 +163,7 @@ if (isset($_SESSION["login"])){
       <div id="google_translate_element"></div>
       <script type="text/javascript">
       function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        new google.translate.TranslateElement({pageLanguage: 'de', includedLanguages: 'en,fr,nl,dk,it,ru,tr,de', autodisplay: false, layout: google.translate.TranslateElement.InlineLayout.INLINE}, 'google_translate_element');
       }
       </script>
       <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -193,30 +202,33 @@ if (isset($_SESSION["login"])){
         </div>
       </div>
         
+
+      <div style="display:none">
+        <div class="row-g-3">
+          <br>
+        </div>
+        
+        <div class="row g-3">
+          <div class="col-md-3">
+            <label for="zimmernummer" class="form-label">Zimmernummer</label>
+          </div>
+          <div class="col-md-3">
+            <input type="text" readonly class="form-control-plaintext" id="zimmernummer" value="<?php echo $zimmer?>"> 
+          </div>
+          <div class="col-md-3">
+            <label for="bettennummer" class="form-label">Bettennummer</label>
+          </div>
+          <div class="col-md-3">
+            <input type="text" readonly class="form-control-plaintext" id="bettennummer" value="<?php echo $bett?>"> 
+          </div>
+        </div>
+      </div>
+        
       <div class="row-g-3">
         <br>
       </div>
-      
-      <div class="row g-3">
-        <div class="col-md-3">
-          <label for="zimmernummer" class="form-label">Zimmernummer</label>
-        </div>
-        <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="zimmernummer" value="<?php echo $zimmer?>"> 
-        </div>
-        <div class="col-md-3">
-          <label for="bettennummer" class="form-label">Bettennummer</label>
-        </div>
-        <div class="col-md-3">
-          <input type="text" readonly class="form-control-plaintext" id="bettennummer" value="<?php echo $bett?>"> 
-        </div>
-      </div>
-
-      <div class="row-g-3">
-        <br>
-      </div>
-
-
+        
+        
       <h1>Wenn Sie uner Lebensmittelallergien leiden geben Sie diese bitte hier an</h1>
       <br>
       <form class="row g-3" action="verpflegung.php">
